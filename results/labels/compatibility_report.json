@@ -1,0 +1,47 @@
+{
+  "solexs_observation": {
+    "start_timestamp": 1792281600.0,
+    "end_timestamp": 1792367999.0,
+    "time_system_decision": "D-10",
+    "time_system_confirmed": false
+  },
+  "sources_evaluated": [
+    {
+      "source_id": "SRC_NOAA_SWPC",
+      "source_name": "NOAA SWPC Solar Geophysical Event Reports",
+      "instrument": "Global ground stations and GOES satellites",
+      "stated_time_system": "Universal Time (UT / UTC)",
+      "time_system_confirmed": false,
+      "compatibility_status": "TIME_SYSTEM_UNCONFIRMED",
+      "notes": "Requires human verification at Gate G3; live daily operational log."
+    },
+    {
+      "source_id": "SRC_NOAA_NCEI_GOES",
+      "source_name": "NOAA NCEI GOES Satellite Data Archive",
+      "instrument": "GOES EXIS / XRS",
+      "stated_time_system": "UTC (ISO 8601 / elapsed seconds from MJD epoch)",
+      "time_system_confirmed": false,
+      "compatibility_status": "TIME_SYSTEM_UNCONFIRMED",
+      "notes": "Requires human verification at Gate G3; definitive international soft X-ray baseline."
+    },
+    {
+      "source_id": "SRC_NASA_HEK",
+      "source_name": "NASA LMSAL Heliophysics Event Knowledgebase",
+      "instrument": "Multi-instrument (SDO AIA GOES RHESSI)",
+      "stated_time_system": "UTC (ISO 8601 string format)",
+      "time_system_confirmed": false,
+      "compatibility_status": "TIME_SYSTEM_UNCONFIRMED",
+      "notes": "Requires human verification at Gate G3; aggregates automated and observer reports."
+    },
+    {
+      "source_id": "SRC_ISRO_PRADAN",
+      "source_name": "ISRO ISSDC Aditya-L1 PRADAN Portal",
+      "instrument": "Aditya-L1 SoLEXS",
+      "stated_time_system": "UTC (TIMESYS=UTC MJDREFI=40587)",
+      "time_system_confirmed": false,
+      "compatibility_status": "TIME_SYSTEM_UNCONFIRMED",
+      "notes": "REJECTED FOR LABELS: Internal to SoLEXS; cannot use SoLEXS data to label SoLEXS models (circular)."
+    }
+  ],
+  "summary": "NO VERIFIED INDEPENDENT SOURCE WITH CONFIRMED TIME COMPATIBILITY. SoLEXS time system (D-10) is UNCONFIRMED. All sources evaluated as TIME_SYSTEM_UNCONFIRMED."
+}

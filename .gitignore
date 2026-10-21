@@ -40,6 +40,8 @@ results/*
 !results/quality/**
 !results/eda/
 !results/eda/**
+!results/labels/
+!results/labels/**
 
 # Logs
 logs/

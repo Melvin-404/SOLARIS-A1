@@ -8,9 +8,9 @@
 ---
 
 ## Current Status
-**Status:** `Stage 3 — FITS Data Inventory and Metadata Inspection`
+**Status:** `Stage 6 — Ground-Truth Research and Labelling Protocol Drafted (Supervised Labelling BLOCKED Pending G3)`
 
-Reusable, non-destructive FITS inspection tools (`src/solar_flare/inspection/`) and the automated inventory generator (`scripts/inspect_fits.py`) are fully implemented and verified. Real Aditya-L1 SoLEXS Level-1 data files are indexed in `data/manifests/manifest.csv` and verified in `data/raw/`. An initial metadata inventory, inspection report, and open questions register have been generated with 100% hash immutability verified.
+Independent ground-truth solar flare event sources have been researched and recorded in `data/manifests/event_sources.csv` and documented in `docs/07_ground_truth_research.md`. Temporal compatibility has been analyzed without arbitrary time conversions (`docs/09_time_compatibility.md` and `results/labels/compatibility_report.md`). A comprehensive labelling policy is drafted in `docs/08_labelling_policy.md` with all decisions (D-01, D-02, D-03, D-04, D-08, D-10, D-15) held strictly PENDING human approval. The automated Gate G3 policy guard (`assert_labelling_approved`) strictly refuses label generation until formal researcher approval is registered. Zero labels have been generated.
 
 ---
 
@@ -151,6 +151,9 @@ Detailed project documentation is available in the [`docs/`](docs/) directory:
 - [**05. EDA Methods**](docs/05_eda_methods.md) — Robust running baseline, candidate burst intervals, and variability metrics.
 - [**05b. EDA Findings**](docs/05_eda_findings.md) — Automated statistical summaries and qualitative observation prompts.
 - [**06. Event Record Schema**](docs/06_event_record_schema.md) — Ground-truth solar flare event record specification (template).
+- [**07. Ground-Truth Research**](docs/07_ground_truth_research.md) — Sourcing taxonomy, accessed independent flare catalogues, rejected sources, and unverified statements.
+- [**08. Labelling Policy**](docs/08_labelling_policy.md) — Scientific labelling protocol draft with all Gate G3 decisions (D-01 to D-04, D-08, D-10, D-15) held PENDING.
+- [**09. Time Compatibility**](docs/09_time_compatibility.md) — Evaluation of reference epochs, time scales (UTC vs MET), leap seconds, and L1 propagation delay.
 - [**Setup & Troubleshooting (Windows)**](docs/setup_windows.md) — Step-by-step PowerShell environment setup, execution policies, and Windows troubleshooting.
 - [**Official Data Acquisition Protocol**](docs/data_acquisition.md) — ISRO ISSDC PRADAN portal retrieval instructions, pairing rules, and checksum logging.
 
@@ -189,7 +192,26 @@ jupyter nbconvert --to notebook --execute notebooks/02_eda.ipynb --output 02_eda
 
 ---
 
-## Next Steps (Stage 6 Source Research)
-- The human student researcher may review candidate burst behavior in [`docs/05_eda_findings.md`](docs/05_eda_findings.md) and [`notebooks/02_eda.ipynb`](notebooks/02_eda.ipynb).
-- Stage 6 independent event catalogue research may begin now.
-- **Label generation and training table creation remain strictly blocked until Gate G3.**
+## Ground-Truth Research and Labelling Protocol (Stage 6)
+Stage 6 establishes independent ground-truth catalogue research, temporal compatibility evaluation, and the scientific policy guard for Gate G3:
+- **Independent Sourcing:** Evaluated external catalogues from NOAA SWPC, NOAA NCEI GOES, NASA HEK, and ISRO PRADAN (PRADAN rejected for labelling to prevent circularity). Registered in `data/manifests/event_sources.csv`.
+- **No Unverified Claims:** All external sources evaluated as `TIME_SYSTEM_UNCONFIRMED` until SoLEXS time system (D-10) is confirmed. No arbitrary time conversions are performed.
+- **Policy Guard (Gate G3):** `assert_labelling_approved()` strictly refuses execution unless `docs/08_labelling_policy.md` contains an approved status line and decisions D-01, D-02, D-03, D-04, D-08, D-10, D-15 are marked `APPROVED` with non-null values in `config/decisions.yaml`.
+- **Zero Labels Generated:** Label generation is safely blocked; no training datasets or label tables exist.
+
+Verify Gate G3 Guard Refusal:
+```powershell
+python scripts/check_labelling_guard.py
+```
+
+Run Temporal Compatibility Assessment:
+```powershell
+python scripts/run_compatibility.py
+```
+
+---
+
+## Next Steps (Stage 7 Preprocessing & Segmentation)
+- The human student researcher reviews the draft labelling policy in [`docs/08_labelling_policy.md`](docs/08_labelling_policy.md) and candidate sources in [`data/manifests/event_sources.csv`](data/manifests/event_sources.csv).
+- Supervised labelling remains **BLOCKED** pending human Gate G3 approval.
+- **Stage 7 (Preprocessing and Segmentation)** may proceed with cleaning, imputation, and sliding window segmentation provided Decision D-14 is approved, as preprocessing does not depend on supervised flare labels.
