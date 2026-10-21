@@ -1,0 +1,92 @@
+# SOLARIS-A1 Machine Learning Training Protocol Specification (Stage 10)
+# STATUS: DRAFT — REQUIRES HUMAN RESEARCHER APPROVAL (Gate G7)
+# Antigravity does not set status to FROZEN. Only the human sets status to FROZEN or PILOT.
+
+protocol_id: "PROTO_STAGE10_DRAFT_001"
+status: "DRAFT"  # Allowed: DRAFT | FROZEN | PILOT
+approved_by: null
+approved_date: null
+protocol_hash: null  # SHA-256 computed over this file excluding this field
+
+# Experiment Scope
+task: "detection"  # "detection" (Task A) | "prediction" (Task B)
+dataset_export_id: null  # Export ID from Stage 9 (e.g. exp_det_...)
+
+# Temporal & Segment Split Strategy
+split_strategy: "chronological"  # "chronological" | "event_grouped"
+split_parameters:
+  train_end: 1792316628.0  # End of segment 1 in seconds
+  val_end: 1792330088.0    # End of segment 2 in seconds
+  embargo_seconds: 300.0   # Buffer interval between train/val and val/test
+  group_column: "segment_id"
+  fractions: [0.60, 0.20, 0.20]
+  random_state: 42
+
+# Inner Validation & Tuning
+inner_validation:
+  method: "TimeSeriesSplit"
+  n_splits: 3
+  respect_grouping: true
+
+# Preprocessing Pipeline (Fitted STRICTLY on Training partition)
+preprocessing:
+  scaler: "StandardScaler"  # "StandardScaler" | "RobustScaler" | "NONE"
+  imputer: "NONE"           # "NONE" (strict: raises MissingFeatureError on NaN)
+  feature_selection: "NONE" # "NONE" | "SelectKBest"
+
+# Class Imbalance Governance
+class_weight_options:
+  - "balanced"
+  - "none"
+
+# Candidate Estimator Search Spaces
+models:
+  logistic_regression:
+    enabled: true
+    param_grid:
+      C: [0.01, 0.1, 1.0, 10.0]
+      solver: ["lbfgs"]
+      max_iter: [1000]
+      class_weight: ["balanced", null]
+    deterministic_seed: 42
+
+  random_forest:
+    enabled: true
+    param_grid:
+      n_estimators: [50, 100]
+      max_depth: [5, 10, null]
+      min_samples_split: [2, 5]
+      class_weight: ["balanced", "balanced_subsample", null]
+    deterministic_seed: 42
+
+  xgboost:
+    enabled: true
+    param_grid:
+      n_estimators: [50, 100]
+      max_depth: [3, 6]
+      learning_rate: [0.05, 0.1]
+      tree_method: ["hist"]
+      n_jobs: [1]
+    deterministic_seed: 42
+
+# Validation Selection Metric
+selection_metric: "PR_AUC"  # Precision-Recall Area Under Curve on validation
+refit_final: "train_only"    # "train_only" | "train_plus_validation"
+
+# Strict Test Set Lockdown
+test_lock: true  # Mandatory true: test partition must be sealed and never read during tuning
+
+# Random Seeds
+seeds:
+  global: 42
+  logistic_regression: 42
+  random_forest: 42
+  xgboost: 42
+
+# Governance & Event Floor (Decision D-15)
+minimum_counts:
+  min_positives_train: 1
+  min_events_train: 1
+  min_positives_val: 1
+  min_events_val: 1
+  d15_minimum_events: 10

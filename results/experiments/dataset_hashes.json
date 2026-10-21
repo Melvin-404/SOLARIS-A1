@@ -1,0 +1,7 @@
+{
+  "dataset_count": 0,
+  "datasets_present": false,
+  "status": "BLOCKED_STAGE9",
+  "files": {},
+  "note": "No datasets exported in data/processed/datasets/ because Gate G3 (labelling policy) is unapproved. Stage 10 live training is blocked."
+}

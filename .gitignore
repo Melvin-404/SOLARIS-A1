@@ -48,6 +48,8 @@ results/*
 !results/features/**
 !results/exports/
 !results/exports/**
+!results/experiments/
+!results/experiments/**
 
 # Logs
 logs/

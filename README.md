@@ -8,9 +8,9 @@
 ---
 
 ## Current Status
-**Status:** `Stage 9 — Label Integration and Dataset Export (Infrastructure Complete; Live Export BLOCKED pending Gate G3 & Gate G6)`
+**Status:** `Stage 10 — Automated Model Training (Infrastructure Complete; Live Training BLOCKED pending Gate G7)`
 
-Policy-guarded label integration, Task A (Detection) and Task B (Forecasting) target builders, segregated export generators (`X_features.csv`, `y_labels.csv`, `metadata.csv`, `exclusions.csv`), and data dictionary generators are implemented (`src/solar_flare/export/`). Live dataset export execution on real workspace files strictly refuses and logs blocked reports (`results/exports/BLOCKED_DETECTION.md` and `results/exports/BLOCKED_PREDICTION.md`) because Gate G3 (labelling policy & event records) and Gate G6 (forecasting policy) require formal human researcher approval.
+Strict splitting algorithms with temporal embargo buffers (`chronological` and `event_grouped`), cryptographic test set sealing (`results/experiments/<exp_id>/sealed/test_set.csv`), training-only preprocessing fitting, and validation-only hyperparameter tuning for Logistic Regression, Random Forest, and XGBoost are implemented (`src/solar_flare/modelling/`). Live execution on the real workspace strictly refuses and outputs a blocked notice (`results/experiments/AWAITING_G7.md`) because Gate G7 (training protocol freeze) and Gate G3/G6 (upstream dataset export) require human researcher approval. Test evaluation is strictly deferred to Stage 11 under Gate G8.
 
 ---
 
@@ -158,6 +158,7 @@ Detailed project documentation is available in the [`docs/`](docs/) directory:
 - [**11. Feature Dictionary**](docs/11_feature_dictionary.md) — Exact mathematical definitions, units, reasons, and critical warning on row-level splitting for all 18 causal features.
 - [**12. Windowing Methods**](docs/12_windowing_methods.md) — Sliding window geometry, reference time $t_0$, coverage fractions, and effective sample size considerations.
 - [**13. Dataset Export**](docs/13_dataset_export.md) — Export structure, label semantics, <NA> exclusion meaning, and complete task separation.
+- [**14. Training Protocol**](docs/14_training_protocol.md) — Non-random splitting, embargo buffers, test set sealing, and validation-only selection rules.
 - [**Setup & Troubleshooting (Windows)**](docs/setup_windows.md) — Step-by-step PowerShell environment setup, execution policies, and Windows troubleshooting.
 - [**Official Data Acquisition Protocol**](docs/data_acquisition.md) — ISRO ISSDC PRADAN portal retrieval instructions, pairing rules, and checksum logging.
 
@@ -278,8 +279,23 @@ python scripts/export_dataset.py --task prediction
 
 ---
 
-## Next Steps (Stage 10 Baseline Classifiers & Evaluation Protocols)
-- Review blocked reports in [`results/exports/`](results/exports/).
-- Complete Human Approval Gate G3 (Labelling Policy & Event Records) and Gate G6 (Forecasting Policy).
-- Once Gate G3 is approved, run live dataset export.
-- If independent verified event count is below Decision D-15 threshold, datasets receive `INSUFFICIENT` status, permitting PILOT model execution while restricting main experiment training.
+## Automated Model Training & Tuning (Stage 10)
+Stage 10 implements non-random dataset splitting, test set cryptographic sealing, training-only preprocessing, and validation-only hyperparameter tuning:
+- **Strict Non-Random Partitioning:** `chronological_split` enforces temporal embargo buffers (default 300 s) at partition boundaries; `event_grouped_split` groups by continuous segment/event ID. Random shuffling is strictly prohibited.
+- **Cryptographic Test Lock:** Test samples are sealed in `results/experiments/<exp_id>/sealed/test_set.csv` with a SHA-256 hash before any tuning begins. Access is logged in `access_log.jsonl`; selection code contains 0 test reads.
+- **Training-Only Preprocessing:** Scalers (`StandardScaler`, `RobustScaler`) are fitted strictly on training indices; validation/test overlap raises `TestLeakageError`. Imputation is `NONE` (raises on `NaN`).
+- **Validation-Only Tuning:** Evaluates Logistic Regression, Random Forest, and XGBoost on validation data using PR-AUC. The test set is evaluated exclusively in Stage 11 under Gate G8.
+- **Current Live Status:** Refuses execution and outputs `results/experiments/AWAITING_G7.md` because Gate G7 (training protocol freeze) awaits human approval.
+
+Run Training CLI:
+```powershell
+python scripts/train_models.py --protocol config/training_protocol.yaml
+```
+
+---
+
+## Next Steps (Stage 11 Model Evaluation & Verification)
+- Review `config/training_protocol.yaml` and `results/experiments/AWAITING_G7.md`.
+- Complete Human Approval Gate G7 (freeze training protocol: status `FROZEN` or `PILOT`).
+- Complete Gate G3/G6 to produce live datasets.
+- Stage 11 (Final Test Evaluation) executes under Gate G8 once models are trained and test locks verified.
