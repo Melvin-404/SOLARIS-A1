@@ -50,6 +50,8 @@ results/*
 !results/exports/**
 !results/experiments/
 !results/experiments/**
+!results/dashboard/
+!results/dashboard/**
 
 # Logs
 logs/

@@ -8,9 +8,9 @@
 ---
 
 ## Current Status
-**Status:** `Stage 11 — Scientific Evaluation (Framework Complete; Single-Shot Test Evaluation BLOCKED pending Gate G8)`
+**Status:** `Stage 12 — Streamlit Dashboard Foundation (Multipage Dashboard Complete & Verified)`
 
-The complete scientific evaluation framework is implemented (`src/solar_flare/evaluation/`), encompassing window-level classification metrics (PR-AUC, F1, precision, recall, mandatory prevalence), macro event-level detection rates with window clustering, operational false-alarm analysis normalized strictly by GTI-covered observation hours, non-learning reference baselines (threshold, climatological, persistence), probability calibration assessment (ECE, Brier score), block bootstrap uncertainty estimation across continuous segments, and standardized reporting/dashboard contracts. Single-shot test evaluation on live workspace data strictly refuses and outputs `results/experiments/AWAITING_G8.md` pending Gate G8 human researcher authorization. Test evaluation is executed exactly once per experiment run.
+A local, multipage Streamlit interactive dashboard (`dashboard/`) has been implemented and verified. The dashboard features 8 dedicated pages covering task framing, inventory provenance, data quality characterisation (with interactive figures), Level-1 light-curve exploration (with GTI shading and sample flag layers), exploratory burst candidates vs. Gate G3 approved events, causal feature distributions (with 83.3% window overlap leakage warnings), and model evaluation results. The dashboard operates strictly read-only, never mutates files, never trains models, and gracefully renders empty/provisional states when artifacts are awaiting human gate approvals.
 
 ---
 
@@ -160,6 +160,7 @@ Detailed project documentation is available in the [`docs/`](docs/) directory:
 - [**13. Dataset Export**](docs/13_dataset_export.md) — Export structure, label semantics, <NA> exclusion meaning, and complete task separation.
 - [**14. Training Protocol**](docs/14_training_protocol.md) — Non-random splitting, embargo buffers, test set sealing, and validation-only selection rules.
 - [**15. Evaluation Methods**](docs/15_evaluation_methods.md) — Window-level vs. event-level duality, PR-AUC, covered-time false alarms, baselines, and single-shot evaluation governance.
+- [**16. Dashboard Foundation**](docs/16_dashboard.md) — Local multipage Streamlit dashboard architecture, artifact loaders, status categories, and display-only guarantees.
 - [**Setup & Troubleshooting (Windows)**](docs/setup_windows.md) — Step-by-step PowerShell environment setup, execution policies, and Windows troubleshooting.
 - [**Official Data Acquisition Protocol**](docs/data_acquisition.md) — ISRO ISSDC PRADAN portal retrieval instructions, pairing rules, and checksum logging.
 
@@ -313,7 +314,31 @@ python scripts/evaluate_locked_models.py --experiment-id <experiment_id>
 
 ---
 
-## Next Steps (Stage 12 Analysis & Gate G9 Review)
-- Review `config/training_protocol.yaml` and approve Gate G7 to unblock model training.
-- Complete Gate G8 approval in `results/experiments/<id>/G8_APPROVAL.json` or protocol YAML to authorize single-shot test set evaluation.
-- After Stage 11 evaluation runs once, human researcher reviews the evaluation report at Gate G9 prior to interactive dashboard analysis (Stage 12/13).
+## Streamlit Dashboard (Stage 12)
+Stage 12 implements a local, interactive, multipage Streamlit dashboard (`dashboard/`):
+- **Multipage Navigation:**
+  - `app.py`: Overview of Task A (detection) vs. Task B (forecasting), Gate G3 labelling policy status, and pipeline artifact checklist.
+  - `1_Overview.py`: Project stage tracking, FITS file inventory summary, and open research questions.
+  - `2_Dataset.py`: Detailed product browser, manifest checksum integrity, detector pairing, and `GTI EMPTY FOR THIS OBSERVATION` warning for SDD1.
+  - `3_Data_Quality.py`: Stage 4 quality summary table, per-file audit reports, and 4 diagnostic figures.
+  - `4_Light_Curves.py`: Interactive time series explorer with time-range slider, GTI shaded rectangles, segregated 0/NaN sample markers, and display-only downsampling notice.
+  - `5_Events.py`: Candidate burst table with persistent `CANDIDATE — UNVERIFIED` badges and light-curve zoom overlay.
+  - `6_Features.py`: Sliding window index browser, feature histograms, and critical 83.3% window overlap leakage warning.
+  - `7_Model_Results.py`: Protocol-governed validation selection results (`VALIDATION ONLY`) and single-shot sealed test evaluation reports.
+- **Strict Read-Only Guarantee:** The dashboard never writes to `data/` or `results/`, never trains models, and never runs pipeline stages on button clicks.
+- **Persistent Governance Disclaimer:** The sidebar permanently displays:
+  > *"Candidate bursts are not verified solar flares. Pilot and provisional results are not validated detector performance."*
+
+Launch Dashboard Locally on Windows:
+```powershell
+# In PowerShell (.venv activated)
+python -m streamlit run dashboard/app.py
+```
+Open `http://localhost:8501` in your browser.
+
+---
+
+## Next Steps (Stage 13 Advanced Visualizations & Gate G10 Review)
+- Review dashboard UI wording, empty states, and status banners with human researcher (Gate G10).
+- Unblock Gate G7 (training protocol freeze) and Gate G8 (single-shot test evaluation) when ready.
+- Proceed to Stage 13 (Interactive Analysis & Advanced Visualizations).
