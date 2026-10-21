@@ -8,9 +8,9 @@
 ---
 
 ## Current Status
-**Status:** `Stage 10 — Automated Model Training (Infrastructure Complete; Live Training BLOCKED pending Gate G7)`
+**Status:** `Stage 11 — Scientific Evaluation (Framework Complete; Single-Shot Test Evaluation BLOCKED pending Gate G8)`
 
-Strict splitting algorithms with temporal embargo buffers (`chronological` and `event_grouped`), cryptographic test set sealing (`results/experiments/<exp_id>/sealed/test_set.csv`), training-only preprocessing fitting, and validation-only hyperparameter tuning for Logistic Regression, Random Forest, and XGBoost are implemented (`src/solar_flare/modelling/`). Live execution on the real workspace strictly refuses and outputs a blocked notice (`results/experiments/AWAITING_G7.md`) because Gate G7 (training protocol freeze) and Gate G3/G6 (upstream dataset export) require human researcher approval. Test evaluation is strictly deferred to Stage 11 under Gate G8.
+The complete scientific evaluation framework is implemented (`src/solar_flare/evaluation/`), encompassing window-level classification metrics (PR-AUC, F1, precision, recall, mandatory prevalence), macro event-level detection rates with window clustering, operational false-alarm analysis normalized strictly by GTI-covered observation hours, non-learning reference baselines (threshold, climatological, persistence), probability calibration assessment (ECE, Brier score), block bootstrap uncertainty estimation across continuous segments, and standardized reporting/dashboard contracts. Single-shot test evaluation on live workspace data strictly refuses and outputs `results/experiments/AWAITING_G8.md` pending Gate G8 human researcher authorization. Test evaluation is executed exactly once per experiment run.
 
 ---
 
@@ -159,6 +159,7 @@ Detailed project documentation is available in the [`docs/`](docs/) directory:
 - [**12. Windowing Methods**](docs/12_windowing_methods.md) — Sliding window geometry, reference time $t_0$, coverage fractions, and effective sample size considerations.
 - [**13. Dataset Export**](docs/13_dataset_export.md) — Export structure, label semantics, <NA> exclusion meaning, and complete task separation.
 - [**14. Training Protocol**](docs/14_training_protocol.md) — Non-random splitting, embargo buffers, test set sealing, and validation-only selection rules.
+- [**15. Evaluation Methods**](docs/15_evaluation_methods.md) — Window-level vs. event-level duality, PR-AUC, covered-time false alarms, baselines, and single-shot evaluation governance.
 - [**Setup & Troubleshooting (Windows)**](docs/setup_windows.md) — Step-by-step PowerShell environment setup, execution policies, and Windows troubleshooting.
 - [**Official Data Acquisition Protocol**](docs/data_acquisition.md) — ISRO ISSDC PRADAN portal retrieval instructions, pairing rules, and checksum logging.
 
@@ -294,8 +295,25 @@ python scripts/train_models.py --protocol config/training_protocol.yaml
 
 ---
 
-## Next Steps (Stage 11 Model Evaluation & Verification)
-- Review `config/training_protocol.yaml` and `results/experiments/AWAITING_G7.md`.
-- Complete Human Approval Gate G7 (freeze training protocol: status `FROZEN` or `PILOT`).
-- Complete Gate G3/G6 to produce live datasets.
-- Stage 11 (Final Test Evaluation) executes under Gate G8 once models are trained and test locks verified.
+## Scientific Evaluation (Stage 11)
+Stage 11 implements the single-shot scientific evaluation engine for locked models on the sealed test set:
+- **Single-Shot Evaluation Rule:** Evaluation on the test set is executed strictly once. Any attempt to re-evaluate an already evaluated experiment directory (`EVALUATED_ONCE`) is strictly refused.
+- **Window vs. Event Metrics:** Evaluates both micro window-level classifications (PR-AUC, F1, precision, recall with mandatory prevalence reporting) and macro event-level detections (consecutive window merging, overlap matching against reference events, onset timing error median & IQR).
+- **Covered Observation Normalization:** Operational false-alarm rates are computed strictly per GTI-covered science observation hour, never uncorrected wall-clock time.
+- **Physics & Statistical Baselines:** Evaluates Threshold Baseline (causal peak-to-baseline ratio fitted strictly on training data), Climatological Baseline (constant training prevalence), and Persistence Baseline.
+- **Calibration Assessment:** Computes reliability diagrams (equal-width probability bins), Expected Calibration Error (ECE), Maximum Calibration Error (MCE), and Brier score without post-hoc test recalibration.
+- **Block Bootstrap Uncertainty:** Resamples continuous observation segments rather than rows to honor temporal autocorrelation. Withheld if independent segments are fewer than 5.
+- **Dashboard Contract:** Generates `evaluation/dashboard_contract.json` specifying exact schema requirements for Stage 12 and Stage 13.
+- **Gate G8 Guard:** Single-shot evaluation strictly refuses execution and writes `results/experiments/AWAITING_G8.md` unless Gate G8 human approval is explicitly recorded.
+
+Run Evaluation CLI:
+```powershell
+python scripts/evaluate_locked_models.py --experiment-id <experiment_id>
+```
+
+---
+
+## Next Steps (Stage 12 Analysis & Gate G9 Review)
+- Review `config/training_protocol.yaml` and approve Gate G7 to unblock model training.
+- Complete Gate G8 approval in `results/experiments/<id>/G8_APPROVAL.json` or protocol YAML to authorize single-shot test set evaluation.
+- After Stage 11 evaluation runs once, human researcher reviews the evaluation report at Gate G9 prior to interactive dashboard analysis (Stage 12/13).

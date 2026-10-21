@@ -1,6 +1,6 @@
 # DATASET EXPORT BLOCKED: DETECTION (Gate G3 (Ground-Truth Labelling Policy))
 
-**Execution Timestamp:** `2026-10-21T08:57:30.642006+00:00`  
+**Execution Timestamp:** `2026-10-21T09:15:19.660462+00:00`  
 **Task:** `detection`  
 **Status:** `BLOCKED — PREREQUISITES NOT MET`  
 

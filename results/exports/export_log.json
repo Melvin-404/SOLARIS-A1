@@ -130,5 +130,49 @@
       "Approved event records file does not exist at 'data\\manifests\\event_records_approved.csv'. Gate G6 requires human-verified flare event onsets."
     ],
     "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-21T09:00:22.286626+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Supervised labelling is strictly BLOCKED pending Gate G3 human approval.\nThe following approval items must be confirmed by the human researcher:\n  - Policy status line in '08_labelling_policy.md' is 'DRAFT \u2014 REQUIRES HUMAN APPROVAL'. Requires exact format 'Status: APPROVED by <name>, date <YYYY-MM-DD>'.\n  - Decision 'D-01' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-02' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-03' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-04' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-08' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-10' status is 'PROVISIONAL' (required: 'APPROVED')\n  - Decision 'D-15' status is 'PENDING' (required: 'APPROVED')",
+      "Approved event records file does not exist at 'data\\manifests\\event_records_approved.csv'. Gate G3 requires human verification and placement of approved independent flare event records."
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-21T09:00:22.321891+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Task B forecasting export is strictly BLOCKED pending Gate G6 human approval.\nThe following items must be confirmed by the human researcher:\n  - Forecasting policy document not found: C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\docs\\22_forecasting_policy.md\n  - Decision 'D-07' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-08' status is 'PENDING' (required: 'APPROVED')",
+      "Approved event records file does not exist at 'data\\manifests\\event_records_approved.csv'. Gate G6 requires human-verified flare event onsets."
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-21T09:15:19.660462+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Supervised labelling is strictly BLOCKED pending Gate G3 human approval.\nThe following approval items must be confirmed by the human researcher:\n  - Policy status line in '08_labelling_policy.md' is 'DRAFT \u2014 REQUIRES HUMAN APPROVAL'. Requires exact format 'Status: APPROVED by <name>, date <YYYY-MM-DD>'.\n  - Decision 'D-01' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-02' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-03' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-04' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-08' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-10' status is 'PROVISIONAL' (required: 'APPROVED')\n  - Decision 'D-15' status is 'PENDING' (required: 'APPROVED')",
+      "Approved event records file does not exist at 'data\\manifests\\event_records_approved.csv'. Gate G3 requires human verification and placement of approved independent flare event records."
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-21T09:15:19.699000+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Task B forecasting export is strictly BLOCKED pending Gate G6 human approval.\nThe following items must be confirmed by the human researcher:\n  - Forecasting policy document not found: C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\docs\\22_forecasting_policy.md\n  - Decision 'D-07' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-08' status is 'PENDING' (required: 'APPROVED')",
+      "Approved event records file does not exist at 'data\\manifests\\event_records_approved.csv'. Gate G6 requires human-verified flare event onsets."
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
   }
 ]
