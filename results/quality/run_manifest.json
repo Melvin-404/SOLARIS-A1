@@ -1,0 +1,21 @@
+{
+  "timestamp_utc": "2026-10-21T07:10:02.477826+00:00",
+  "command": "scripts/run_quality.py --raw-dir data/raw --manifest data/manifests/manifest.csv --out-dir results/quality",
+  "raw_dir": "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\data\\raw",
+  "manifest": "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\data\\manifests\\manifest.csv",
+  "out_dir": "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\results\\quality",
+  "config": "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\config\\default.yaml",
+  "column_roles": "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\config\\column_roles.yaml",
+  "thresholds": {
+    "cadence_tolerance_factor": 1.5,
+    "spike_z_score_threshold": 5.0,
+    "min_zero_run_length": 5
+  },
+  "files_processed": [
+    "AL1_SOLEXS_20261018_SDD1_L1.gti",
+    "AL1_SOLEXS_20261018_SDD2_L1.lc",
+    "AL1_SOLEXS_20261018_SDD2_L1.pi"
+  ],
+  "overall_status": "PROVISIONAL pending G1",
+  "exit_code": 0
+}

@@ -1,0 +1,36 @@
+# SOLARIS-A1 Column Roles Configuration
+# Status: All roles are strictly PROVISIONAL until confirmed by the student researcher at Gate G1.
+
+roles:
+  lightcurve:
+    file_pattern: "*.lc.gz"
+    hdu: 1
+    time_column:
+      name: "TIME"
+      status: "PROVISIONAL"
+      evidence_reference: "results/quality/column_role_evidence.json"
+      notes: "Monotonically increasing 1.0 s cadence matching DATE-OBS; requires human confirmation (G1)"
+    count_column:
+      name: "COUNTS"
+      status: "PROVISIONAL"
+      evidence_reference: "results/quality/column_role_evidence.json"
+      notes: "Non-negative count rates in RATE table; requires human confirmation (G1)"
+    quality_flag_column:
+      name: null
+      status: "UNRESOLVED"
+      evidence_reference: "results/quality/column_role_evidence.json"
+      notes: "No dedicated flag column found in RATE table; requires human confirmation (G1)"
+
+  gti:
+    file_pattern: "*.gti.gz"
+    hdu: 1
+    start_column:
+      name: "START"
+      status: "PROVISIONAL"
+      evidence_reference: "results/quality/column_role_evidence.json"
+      notes: "Start timestamp of valid observation interval; requires human confirmation (G1)"
+    stop_column:
+      name: "STOP"
+      status: "PROVISIONAL"
+      evidence_reference: "results/quality/column_role_evidence.json"
+      notes: "Stop timestamp of valid observation interval; requires human confirmation (G1)"

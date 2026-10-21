@@ -1,0 +1,110 @@
+# SOLARIS-A1 Machine-Readable Decision Register
+# Status Vocabulary: PENDING, PROVISIONAL, CONFIRMED, APPROVED
+
+decisions:
+  D-01:
+    title: "Source of verified flare-event labels"
+    status: "PENDING"
+    owner: "Student"
+    stage_needed: "Stage 6"
+    notes: "Requires human selection of verified flare event catalogue."
+
+  D-02:
+    title: "Time-matching tolerance between event records and SoLEXS timestamps"
+    status: "PENDING"
+    owner: "Student"
+    stage_needed: "Stage 6"
+    notes: "Matching tolerance delta_t pending student review."
+
+  D-03:
+    title: "Definition of flare onset, peak, and end"
+    status: "PENDING"
+    owner: "Student"
+    stage_needed: "Stage 6"
+    notes: "Boundary criteria definition pending student approval."
+
+  D-04:
+    title: "Treatment of ambiguous or partially observed events"
+    status: "PENDING"
+    owner: "Student"
+    stage_needed: "Stage 4"
+    notes: "Partial flare window treatment pending student decision."
+
+  D-05:
+    title: "Window length (W = 60 s)"
+    status: "PROVISIONAL"
+    owner: "Student / Antigravity"
+    stage_needed: "Stage 8"
+    notes: "Provisional default 60 s."
+
+  D-06:
+    title: "Window stride (S = 10 s)"
+    status: "PROVISIONAL"
+    owner: "Student / Antigravity"
+    stage_needed: "Stage 8"
+    notes: "Provisional default 10 s."
+
+  D-07:
+    title: "Forecast horizon for Task B"
+    status: "PENDING"
+    owner: "Student"
+    stage_needed: "Stage 14"
+    notes: "Prediction horizon delta_t_horizon pending student scientific design."
+
+  D-08:
+    title: "Definition of verified negative intervals"
+    status: "PENDING"
+    owner: "Student"
+    stage_needed: "Stage 7"
+    notes: "Quiet-Sun safety buffer definition pending student approval."
+
+  D-09:
+    title: "Energy band / light-curve channel selection"
+    status: "PROVISIONAL"
+    owner: "Student"
+    stage_needed: "Stage 4 (Gate G1)"
+    candidate_choice: "RATE table column COUNTS in AL1_SOLEXS_20261018_SDD2_L1.lc.gz"
+    evidence_reference: "results/quality/column_role_evidence.json"
+    notes: "PROVISIONAL pending human confirmation (Gate G1). Full-disk integrated soft X-ray counts from SDD2 detector."
+
+  D-10:
+    title: "Time system alignment (UTC vs Mission Elapsed Time)"
+    status: "PROVISIONAL"
+    owner: "Student"
+    stage_needed: "Stage 4 (Gate G1)"
+    candidate_choice: "Elapsed seconds since MJD 40587.0 (1970-01-01 00:00:00 UTC)"
+    evidence_reference: "results/quality/column_role_evidence.json"
+    notes: "PROVISIONAL pending human confirmation (Gate G1). Matches DATE-OBS with 1.0 s step."
+
+  D-11:
+    title: "Class-imbalance handling strategy"
+    status: "PENDING"
+    owner: "Student"
+    stage_needed: "Stage 10"
+    notes: "Class imbalance strategy deferred to student researcher."
+
+  D-12:
+    title: "Train / Validation / Test split strategy"
+    status: "PENDING"
+    owner: "Student"
+    stage_needed: "Stage 10"
+    notes: "Temporal train/val/test splitting strategy pending student approval."
+
+  D-13:
+    title: "Quality check and cadence thresholds"
+    status: "PROVISIONAL"
+    owner: "Student"
+    stage_needed: "Stage 4 (Gate G2)"
+    parameters:
+      cadence_tolerance_factor: 1.5
+      spike_z_score_threshold: 5.0
+      min_zero_run_length: 5
+    evidence_reference: "config/default.yaml"
+    notes: "PROVISIONAL pending human confirmation (Gate G2)."
+
+  D-14:
+    title: "Handling of sub-cadence jitter and small telemetry dropouts"
+    status: "PENDING"
+    owner: "Student"
+    stage_needed: "Stage 4"
+    notes: "Sub-cadence dropout handling pending student review."

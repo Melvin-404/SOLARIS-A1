@@ -1,0 +1,31 @@
+# SOLARIS-A1 Default Configuration (Stage 4)
+# Note: Scientific parameters are uncommitted and marked PENDING pending student decisions.
+
+project:
+  name: "SOLARIS-A1"
+  stage_status: "Stage 4 (PROVISIONAL pending G1)"
+
+paths:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  results_dir: "results"
+  logs_dir: "logs"
+
+logging:
+  level: "INFO"
+  file_name: "solaris_a1.log"
+
+quality:
+  # PROVISIONAL quality check thresholds — requires human confirmation (G2)
+  cadence_tolerance_factor: 1.5  # PROVISIONAL: delta > 1.5 * expected_cadence flagged as gap
+  spike_z_score_threshold: 5.0   # PROVISIONAL: robust MAD z-score for candidate spike detection
+  min_zero_run_length: 5         # PROVISIONAL: min consecutive zero counts to record as a zero run
+  flag_columns_enabled: false    # PROVISIONAL: flag column parsing disabled until flag semantics confirmed
+
+scientific_parameters:
+  # All scientific parameters are deferred to student review and decision log
+  window_length_s: "PENDING — see docs/01_decision_log.md (D-05)"
+  window_stride_s: "PENDING — see docs/01_decision_log.md (D-06)"
+  forecast_horizon_s: "PENDING — see docs/01_decision_log.md (D-07)"
+  time_tolerance_s: "PENDING — see docs/01_decision_log.md (D-02)"
+  energy_channels: "PENDING — see docs/01_decision_log.md (D-09)"

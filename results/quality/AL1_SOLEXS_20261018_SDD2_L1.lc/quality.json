@@ -1,0 +1,204 @@
+{
+  "file_stem": "AL1_SOLEXS_20261018_SDD2_L1.lc",
+  "role_status": "PROVISIONAL",
+  "overall_status": "PROVISIONAL pending G1",
+  "cadence_analysis": {
+    "status": "PASS",
+    "cadence_median": 1.0,
+    "cadence_mode": 1.0,
+    "cadence_min": 1.0,
+    "cadence_max": 1.0,
+    "cadence_std": 0.0,
+    "n_positive_diffs": 86399,
+    "total_samples": 86400,
+    "detail": "No cadence gaps detected above threshold.",
+    "n_cadence_gaps": 0,
+    "gaps": [],
+    "total_gap_duration_s": 0.0,
+    "expected_cadence": 1.0,
+    "tolerance_factor": 1.5,
+    "threshold_s": 1.5
+  },
+  "gti_coverage": {
+    "gti_status": "VALID",
+    "n_intervals": 8,
+    "covered_duration_s": 81417.0,
+    "obs_span_s": 86399.0,
+    "gti_covered_fraction": 0.9424189814814815,
+    "n_samples_inside_gti": 81425,
+    "n_samples_outside_gti": 4975,
+    "empty_intervals": [],
+    "interval_sample_counts": [
+      30202,
+      6802,
+      18210,
+      11,
+      6,
+      12,
+      13,
+      26169
+    ],
+    "detail": "Coverage: 81425/86400 samples inside GTI (94.24%). 4975 samples outside GTI. 0 intervals had zero samples."
+  },
+  "checks": {
+    "check_non_finite": {
+      "name": "check_non_finite",
+      "status": "WARN",
+      "counts": {
+        "total_samples": 86400,
+        "n_nan": 4849,
+        "n_pos_inf": 0,
+        "n_neg_inf": 0,
+        "n_non_finite": 4849
+      },
+      "detail": "Observed 4849 NaNs, 0 +inf, and 0 -inf samples."
+    },
+    "check_negative_values": {
+      "name": "check_negative_values",
+      "status": "PASS",
+      "counts": {
+        "total_samples": 86400,
+        "n_negative": 0
+      },
+      "detail": {
+        "min_finite_value": 0.0,
+        "message": "No negative values detected."
+      }
+    },
+    "check_duplicate_timestamps": {
+      "name": "check_duplicate_timestamps",
+      "status": "PASS",
+      "counts": {
+        "total_samples": 86400,
+        "n_duplicates": 0,
+        "n_unique": 86400
+      },
+      "detail": {
+        "message": "All timestamps are unique.",
+        "examples": []
+      }
+    },
+    "check_time_ordering": {
+      "name": "check_time_ordering",
+      "status": "PASS",
+      "counts": {
+        "total_samples": 86400,
+        "n_backward_steps": 0
+      },
+      "detail": {
+        "message": "Timestamps are strictly non-decreasing.",
+        "examples": []
+      }
+    },
+    "check_zero_runs": {
+      "name": "check_zero_runs",
+      "status": "PASS",
+      "counts": {
+        "total_samples": 86400,
+        "n_zero_samples": 137,
+        "n_zero_runs": 0,
+        "max_zero_run_length": 0,
+        "min_run_length_threshold": 5
+      },
+      "detail": {
+        "runs": [],
+        "message": "Observed 137 zero counts across 0 runs (run length >= 5). Maximum run length: 0 samples."
+      }
+    },
+    "check_quality_flags": {
+      "name": "check_quality_flags",
+      "status": "NOT_APPLICABLE",
+      "counts": {
+        "total_samples": 0
+      },
+      "detail": "No quality flag column available or column is null (UNRESOLVED pending G1)."
+    },
+    "check_candidate_spikes": {
+      "name": "check_candidate_spikes",
+      "status": "WARN",
+      "counts": {
+        "total_samples": 86400,
+        "n_candidate_spikes": 5238,
+        "median": 9.0,
+        "mad": 3.0,
+        "z_threshold": 5.0
+      },
+      "detail": {
+        "label": "candidate spike \u2014 not a verified event",
+        "message": "Detected 5238 statistical candidate spikes with robust z > 5.0. These are statistical anomalies only and MUST NOT be interpreted as solar flares.",
+        "examples": [
+          {
+            "index": 13151,
+            "value": 32.0,
+            "robust_z": 5.171095822653896,
+            "label": "candidate spike \u2014 not a verified event",
+            "time": 1792294751.0
+          },
+          {
+            "index": 13280,
+            "value": 35.0,
+            "robust_z": 5.845586582130491,
+            "label": "candidate spike \u2014 not a verified event",
+            "time": 1792294880.0
+          },
+          {
+            "index": 13367,
+            "value": 39.0,
+            "robust_z": 6.744907594765952,
+            "label": "candidate spike \u2014 not a verified event",
+            "time": 1792294967.0
+          },
+          {
+            "index": 13371,
+            "value": 34.0,
+            "robust_z": 5.620756328971626,
+            "label": "candidate spike \u2014 not a verified event",
+            "time": 1792294971.0
+          },
+          {
+            "index": 13375,
+            "value": 32.0,
+            "robust_z": 5.171095822653896,
+            "label": "candidate spike \u2014 not a verified event",
+            "time": 1792294975.0
+          },
+          {
+            "index": 13377,
+            "value": 33.0,
+            "robust_z": 5.395926075812762,
+            "label": "candidate spike \u2014 not a verified event",
+            "time": 1792294977.0
+          },
+          {
+            "index": 13387,
+            "value": 35.0,
+            "robust_z": 5.845586582130491,
+            "label": "candidate spike \u2014 not a verified event",
+            "time": 1792294987.0
+          },
+          {
+            "index": 13393,
+            "value": 32.0,
+            "robust_z": 5.171095822653896,
+            "label": "candidate spike \u2014 not a verified event",
+            "time": 1792294993.0
+          },
+          {
+            "index": 13395,
+            "value": 34.0,
+            "robust_z": 5.620756328971626,
+            "label": "candidate spike \u2014 not a verified event",
+            "time": 1792294995.0
+          },
+          {
+            "index": 13404,
+            "value": 34.0,
+            "robust_z": 5.620756328971626,
+            "label": "candidate spike \u2014 not a verified event",
+            "time": 1792295004.0
+          }
+        ]
+      }
+    }
+  }
+}
