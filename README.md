@@ -8,9 +8,9 @@
 ---
 
 ## Current Status
-**Status:** `Stage 13 — Dashboard and Pipeline Integration (Lineage, Status & Integrity Verification Complete)`
+**Status:** `Stage 14 — Integration Testing, Reproducibility, and Acceptance Preparation (Automated Checks Complete)`
 
-Stage 13 connects the SOLARIS-A1 Streamlit presentation layer to real pipeline artifacts with rigorous schema validation, cryptographic SHA-256 lineage tracking, stale-artifact detection, and a pure functional status engine (`src/solar_flare/status.py`). The dashboard strictly inspects artifacts in read-only mode, displays pipeline status color-coded across all stages, surfaces configuration drift side-by-side, and is verified by automated AST architecture boundaries prohibiting model training or data mutation. See [`docs/17_integration.md`](docs/17_integration.md).
+Stage 14 executes the complete automated test suite (215 tests), synthetic end-to-end pipeline verification, real-data isolated reproducibility check, dependency auditing, and static AST safeguard scans. All automated checks passed with exit code 0. Technical documentation, reproducibility checklists, scientific limitations, and the human acceptance bundle are prepared in [`docs/`](docs/) and [`docs/acceptance/`](docs/acceptance/). Human acceptance testing is required before final scientific sign-off. See [`docs/18_test_report.md`](docs/18_test_report.md) and [`docs/acceptance/ACCEPTANCE_CHECKLIST.md`](docs/acceptance/ACCEPTANCE_CHECKLIST.md).
 
 ---
 
@@ -390,8 +390,45 @@ python -m streamlit run dashboard/app.py
 
 ---
 
-## Next Steps (Stage 14 Deployment & Gate G10 Review)
-- Human researcher review of pipeline status categories and regeneration sequence in [`docs/17_integration.md`](docs/17_integration.md) (Gate G10).
-- Unblock Gate G3 (labelling policy approval) when external GOES/SWPC catalogs are integrated.
-- Proceed to Stage 14 (Automated Packaging, Deployment Preparation & Final Verification).
+## Integration Testing, Reproducibility & Acceptance Preparation (Stage 14)
+
+Stage 14 executes the comprehensive automated integration suite, end-to-end synthetic pipeline test, real-data reproducibility check, dependency verification, and static AST safeguard scans:
+
+### 1. Automated Test Suite (215 Tests)
+Run unit, integration, and safeguard tests across all subsystems:
+```powershell
+# Run full automated test suite
+python -m pytest tests/ tests/integration/ -v
+```
+
+### 2. Master Verification Audit Runner
+Run the automated end-to-end check runner covering all 9 system audits:
+```powershell
+python scripts/run_full_pipeline_check.py
+```
+This produces an auditable verification report in `results/checks/full_check_<timestamp>.md`.
+
+### 3. Real-Data Reproducibility Verifier
+Run the development pipeline in an isolated temporary directory and verify deterministic artifact equality:
+```powershell
+python scripts/check_real_reproducibility.py
+```
+
+### 4. Stage 14 Technical Documentation
+- **Test & Audit Report:** [`docs/18_test_report.md`](docs/18_test_report.md) — Verbatim test counts (215 passed, 0 failed), dependency checks, and environment snapshot.
+- **Reproducibility Checklist:** [`docs/19_reproducibility_checklist.md`](docs/19_reproducibility_checklist.md) — Item-by-item verification register with explicit verification statuses.
+- **Scientific Research Limitations:** [`docs/20_limitations.md`](docs/20_limitations.md) — Comprehensive register of physical, instrumental, observational, and statistical limitations.
+- **Changelog:** [`CHANGELOG.md`](CHANGELOG.md) — Full changelog from Stage 4 through Stage 14 with timestamps derived from Git history.
+
+### 5. Final Human Acceptance Bundle
+Final project acceptance testing is reserved exclusively for the human researcher and is not performed by Antigravity:
+- **Acceptance Checklist:** [`docs/acceptance/ACCEPTANCE_CHECKLIST.md`](docs/acceptance/ACCEPTANCE_CHECKLIST.md) — Human acceptance protocol with commands, expected outcomes, and blank result fields.
+- **Verification Bundle:** [`docs/acceptance/VERIFICATION_BUNDLE.md`](docs/acceptance/VERIFICATION_BUNDLE.md) — Independent verification commands and expected artifacts for every claim made across all stages.
+
+---
+
+## Next Steps (Human Acceptance Testing)
+- The human researcher performs personal verification using [`docs/acceptance/ACCEPTANCE_CHECKLIST.md`](docs/acceptance/ACCEPTANCE_CHECKLIST.md) and [`docs/acceptance/VERIFICATION_BUNDLE.md`](docs/acceptance/VERIFICATION_BUNDLE.md).
+- Human review and approval of scientific gates (G1 through G8 in `config/decisions.yaml`).
+- Upon human acceptance sign-off, the project transitions to multi-day dataset expansion and formal scientific model development.
 

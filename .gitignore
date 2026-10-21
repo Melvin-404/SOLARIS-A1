@@ -54,6 +54,8 @@ results/*
 !results/dashboard/**
 !results/integration/
 !results/integration/**
+!results/checks/
+!results/checks/**
 
 # Logs
 logs/

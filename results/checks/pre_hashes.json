@@ -1,0 +1,26 @@
+{
+  "data\\raw\\AL1_SOLEXS_20261018_SDD1_L1.gti.gz": {
+    "sha256": "9415f2457bfc108ba561e20420fb34f694787f5f24461dcd6cb24a4a00580f9e",
+    "size_bytes": 957
+  },
+  "data\\raw\\AL1_SOLEXS_20261018_SDD2_L1.gti.gz": {
+    "sha256": "0e12dab0cf21f3246a75f901f1af1e10e2e55bcd81ea8936801399355a9b1e2b",
+    "size_bytes": 1084
+  },
+  "data\\raw\\AL1_SOLEXS_20261018_SDD2_L1.lc.gz": {
+    "sha256": "1c1a5371663267d39a8e89c8d29640aed69dcad427f0d8139b97e61071746c94",
+    "size_bytes": 256172
+  },
+  "data\\raw\\AL1_SOLEXS_20261018_SDD2_L1.pi.gz": {
+    "sha256": "7914183ae74d2ad46b916b3759a4af4e234ed526d4bf098eeeeef8c369c3eb85",
+    "size_bytes": 5669587
+  },
+  "data\\raw\\gti\\README.md": {
+    "sha256": "164b150503d73ab67654398eb411edf8ad8b5ecbba28696ad1d2da07302bf49d",
+    "size_bytes": 403
+  },
+  "data\\raw\\README.md": {
+    "sha256": "cbbf486887b536309840b400543a8388077a3550c8f3873c778f5cddea2f9dd0",
+    "size_bytes": 1035
+  }
+}
