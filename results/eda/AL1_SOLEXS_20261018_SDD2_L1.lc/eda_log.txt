@@ -1,0 +1,21 @@
+SOLARIS-A1 EDA EXECUTION AUDIT LOG: AL1_SOLEXS_20261018_SDD2_L1.lc
+Timestamp: 2026-10-21T07:21:02.179528+00:00
+
+EXPLORATORY STATUS: ALL CANDIDATES ARE UNVERIFIED.
+Nothing in this directory represents a flare label, ground truth, or training target.
+
+--- Parameter Audit Table ---
+- baseline_span_seconds: 600.0 s (Status: PROVISIONAL)
+- burst_threshold_sigma: 5.0 sigma (Status: PROVISIONAL)
+- burst_min_duration_seconds: 10.0 s (Status: PROVISIONAL)
+- gallery_max_panels: 9 (Status: PROVISIONAL)
+- rolling_window_seconds: 60.0 s (Status: PROVISIONAL)
+
+--- Execution Observations ---
+- GTI Status: Successfully loaded 8 GTI intervals.
+- Candidate Burst Intervals Detected: 4 (Status: CANDIDATE — UNVERIFIED)
+- Event Comparison Status: NOT PERFORMED — no independent event records supplied
+
+CRITICAL SCIENTIFIC NOTICE:
+No candidate interval may be utilized as ground truth without human researcher
+verification against independent solar flare catalogs at Gate G3.

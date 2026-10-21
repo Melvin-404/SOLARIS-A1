@@ -38,6 +38,8 @@ results/*
 !results/inventory/**
 !results/quality/
 !results/quality/**
+!results/eda/
+!results/eda/**
 
 # Logs
 logs/

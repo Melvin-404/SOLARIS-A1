@@ -3,7 +3,7 @@
 
 project:
   name: "SOLARIS-A1"
-  stage_status: "Stage 4 (PROVISIONAL pending G1)"
+  stage_status: "Stage 5 (PROVISIONAL pending G1)"
 
 paths:
   raw_dir: "data/raw"
@@ -21,6 +21,14 @@ quality:
   spike_z_score_threshold: 5.0   # PROVISIONAL: robust MAD z-score for candidate spike detection
   min_zero_run_length: 5         # PROVISIONAL: min consecutive zero counts to record as a zero run
   flag_columns_enabled: false    # PROVISIONAL: flag column parsing disabled until flag semantics confirmed
+
+eda:
+  # PROVISIONAL exploratory parameters — exploratory analysis only, no labels or targets
+  baseline_span_seconds: 600.0        # PROVISIONAL: running median time span for robust baseline
+  burst_threshold_sigma: 5.0          # PROVISIONAL: robust MAD dispersion multiplier for candidate bursts
+  burst_min_duration_seconds: 10.0    # PROVISIONAL: min duration above threshold to flag candidate interval
+  gallery_max_panels: 9               # PROVISIONAL: max panels to render in candidate burst gallery
+  rolling_window_seconds: 60.0        # PROVISIONAL: time-based rolling window for variability statistics
 
 scientific_parameters:
   # All scientific parameters are deferred to student review and decision log

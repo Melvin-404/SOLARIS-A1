@@ -148,6 +148,9 @@ Detailed project documentation is available in the [`docs/`](docs/) directory:
 - [**03. System Architecture**](docs/03_architecture.md) — Layered software architecture, unidirectional data flow, write permissions, and subsystem designs.
 - [**03b. FITS Inspection Methods**](docs/03_inspection_methods.md) — Inspection algorithms, role detection heuristics, and inventory interpretation guidelines.
 - [**04. Quality Assessment Methods**](docs/04_quality_methods.md) — Pure functional quality checks, cadence diagnostics, GTI coverage quantification, and Gate G1/G2 protocols.
+- [**05. EDA Methods**](docs/05_eda_methods.md) — Robust running baseline, candidate burst intervals, and variability metrics.
+- [**05b. EDA Findings**](docs/05_eda_findings.md) — Automated statistical summaries and qualitative observation prompts.
+- [**06. Event Record Schema**](docs/06_event_record_schema.md) — Ground-truth solar flare event record specification (template).
 - [**Setup & Troubleshooting (Windows)**](docs/setup_windows.md) — Step-by-step PowerShell environment setup, execution policies, and Windows troubleshooting.
 - [**Official Data Acquisition Protocol**](docs/data_acquisition.md) — ISRO ISSDC PRADAN portal retrieval instructions, pairing rules, and checksum logging.
 
@@ -168,9 +171,25 @@ python scripts/run_quality.py --raw-dir data/raw --manifest data/manifests/manif
 
 ---
 
-## Next Steps (Gate G1 & G2 Human Approval)
-Before scientific results from Stage 5 or beyond can be finalized:
-1. The student researcher must review `results/quality/column_role_evidence.md` and `results/quality/summary.csv`.
-2. Confirm Gate G1 items: column roles (`TIME`, `COUNTS`), time system (`MJD 40587` / Unix epoch), and GTI pairing.
-3. Confirm Gate G2 items: quality thresholds (`cadence_tolerance_factor = 1.5`, `spike_z_score_threshold = 5.0`).
-4. Update `config/column_roles.yaml` and `config/decisions.yaml` once confirmed.
+## Exploratory Data Analysis (Stage 5)
+Stage 5 implements reproducible exploratory data analysis of light-curve variability, count distributions, coverage timelines, running baselines, and candidate transient bursts:
+- **Unverified Candidate Status:** All detected candidate intervals are strictly tagged `CANDIDATE — UNVERIFIED`.
+- **Zero Labeling Guarantee:** Nothing produced in Stage 5 is a flare label, ground truth, or training target.
+- **Event Comparison Check:** Returns strictly `NOT PERFORMED — no independent event records supplied` until external event catalogues are confirmed at Gate G3.
+
+Run EDA CLI:
+```powershell
+python scripts/run_eda.py --out-dir results/eda
+```
+
+Execute exploratory notebook:
+```powershell
+jupyter nbconvert --to notebook --execute notebooks/02_eda.ipynb --output 02_eda_executed.ipynb --output-dir results/eda/notebook_runs
+```
+
+---
+
+## Next Steps (Stage 6 Source Research)
+- The human student researcher may review candidate burst behavior in [`docs/05_eda_findings.md`](docs/05_eda_findings.md) and [`notebooks/02_eda.ipynb`](notebooks/02_eda.ipynb).
+- Stage 6 independent event catalogue research may begin now.
+- **Label generation and training table creation remain strictly blocked until Gate G3.**

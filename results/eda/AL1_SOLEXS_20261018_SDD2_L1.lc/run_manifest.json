@@ -1,0 +1,27 @@
+{
+  "timestamp_utc": "2026-10-21T07:21:02.179528+00:00",
+  "file_stem": "AL1_SOLEXS_20261018_SDD2_L1.lc",
+  "raw_file": "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\data\\raw\\AL1_SOLEXS_20261018_SDD2_L1.lc.gz",
+  "gti_file": "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\data\\raw\\AL1_SOLEXS_20261018_SDD2_L1.gti.gz",
+  "parameters": {
+    "baseline_span_seconds": 600.0,
+    "burst_threshold_sigma": 5.0,
+    "burst_min_duration_seconds": 10.0,
+    "gallery_max_panels": 9,
+    "rolling_window_seconds": 60.0
+  },
+  "candidate_count": 4,
+  "event_comparison_status": "NOT PERFORMED \u2014 no independent event records supplied",
+  "artifacts_generated": [
+    "variability_summary.csv",
+    "candidate_bursts.csv",
+    "light_curve.png",
+    "light_curve.pdf",
+    "count_distribution.png",
+    "coverage_timeline.png",
+    "burst_gallery.png",
+    "eda_log.txt",
+    "run_manifest.json"
+  ],
+  "status": "COMPLETED \u2014 ALL CANDIDATES UNVERIFIED"
+}
