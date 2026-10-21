@@ -254,16 +254,26 @@ def load_feature_index_pure(stem: Optional[str] = None, root: Optional[Union[Pat
 
 
 def load_feature_table_pure(stem: Optional[str] = None, root: Optional[Union[Path, str]] = None) -> LoadResult:
-    """Load feature table from data/processed/features/<stem>/features.csv."""
+    """Load feature table from data/processed/features/<stem>/window_features.csv or features.csv."""
     r = _resolve_root(root)
     feat_base = r / "data" / "processed" / "features"
     feat_file = None
+    target_stem = stem
+
     if stem:
-        feat_file = feat_base / stem / "features.csv"
+        candidates = [
+            feat_base / stem / "window_features.csv",
+            feat_base / stem / "features.csv",
+        ]
+        for c in candidates:
+            if c.is_file():
+                feat_file = c
+                break
     else:
-        found = list(feat_base.glob("*/features.csv"))
+        found = list(feat_base.glob("*/window_features.csv")) + list(feat_base.glob("*/features.csv"))
         if found:
             feat_file = found[0]
+            target_stem = feat_file.parent.name
 
     if not feat_file or not feat_file.is_file():
         return LoadResult(data=None, status="MISSING", message="Feature table not found.", source_path=str(feat_file or feat_base))
@@ -272,6 +282,27 @@ def load_feature_table_pure(stem: Optional[str] = None, root: Optional[Union[Pat
         df = pd.read_csv(feat_file)
         if df.empty:
             return LoadResult(data=df, status="EMPTY", message="Feature table is empty.", source_path=str(feat_file))
+
+        # Check STALE: compare build_log parameters against current config/default.yaml
+        if target_stem:
+            build_log_file = r / "results" / "features" / target_stem / "build_log.json"
+            cfg_file = r / "config" / "default.yaml"
+            if build_log_file.is_file() and cfg_file.is_file():
+                try:
+                    b_data = json.loads(build_log_file.read_text(encoding="utf-8"))
+                    rec_w = b_data.get("parameters", {}).get("window_seconds")
+                    c_data = yaml.safe_load(cfg_file.read_text(encoding="utf-8")) or {}
+                    curr_w = c_data.get("features", {}).get("window_length_seconds")
+                    if rec_w is not None and curr_w is not None and float(rec_w) != float(curr_w):
+                        return LoadResult(
+                            data=df,
+                            status="STALE",
+                            message=f"STALE FEATURE ARTIFACT: Recorded window_length={rec_w}s, current config={curr_w}s.",
+                            source_path=str(feat_file),
+                        )
+                except Exception:
+                    pass
+
         return LoadResult(data=df, status="OK", message="Loaded feature table.", source_path=str(feat_file))
     except Exception as exc:
         return LoadResult(data=None, status="ERROR", message=f"Error parsing feature table: {exc}", source_path=str(feat_file))
@@ -288,10 +319,24 @@ def load_dataset_status_pure(task: str = "detection", root: Optional[Union[Path,
         text = blocked_file.read_text(encoding="utf-8")
         return LoadResult(
             data={"status": "BLOCKED", "report": text},
-            status="PROVISIONAL",
-            message=f"Stage 9 export for task '{task}' is BLOCKED pending approval.",
+            status="BLOCKED",
+            message=f"Stage 9 export for task '{task}' is BLOCKED pending human gate approval.",
             source_path=str(blocked_file),
         )
+
+    # Check for exported datasets
+    ds_dir = r / "data" / "processed" / "datasets" / task
+    if ds_dir.is_dir() and any(ds_dir.iterdir()):
+        export_dirs = [d for d in ds_dir.iterdir() if d.is_dir()]
+        if export_dirs:
+            exp_id = export_dirs[0].name
+            # Under Decision D-15, single-day observation datasets are PILOT
+            return LoadResult(
+                data={"status": "PILOT", "export_id": exp_id, "task": task},
+                status="PILOT",
+                message=f"Dataset exported under PILOT status (single observation date).",
+                source_path=str(export_dirs[0]),
+            )
 
     if log_file.is_file():
         try:
@@ -300,11 +345,11 @@ def load_dataset_status_pure(task: str = "detection", root: Optional[Union[Path,
         except Exception as exc:
             return LoadResult(data=None, status="ERROR", message=f"Failed to parse export log: {exc}", source_path=str(log_file))
 
-    return LoadResult(data=None, status="MISSING", message=f"No dataset export status found for task '{task}'.", source_path=str(exp_dir))
+    return LoadResult(data=None, status="MISSING", message=f"Dataset not yet available for task '{task}'. See docs/data_acquisition.md.", source_path=str(exp_dir))
 
 
 def load_experiments_pure(root: Optional[Union[Path, str]] = None) -> LoadResult:
-    """List available experiment runs from results/experiments/."""
+    """List available experiment runs from results/experiments/ with lock & manifest checks."""
     r = _resolve_root(root)
     exp_base = r / "results" / "experiments"
     if not exp_base.is_dir():
@@ -314,15 +359,24 @@ def load_experiments_pure(root: Optional[Union[Path, str]] = None) -> LoadResult
     if not subdirs:
         return LoadResult(data=[], status="EMPTY", message="No completed experiment directories found.", source_path=str(exp_base))
 
+    from solar_flare.integrity import verify_test_lock_integrity
+
     exp_records = []
     for d in subdirs:
         try:
             manifest = json.loads((d / "run_manifest.json").read_text(encoding="utf-8"))
+            lock_res = verify_test_lock_integrity(d)
+            status_val = manifest.get("status", "UNKNOWN")
+            if lock_res.status in {"MISMATCH", "ERROR"}:
+                status_val = "ERROR"
+
             exp_records.append({
                 "experiment_id": d.name,
-                "status": manifest.get("status", "UNKNOWN"),
+                "status": status_val,
                 "protocol_id": manifest.get("protocol_id", "UNKNOWN"),
                 "dataset_export_id": manifest.get("dataset_export_id", "UNKNOWN"),
+                "lock_status": lock_res.status,
+                "lock_message": lock_res.message,
                 "path": str(d),
             })
         except Exception:
@@ -330,6 +384,7 @@ def load_experiments_pure(root: Optional[Union[Path, str]] = None) -> LoadResult
                 "experiment_id": d.name,
                 "status": "UNPARSEABLE",
                 "protocol_id": "UNKNOWN",
+                "lock_status": "ERROR",
                 "path": str(d),
             })
 
@@ -408,6 +463,27 @@ def load_light_curve_pure(stem: str = "AL1_SOLEXS_20261018_SDD2_L1", root: Optio
             counts = np.array(table_hdu.data[count_col], dtype=float)
 
             df = pd.DataFrame({"time": times, "counts": counts})
+
+            # Check raw hash against Stage 7 audit
+            audit_hash_file = r / "results" / "preprocessing" / "raw_hashes_before.json"
+            if audit_hash_file.is_file():
+                try:
+                    rec_hashes = json.loads(audit_hash_file.read_text(encoding="utf-8"))
+                    rel_key = f"data/raw/{target_fits.name}"
+                    if rel_key in rec_hashes:
+                        rec_hash = rec_hashes[rel_key]
+                        from solar_flare.integrity import compute_sha256
+                        curr_hash = compute_sha256(target_fits)
+                        if curr_hash != rec_hash:
+                            return LoadResult(
+                                data=df,
+                                status="ERROR",
+                                message=f"RAW DATA HASH MISMATCH for {target_fits.name}! Recorded={rec_hash[:8]}..., Current={curr_hash[:8]}...",
+                                source_path=str(target_fits),
+                            )
+                except Exception:
+                    pass
+
             return LoadResult(data=df, status="OK", message=f"Loaded light curve ({len(df)} samples).", source_path=str(target_fits))
     except Exception as exc:
         return LoadResult(data=None, status="ERROR", message=f"Error reading FITS light curve: {exc}", source_path=str(target_fits))

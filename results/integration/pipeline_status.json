@@ -1,0 +1,128 @@
+{
+  "stages": [
+    {
+      "stage_id": 3,
+      "stage_name": "FITS Inventory",
+      "status": "COMPLETE",
+      "reason": "Inventory and FITS metadata inspected and confirmed.",
+      "gate_id": "G0",
+      "artifacts_checked": [
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\results\\inventory\\inventory.csv",
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\results\\inventory\\inventory.json",
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\results\\inventory\\inspection_report.md"
+      ],
+      "recorded_hash": null,
+      "current_hash": null
+    },
+    {
+      "stage_id": 4,
+      "stage_name": "Data Quality",
+      "status": "COMPLETE",
+      "reason": "Data quality characterisation complete.",
+      "gate_id": "G1/G2",
+      "artifacts_checked": [
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\results\\quality\\summary.csv",
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\results\\quality\\AWAITING_G1.md"
+      ],
+      "recorded_hash": null,
+      "current_hash": null
+    },
+    {
+      "stage_id": 5,
+      "stage_name": "Exploratory Analysis",
+      "status": "COMPLETE",
+      "reason": "EDA variability metrics and candidate burst intervals computed (all candidates UNVERIFIED).",
+      "gate_id": "G3-pre",
+      "artifacts_checked": [
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\results\\eda\\AL1_SOLEXS_20261018_SDD2_L1.lc\\candidate_bursts.csv",
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\results\\eda\\AL1_SOLEXS_20261018_SDD2_L1.lc\\variability_summary.csv"
+      ],
+      "recorded_hash": null,
+      "current_hash": null
+    },
+    {
+      "stage_id": 6,
+      "stage_name": "Labelling Protocol",
+      "status": "BLOCKED",
+      "reason": "Labelling policy status is DRAFT. Gate G3 human approval is required before supervised labelling.",
+      "gate_id": "G3",
+      "artifacts_checked": [
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\docs\\08_labelling_policy.md"
+      ],
+      "recorded_hash": null,
+      "current_hash": null
+    },
+    {
+      "stage_id": 7,
+      "stage_name": "Preprocessing & Segmentation",
+      "status": "PROVISIONAL",
+      "reason": "Segmentation complete in PROVISIONAL mode (Gate G4 approval pending).",
+      "gate_id": "G4",
+      "artifacts_checked": [
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\results\\preprocessing\\summary.csv",
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\results\\preprocessing\\AWAITING_G4.md"
+      ],
+      "recorded_hash": null,
+      "current_hash": null
+    },
+    {
+      "stage_id": 8,
+      "stage_name": "Feature Engineering",
+      "status": "PROVISIONAL",
+      "reason": "Sliding windows and causal features generated in PROVISIONAL mode (Gate G5 approval pending).",
+      "gate_id": "G5",
+      "artifacts_checked": [
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\data\\processed\\features\\AL1_SOLEXS_20261018_SDD2_L1\\window_index.csv",
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\data\\processed\\features\\AL1_SOLEXS_20261018_SDD2_L1\\window_features.csv",
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\results\\features\\AL1_SOLEXS_20261018_SDD2_L1\\build_log.json"
+      ],
+      "recorded_hash": null,
+      "current_hash": null
+    },
+    {
+      "stage_id": 9,
+      "stage_name": "Dataset Export",
+      "status": "BLOCKED",
+      "reason": "Dataset export is strictly BLOCKED pending Gate G3 (labelling policy) and Gate G6 (forecasting policy).",
+      "gate_id": "G3/G6",
+      "artifacts_checked": [
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\results\\exports\\BLOCKED_DETECTION.md",
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\results\\exports\\BLOCKED_PREDICTION.md",
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\results\\exports\\export_log.json"
+      ],
+      "recorded_hash": null,
+      "current_hash": null
+    },
+    {
+      "stage_id": 10,
+      "stage_name": "Model Training",
+      "status": "BLOCKED",
+      "reason": "Model training is strictly BLOCKED pending Gate G7 (training protocol freeze).",
+      "gate_id": "G7",
+      "artifacts_checked": [
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\results\\experiments\\AWAITING_G7.md",
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\config\\training_protocol.yaml"
+      ],
+      "recorded_hash": null,
+      "current_hash": null
+    },
+    {
+      "stage_id": 11,
+      "stage_name": "Scientific Evaluation",
+      "status": "BLOCKED",
+      "reason": "Single-shot test evaluation is strictly BLOCKED pending Gate G8 human researcher approval.",
+      "gate_id": "G8",
+      "artifacts_checked": [
+        "C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\results\\experiments\\AWAITING_G8.md"
+      ],
+      "recorded_hash": null,
+      "current_hash": null
+    }
+  ],
+  "n_complete": 3,
+  "n_provisional": 2,
+  "n_blocked": 4,
+  "n_stale": 0,
+  "n_missing": 0,
+  "n_error": 0
+}

@@ -1,33 +1,71 @@
-"""Page 1: Project Overview & Scientific Stage Summary."""
+"""Page 1: Project Overview, Pipeline Status & Scientific Stage Summary."""
 
+from datetime import datetime, timezone
+from pathlib import Path
+import pandas as pd
 import streamlit as st
+
 from dashboard.loaders import load_inventory, load_open_questions
 from dashboard.components.banner import render_sidebar_disclaimer, render_status_banner
+from solar_flare.paths import project_root
+from solar_flare.status import pipeline_status
 
 st.set_page_config(page_title="Overview | SOLARIS-A1", page_icon="📋", layout="wide")
 render_sidebar_disclaimer()
 
-st.title("📋 Project Overview & Repository Status")
-st.caption("Current scientific stage, inventory summary, and open scientific questions")
+st.title("📋 Project Overview & Pipeline Integration Status")
+st.caption("Active lifecycle status, artifact lineage verification, and open scientific questions")
 
-# 1. Project Stage
-st.header("1. Active Implementation Lifecycle Stage")
-st.markdown(
-    """
-    - **Current Milestone:** **Stage 12 — Streamlit Dashboard Foundation**
-    - **Upstream Stage Status:** Stages 0 through 11 fully implemented with 179 passing automated tests.
-    - **Dataset Classification:** **PILOT (Single Observation Day: 2026-10-18)** under Decision D-15.
-    - **Human Approval Gates:**
-      - Gate G1/G2 (Data Quality & Column Roles): PROVISIONAL.
-      - Gate G3 (Labelling Policy): DRAFT (Awaiting Human Approval).
-      - Gate G7 (Training Protocol Freeze): DRAFT.
-      - Gate G8 (Single-Shot Test Evaluation): PENDING.
-    """
-)
+root = project_root()
+
+# 1. Action Bar: Cache Reload & File-System Timestamp
+col_btn, col_time = st.columns([1, 2])
+with col_btn:
+    if st.button("🔄 Reload Artefacts (Clear Cache)"):
+        st.cache_data.clear()
+        st.rerun()
+
+# Compute latest artefact generation time (max mtime across results/)
+results_dir = root / "results"
+latest_mtime = 0.0
+if results_dir.is_dir():
+    for f in results_dir.rglob("*"):
+        if f.is_file():
+            try:
+                mt = f.stat().st_mtime
+                if mt > latest_mtime:
+                    latest_mtime = mt
+            except Exception:
+                pass
+
+with col_time:
+    if latest_mtime > 0:
+        dt_str = datetime.fromtimestamp(latest_mtime, tz=timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+        st.caption(f"🕒 **Last Artefact Generation Time:** `{dt_str}` (file-system time)")
+    else:
+        st.caption("🕒 **Last Artefact Generation Time:** N/A")
 
 st.markdown("---")
 
-# 2. Inventory Summary
+# 2. Pipeline Stage Status Table (Pure status evaluation)
+st.header("1. Pipeline Lifecycle Stages Status (Stages 3–11)")
+status_rep = pipeline_status(root)
+status_rows = []
+for s in status_rep.stages:
+    status_rows.append({
+        "Stage": s.stage_id,
+        "Name": s.stage_name,
+        "Status": s.status,
+        "Gate": s.gate_id or "-",
+        "Details & Diagnostics": s.reason,
+    })
+
+df_status = pd.DataFrame(status_rows)
+st.dataframe(df_status, use_container_width=True)
+
+st.markdown("---")
+
+# 3. Inventory Summary
 st.header("2. FITS Data Inventory Summary")
 inv_res = load_inventory()
 
@@ -53,7 +91,7 @@ else:
 
 st.markdown("---")
 
-# 3. Open Scientific Questions
+# 4. Open Scientific Questions
 st.header("3. Unresolved Questions & Decision Log Register")
 q_res = load_open_questions()
 
@@ -62,7 +100,6 @@ if q_res.status == "MISSING":
 elif q_res.status == "ERROR":
     render_status_banner("ERROR", q_res.message, "Open Questions")
 else:
-    # Count open questions (e.g. lines with '## ' or 'Q-')
     lines = q_res.data.splitlines()
     q_count = sum(1 for line in lines if line.strip().startswith("## Q") or "Question" in line)
     st.metric("Open Questions Flagged", q_count if q_count > 0 else "Documented")

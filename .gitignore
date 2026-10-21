@@ -52,6 +52,8 @@ results/*
 !results/experiments/**
 !results/dashboard/
 !results/dashboard/**
+!results/integration/
+!results/integration/**
 
 # Logs
 logs/

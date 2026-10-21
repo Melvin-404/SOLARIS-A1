@@ -8,9 +8,9 @@
 ---
 
 ## Current Status
-**Status:** `Stage 12 — Streamlit Dashboard Foundation (Multipage Dashboard Complete & Verified)`
+**Status:** `Stage 13 — Dashboard and Pipeline Integration (Lineage, Status & Integrity Verification Complete)`
 
-A local, multipage Streamlit interactive dashboard (`dashboard/`) has been implemented and verified. The dashboard features 8 dedicated pages covering task framing, inventory provenance, data quality characterisation (with interactive figures), Level-1 light-curve exploration (with GTI shading and sample flag layers), exploratory burst candidates vs. Gate G3 approved events, causal feature distributions (with 83.3% window overlap leakage warnings), and model evaluation results. The dashboard operates strictly read-only, never mutates files, never trains models, and gracefully renders empty/provisional states when artifacts are awaiting human gate approvals.
+Stage 13 connects the SOLARIS-A1 Streamlit presentation layer to real pipeline artifacts with rigorous schema validation, cryptographic SHA-256 lineage tracking, stale-artifact detection, and a pure functional status engine (`src/solar_flare/status.py`). The dashboard strictly inspects artifacts in read-only mode, displays pipeline status color-coded across all stages, surfaces configuration drift side-by-side, and is verified by automated AST architecture boundaries prohibiting model training or data mutation. See [`docs/17_integration.md`](docs/17_integration.md).
 
 ---
 
@@ -338,7 +338,60 @@ Open `http://localhost:8501` in your browser.
 
 ---
 
-## Next Steps (Stage 13 Advanced Visualizations & Gate G10 Review)
-- Review dashboard UI wording, empty states, and status banners with human researcher (Gate G10).
-- Unblock Gate G7 (training protocol freeze) and Gate G8 (single-shot test evaluation) when ready.
-- Proceed to Stage 13 (Interactive Analysis & Advanced Visualizations).
+## Dashboard and Pipeline Integration (Stage 13)
+Stage 13 connects the dashboard to real pipeline artifacts with end-to-end schema validation, cryptographic lineage checks, stale-artifact detection, and a pure functional status engine:
+- **Pure Pipeline Status Engine (`src/solar_flare/status.py`):**
+  Evaluates stages 3 through 11 without side effects or disk writes. Assigns one unambiguous status:
+  - `COMPLETE`: Required artifacts exist, schemas valid, hashes consistent.
+  - `PROVISIONAL`: Artifacts exist but depend on provisional decisions/thresholds.
+  - `PARTIAL`: Some required artifacts missing.
+  - `MISSING`: No artifacts found for stage.
+  - `BLOCKED`: Explicit blocking notice (`AWAITING_G*.md` or `BLOCKED_*.md`) present.
+  - `STALE`: Configuration parameter or upstream hash differs from recorded artifact values.
+  - `ERROR`: Artifact fails schema validation or cryptographic hash check.
+- **Cryptographic Lineage & Schemas (`src/solar_flare/integrity.py`):**
+  Tracks SHA-256 hashes connecting raw Level-1 observations -> Stage 7 preprocessing audit -> Stage 8 feature build log -> Stage 10 sealed test set lock -> Stage 11 evaluation.
+- **Stale Detection:** Parameter drift (e.g. window length in `default.yaml` vs. `build_log.json`) flags `STALE` and presents recorded vs. current values side-by-side without silent regeneration.
+- **Zero-Write Isolation:** AST architecture scans enforce that dashboard pages cannot import training functions, invoke `.fit()`, spawn subprocesses, or open files for writing.
+
+### Topological Pipeline Regeneration Sequence
+```powershell
+# 1. Inspect FITS files (Stage 3)
+python scripts/inspect_fits.py
+
+# 2. Quality Assessment (Stage 4)
+python scripts/run_quality.py --raw-dir data/raw --manifest data/manifests/manifest.csv --out-dir results/quality
+
+# 3. Exploratory Data Analysis (Stage 5)
+python scripts/run_eda.py --out-dir results/eda
+
+# 4. Check Labelling Policy Guard (Stage 6)
+python scripts/check_labelling_guard.py
+
+# 5. Preprocessing & Continuous Segmentation (Stage 7)
+python scripts/run_preprocessing.py --stem all
+
+# 6. Sliding Windows & Feature Engineering (Stage 8)
+python scripts/build_features.py --stem all
+
+# 7. Dataset Export (Stage 9 — Requires Gate G3/G6 approval)
+python scripts/export_dataset.py --task detection
+
+# 8. Model Training & Test Set Sealing (Stage 10 — Requires Gate G7 frozen protocol)
+python scripts/train_models.py --protocol config/training_protocol.yaml
+
+# 9. Single-Shot Test Set Evaluation (Stage 11 — Requires Gate G8 approval)
+python scripts/evaluate_locked_models.py --experiment-id <experiment_id>
+
+# 10. Run Integration Audit & Launch Dashboard (Stage 12/13)
+python scripts/run_stage13_integration.py
+python -m streamlit run dashboard/app.py
+```
+
+---
+
+## Next Steps (Stage 14 Deployment & Gate G10 Review)
+- Human researcher review of pipeline status categories and regeneration sequence in [`docs/17_integration.md`](docs/17_integration.md) (Gate G10).
+- Unblock Gate G3 (labelling policy approval) when external GOES/SWPC catalogs are integrated.
+- Proceed to Stage 14 (Automated Packaging, Deployment Preparation & Final Verification).
+

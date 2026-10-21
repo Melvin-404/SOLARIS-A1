@@ -72,18 +72,14 @@ st.header("2. Single-Shot Sealed Test Set Evaluation")
 
 sealed_dir = exp_dir / "sealed"
 eval_dir = exp_dir / "evaluation"
-lock_verified = False
+from solar_flare.integrity import verify_test_lock_integrity
+lock_check = verify_test_lock_integrity(exp_dir)
 
-# Verify cryptographic test lock
-if sealed_dir.is_dir():
-    try:
-        lock_verified = verify_lock(sealed_dir)
-    except Exception:
-        lock_verified = False
-
-if not lock_verified:
-    st.error("🚨 **Test Set Cryptographic Lock Verification Failed or Not Available!**")
-    st.info("Test evaluation not available or not attested.")
+if lock_check.status != "OK":
+    st.error(f"🚨 **Test Set Cryptographic Lock Verification Failed:** {lock_check.message}")
+    if lock_check.recorded_value and lock_check.current_value:
+        st.caption(f"Recorded SHA-256: `{lock_check.recorded_value}` | Current SHA-256: `{lock_check.current_value}`")
+    st.info("Test evaluation results cannot be displayed due to lock integrity failure.")
 elif not eval_dir.is_dir():
     st.info("ℹ️ **Test evaluation not available or not attested.** (Stage 11 test evaluation has not yet been executed).")
 else:
