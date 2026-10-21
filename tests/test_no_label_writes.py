@@ -42,12 +42,16 @@ def test_static_scan_eda_modules_no_dataset_or_label_writes():
 def test_no_files_exist_under_processed_datasets_or_labels():
     """Verify that no dataset or label files exist in the project directory."""
     root = project_root()
-    processed_dir = root / "data" / "processed"
+    forbidden_dirs = [
+        root / "data" / "processed" / "datasets",
+        root / "data" / "processed" / "labels",
+        root / "results" / "labels" / "datasets",
+    ]
 
-    if processed_dir.is_dir():
-        for item in processed_dir.rglob("*"):
-            if item.is_file():
-                assert item.name == "README.md", (
-                    f"Unexpected file found in data/processed: {item.relative_to(root)}. "
-                    "No datasets or labels may be created during Stage 5."
-                )
+    for d in forbidden_dirs:
+        if d.is_dir():
+            files = [item for item in d.rglob("*") if item.is_file() and item.name != "README.md"]
+            assert not files, (
+                f"Unexpected dataset or label file(s) found in {d.relative_to(root)}: {files}. "
+                "Supervised datasets and flare labels must not be created."
+            )

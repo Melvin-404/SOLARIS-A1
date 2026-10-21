@@ -27,8 +27,18 @@ eda:
   baseline_span_seconds: 600.0        # PROVISIONAL: running median time span for robust baseline
   burst_threshold_sigma: 5.0          # PROVISIONAL: robust MAD dispersion multiplier for candidate bursts
   burst_min_duration_seconds: 10.0    # PROVISIONAL: min duration above threshold to flag candidate interval
-  gallery_max_panels: 9               # PROVISIONAL: max panels to render in candidate burst gallery
   rolling_window_seconds: 60.0        # PROVISIONAL: time-based rolling window for variability statistics
+
+preprocessing:
+  # Stage 7 GTI-aware preprocessing and segmentation parameters
+  # Status: PROVISIONAL in development mode; require Gate G4 human approval for final runs.
+  max_gap_seconds: 2.0                            # Split segments if gap dt > max_gap_seconds
+  min_segment_seconds: 60.0                       # Minimum duration (s) of valid continuous segment
+  gti_boundary_convention: "START_INCLUSIVE_STOP_EXCLUSIVE"  # START_INCLUSIVE_STOP_EXCLUSIVE, START_EXCLUSIVE_STOP_INCLUSIVE, BOTH_INCLUSIVE
+  duplicate_timestamp_policy: "ERROR"            # ERROR, KEEP_FIRST, KEEP_LAST
+  excluded_quality_flags: []                     # List of integer flag codes to exclude (empty when flag column unresolved)
+  status_d14: "PENDING"
+  status_d17: "PENDING"
 
 scientific_parameters:
   # All scientific parameters are deferred to student review and decision log

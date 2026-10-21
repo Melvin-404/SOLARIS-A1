@@ -1,0 +1,67 @@
+{
+  "stage": "Stage 7 \u2014 Preprocessing and GTI-Aware Segmentation",
+  "timestamp": "2026-10-21T08:07:51.326713+00:00",
+  "mode": "PROVISIONAL (DEVELOPMENT)",
+  "summary": [
+    {
+      "file_stem": "AL1_SOLEXS_20261018_SDD2_L1",
+      "status": "SUCCESS",
+      "is_final": false,
+      "original_samples": 86400,
+      "retained_samples": 81379,
+      "retention_percentage": 94.1887,
+      "excluded_by_reason": {
+        "NON_FINITE": 4849,
+        "OUTSIDE_GTI": 134,
+        "SEGMENT_TOO_SHORT": 38
+      },
+      "n_segments": 4,
+      "segments": [
+        {
+          "segment_id": "AL1_SOLEXS_20261018_SDD2_L1_seg_001",
+          "start": 1792286428.0,
+          "end": 1792316628.0,
+          "n_samples": 30201,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 0.0,
+          "duration_seconds": 30200.0
+        },
+        {
+          "segment_id": "AL1_SOLEXS_20261018_SDD2_L1_seg_002",
+          "start": 1792316631.0,
+          "end": 1792323431.0,
+          "n_samples": 6801,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 3.0,
+          "duration_seconds": 6800.0
+        },
+        {
+          "segment_id": "AL1_SOLEXS_20261018_SDD2_L1_seg_003",
+          "start": 1792323469.0,
+          "end": 1792341677.0,
+          "n_samples": 18209,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 38.0,
+          "duration_seconds": 18208.0
+        },
+        {
+          "segment_id": "AL1_SOLEXS_20261018_SDD2_L1_seg_004",
+          "start": 1792341831.0,
+          "end": 1792367998.0,
+          "n_samples": 26168,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 74.0,
+          "duration_seconds": 26167.0
+        }
+      ],
+      "hash_before": "1c1a5371663267d39a8e89c8d29640aed69dcad427f0d8139b97e61071746c94",
+      "hash_after": "1c1a5371663267d39a8e89c8d29640aed69dcad427f0d8139b97e61071746c94",
+      "immutability_verified": true,
+      "audit_files": {
+        "csv": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20261018_SDD2_L1.csv",
+        "json": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20261018_SDD2_L1.json",
+        "md": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20261018_SDD2_L1.md"
+      }
+    }
+  ]
+}

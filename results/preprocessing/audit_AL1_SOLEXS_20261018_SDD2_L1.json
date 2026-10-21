@@ -1,0 +1,72 @@
+{
+  "file_stem": "AL1_SOLEXS_20261018_SDD2_L1",
+  "is_final_run": false,
+  "run_mode": "PROVISIONAL (DEVELOPMENT)",
+  "utc_processing_timestamp": "2026-10-21T08:07:51.081968+00:00",
+  "software_version": "SOLARIS-A1 Stage 7 (1.0.0)",
+  "raw_file_sha256_before": "1c1a5371663267d39a8e89c8d29640aed69dcad427f0d8139b97e61071746c94",
+  "raw_file_sha256_after": "1c1a5371663267d39a8e89c8d29640aed69dcad427f0d8139b97e61071746c94",
+  "raw_immutability_verified": true,
+  "reconciliation_passed": true,
+  "sample_counts": {
+    "original": 86400,
+    "retained": 81379,
+    "excluded_total": 5021,
+    "retention_percentage": 94.1887,
+    "excluded_by_reason": {
+      "NON_FINITE": 4849,
+      "OUTSIDE_GTI": 134,
+      "SEGMENT_TOO_SHORT": 38
+    }
+  },
+  "parameters": {
+    "time_column": "TIME",
+    "count_column": "COUNTS",
+    "flag_column": null,
+    "max_gap_seconds": 2.0,
+    "min_segment_seconds": 60.0,
+    "gti_boundary_convention": "START_INCLUSIVE_STOP_EXCLUSIVE",
+    "duplicate_timestamp_policy": "ERROR",
+    "excluded_quality_flags": [],
+    "is_final": false,
+    "file_format": "CSV (pyarrow not present in requirements)"
+  },
+  "segments": [
+    {
+      "segment_id": "AL1_SOLEXS_20261018_SDD2_L1_seg_001",
+      "start": 1792286428.0,
+      "end": 1792316628.0,
+      "n_samples": 30201,
+      "cadence_median": 1.0,
+      "gap_before_seconds": 0.0,
+      "duration_seconds": 30200.0
+    },
+    {
+      "segment_id": "AL1_SOLEXS_20261018_SDD2_L1_seg_002",
+      "start": 1792316631.0,
+      "end": 1792323431.0,
+      "n_samples": 6801,
+      "cadence_median": 1.0,
+      "gap_before_seconds": 3.0,
+      "duration_seconds": 6800.0
+    },
+    {
+      "segment_id": "AL1_SOLEXS_20261018_SDD2_L1_seg_003",
+      "start": 1792323469.0,
+      "end": 1792341677.0,
+      "n_samples": 18209,
+      "cadence_median": 1.0,
+      "gap_before_seconds": 38.0,
+      "duration_seconds": 18208.0
+    },
+    {
+      "segment_id": "AL1_SOLEXS_20261018_SDD2_L1_seg_004",
+      "start": 1792341831.0,
+      "end": 1792367998.0,
+      "n_samples": 26168,
+      "cadence_median": 1.0,
+      "gap_before_seconds": 74.0,
+      "duration_seconds": 26167.0
+    }
+  ]
+}

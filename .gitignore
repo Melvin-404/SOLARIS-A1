@@ -42,6 +42,8 @@ results/*
 !results/eda/**
 !results/labels/
 !results/labels/**
+!results/preprocessing/
+!results/preprocessing/**
 
 # Logs
 logs/

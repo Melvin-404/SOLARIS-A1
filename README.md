@@ -8,9 +8,9 @@
 ---
 
 ## Current Status
-**Status:** `Stage 6 — Ground-Truth Research and Labelling Protocol Drafted (Supervised Labelling BLOCKED Pending G3)`
+**Status:** `Stage 7 — Preprocessing and GTI-Aware Segmentation (PROVISIONAL Development Run)`
 
-Independent ground-truth solar flare event sources have been researched and recorded in `data/manifests/event_sources.csv` and documented in `docs/07_ground_truth_research.md`. Temporal compatibility has been analyzed without arbitrary time conversions (`docs/09_time_compatibility.md` and `results/labels/compatibility_report.md`). A comprehensive labelling policy is drafted in `docs/08_labelling_policy.md` with all decisions (D-01, D-02, D-03, D-04, D-08, D-10, D-15) held strictly PENDING human approval. The automated Gate G3 policy guard (`assert_labelling_approved`) strictly refuses label generation until formal researcher approval is registered. Zero labels have been generated.
+Non-destructive filtering, GTI boundary application, continuous segmentation, and auditable mathematical sample conservation are implemented (`src/solar_flare/preprocessing/`). The development run processed 86,400 raw samples on `2026-10-18`, retaining 81,379 valid samples (94.19%) across 4 continuous segments, with 5,021 excluded samples fully accounted for in audit logs. Source raw files are 100% hash-verified immutable. Final runs strictly refuse execution (`AWAITING_G4.md`) until human approval of Gates G1, G2, and Gate G4 (Decision D-14).
 
 ---
 
@@ -154,6 +154,7 @@ Detailed project documentation is available in the [`docs/`](docs/) directory:
 - [**07. Ground-Truth Research**](docs/07_ground_truth_research.md) — Sourcing taxonomy, accessed independent flare catalogues, rejected sources, and unverified statements.
 - [**08. Labelling Policy**](docs/08_labelling_policy.md) — Scientific labelling protocol draft with all Gate G3 decisions (D-01 to D-04, D-08, D-10, D-15) held PENDING.
 - [**09. Time Compatibility**](docs/09_time_compatibility.md) — Evaluation of reference epochs, time scales (UTC vs MET), leap seconds, and L1 propagation delay.
+- [**10. Preprocessing Methods**](docs/10_preprocessing_methods.md) — Non-destructive filtering, GTI boundary conventions, continuous segmentation, and auditable reconciliation.
 - [**Setup & Troubleshooting (Windows)**](docs/setup_windows.md) — Step-by-step PowerShell environment setup, execution policies, and Windows troubleshooting.
 - [**Official Data Acquisition Protocol**](docs/data_acquisition.md) — ISRO ISSDC PRADAN portal retrieval instructions, pairing rules, and checksum logging.
 
@@ -211,7 +212,27 @@ python scripts/run_compatibility.py
 
 ---
 
-## Next Steps (Stage 7 Preprocessing & Segmentation)
-- The human student researcher reviews the draft labelling policy in [`docs/08_labelling_policy.md`](docs/08_labelling_policy.md) and candidate sources in [`data/manifests/event_sources.csv`](data/manifests/event_sources.csv).
-- Supervised labelling remains **BLOCKED** pending human Gate G3 approval.
-- **Stage 7 (Preprocessing and Segmentation)** may proceed with cleaning, imputation, and sliding window segmentation provided Decision D-14 is approved, as preprocessing does not depend on supervised flare labels.
+## Preprocessing & GTI-Aware Segmentation (Stage 7)
+Stage 7 implements non-destructive sample filtering, GTI boundary filtering, and continuous observation segmentation:
+- **Zero Mutation:** Raw files under `data/raw/` verified 100% hash identical before and after execution.
+- **Zero Interpolation:** Data is never interpolated, reconstructed, or gap-filled.
+- **Mathematical Sample Conservation:** Every single sample is accounted for ($N_{\text{retained}} + \sum N_{\text{excluded}} = N_{\text{original}}$). Discrepancy triggers `ReconciliationError`.
+- **Reconciliation on 2026-10-18:** 86,400 raw samples $\to$ 81,379 retained in 4 valid continuous segments (94.19%), 4,849 non-finite excluded, 134 outside GTI excluded, 38 short segment samples excluded.
+- **Format:** Exported to CSV format (pyarrow absent from dependencies).
+
+Run Preprocessing Development CLI (PROVISIONAL mode):
+```powershell
+python scripts/run_preprocessing.py --stem all
+```
+
+Verify Final Run Refusal (Requires Gate G4 approval):
+```powershell
+python scripts/run_preprocessing.py --final
+```
+
+---
+
+## Next Steps (Stage 8 Windowing and Feature Extraction)
+- Review preprocessing audit reports in [`results/preprocessing/`](results/preprocessing/).
+- Review required decisions in [`results/preprocessing/AWAITING_G4.md`](results/preprocessing/AWAITING_G4.md) for final Gate G4 approval.
+- **Stage 8 (Windowing and Feature Extraction)** may proceed in PROVISIONAL mode for development. Final feature datasets require Decision D-14 approval.
