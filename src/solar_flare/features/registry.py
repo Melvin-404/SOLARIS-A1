@@ -67,6 +67,12 @@ class FeatureRegistry:
             raise KeyError(f"Feature '{name}' not found in registry.")
         return self._registry[name][1]
 
+    def get(self, name: str) -> Optional[FeatureMetadata]:
+        """Retrieve metadata for a registered feature or None if not found."""
+        if name in self._registry:
+            return self._registry[name][1]
+        return None
+
     def list_features(self) -> List[str]:
         """Return list of all registered feature names."""
         return sorted(list(self._registry.keys()))
@@ -210,6 +216,7 @@ class FeatureRegistry:
 
 # Global default registry instance
 GLOBAL_REGISTRY = FeatureRegistry()
+DEFAULT_REGISTRY = GLOBAL_REGISTRY
 
 
 def compute_features(

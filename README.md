@@ -8,9 +8,9 @@
 ---
 
 ## Current Status
-**Status:** `Stage 8 — Sliding Windows and Feature Engineering (PROVISIONAL Development Run)`
+**Status:** `Stage 9 — Label Integration and Dataset Export (Infrastructure Complete; Live Export BLOCKED pending Gate G3 & Gate G6)`
 
-Configurable intra-segment sliding windows ($W = 60\text{ s}$, $S = 10\text{ s}$ provisional), 18 pure causal features, causal pre-window baselines ($T_{\text{lookback}} = 600\text{ s}$), and a sample-level temporal leakage guard are implemented (`src/solar_flare/features/`). The development run generated 8,116 sliding windows across 4 segments from `2026-10-18`. All 8,116 windows passed the temporal leakage guard (provenance verified: zero future observations accessed). Windows strictly never cross segment boundaries or gaps. Raw data and segment files are 100% hash-verified immutable. Final mode strictly refuses execution until human approval of Gate G5 (Decisions D-05, D-06, D-18, D-19, D-20).
+Policy-guarded label integration, Task A (Detection) and Task B (Forecasting) target builders, segregated export generators (`X_features.csv`, `y_labels.csv`, `metadata.csv`, `exclusions.csv`), and data dictionary generators are implemented (`src/solar_flare/export/`). Live dataset export execution on real workspace files strictly refuses and logs blocked reports (`results/exports/BLOCKED_DETECTION.md` and `results/exports/BLOCKED_PREDICTION.md`) because Gate G3 (labelling policy & event records) and Gate G6 (forecasting policy) require formal human researcher approval.
 
 ---
 
@@ -157,6 +157,7 @@ Detailed project documentation is available in the [`docs/`](docs/) directory:
 - [**10. Preprocessing Methods**](docs/10_preprocessing_methods.md) — Non-destructive filtering, GTI boundary conventions, continuous segmentation, and auditable reconciliation.
 - [**11. Feature Dictionary**](docs/11_feature_dictionary.md) — Exact mathematical definitions, units, reasons, and critical warning on row-level splitting for all 18 causal features.
 - [**12. Windowing Methods**](docs/12_windowing_methods.md) — Sliding window geometry, reference time $t_0$, coverage fractions, and effective sample size considerations.
+- [**13. Dataset Export**](docs/13_dataset_export.md) — Export structure, label semantics, <NA> exclusion meaning, and complete task separation.
 - [**Setup & Troubleshooting (Windows)**](docs/setup_windows.md) — Step-by-step PowerShell environment setup, execution policies, and Windows troubleshooting.
 - [**Official Data Acquisition Protocol**](docs/data_acquisition.md) — ISRO ISSDC PRADAN portal retrieval instructions, pairing rules, and checksum logging.
 
@@ -256,7 +257,29 @@ python scripts/build_features.py --final
 
 ---
 
-## Next Steps (Stage 9 Detection Dataset Export)
-- Review feature logs and summary in [`results/features/`](results/features/).
-- Complete Human Approval Gate G3 (labelling policy) and Gate G5 (window parameters and feature selection).
-- Stage 9 detection export requires Gate G3 and Gate G5 approvals. Feature generation is complete in PROVISIONAL mode.
+## Label Integration & Dataset Export (Stage 9)
+Stage 9 integrates validated sliding feature windows with independently verified ground-truth labels and exports segregated datasets:
+- **Strict Task Separation:** Task A (Detection) and Task B (Forecasting) targets never share directories or tables.
+- **Segregated Tabular Structure:** Exports `X_features.csv` (strictly features; no IDs, labels, or timestamps), `y_labels.csv` (`window_id`, `label`, `label_reason`), `metadata.csv` (full provenance), `exclusions.csv` (all `<NA>` rows with auditable reasons), `config_snapshot.yaml`, and `data_dictionary.md`.
+- **Zero Imputation of Unknowns:** Unknown, partial, or embargoed intervals receive `<NA>` and are never coerced to `0`.
+- **Policy Guard Enforcement:**
+  - Detection export requires Gate G3 approval (`docs/08_labelling_policy.md`, confirmed event records).
+  - Prediction export requires Gate G6 approval (`docs/22_forecasting_policy.md`, horizon and embargo parameters).
+- **Current Live Status:** Live export on the real workspace strictly refuses and outputs BLOCKED reports (`results/exports/BLOCKED_DETECTION.md` and `results/exports/BLOCKED_PREDICTION.md`) because Gate G3 and Gate G6 await human researcher decisions.
+
+Run Dataset Export CLI:
+```powershell
+# Detection Export (Task A)
+python scripts/export_dataset.py --task detection
+
+# Forecasting Export (Task B)
+python scripts/export_dataset.py --task prediction
+```
+
+---
+
+## Next Steps (Stage 10 Baseline Classifiers & Evaluation Protocols)
+- Review blocked reports in [`results/exports/`](results/exports/).
+- Complete Human Approval Gate G3 (Labelling Policy & Event Records) and Gate G6 (Forecasting Policy).
+- Once Gate G3 is approved, run live dataset export.
+- If independent verified event count is below Decision D-15 threshold, datasets receive `INSUFFICIENT` status, permitting PILOT model execution while restricting main experiment training.

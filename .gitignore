@@ -46,6 +46,8 @@ results/*
 !results/preprocessing/**
 !results/features/
 !results/features/**
+!results/exports/
+!results/exports/**
 
 # Logs
 logs/
