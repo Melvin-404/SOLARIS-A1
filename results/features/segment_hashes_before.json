@@ -1,0 +1,22 @@
+{
+  "AL1_SOLEXS_20261018_SDD2_L1/AL1_SOLEXS_20261018_SDD2_L1_seg_001.csv": {
+    "path": "data/processed/segments/AL1_SOLEXS_20261018_SDD2_L1/AL1_SOLEXS_20261018_SDD2_L1_seg_001.csv",
+    "size_bytes": 2164323,
+    "sha256": "3fd99bd34ea4abea7853c8660479d6e6d11cfe782496ffb5ea82cee5a4da1ec1"
+  },
+  "AL1_SOLEXS_20261018_SDD2_L1/AL1_SOLEXS_20261018_SDD2_L1_seg_002.csv": {
+    "path": "data/processed/segments/AL1_SOLEXS_20261018_SDD2_L1/AL1_SOLEXS_20261018_SDD2_L1_seg_002.csv",
+    "size_bytes": 485645,
+    "sha256": "5590f27c8a0566d649edb2a75763875f257d113b26a8ca948fcbe39a23658506"
+  },
+  "AL1_SOLEXS_20261018_SDD2_L1/AL1_SOLEXS_20261018_SDD2_L1_seg_003.csv": {
+    "path": "data/processed/segments/AL1_SOLEXS_20261018_SDD2_L1/AL1_SOLEXS_20261018_SDD2_L1_seg_003.csv",
+    "size_bytes": 1296631,
+    "sha256": "507089fc484a5fd3ed33e7b2f392b5a9e2e770e67403f79b9e7683344f41fed7"
+  },
+  "AL1_SOLEXS_20261018_SDD2_L1/AL1_SOLEXS_20261018_SDD2_L1_seg_004.csv": {
+    "path": "data/processed/segments/AL1_SOLEXS_20261018_SDD2_L1/AL1_SOLEXS_20261018_SDD2_L1_seg_004.csv",
+    "size_bytes": 1867202,
+    "sha256": "a89bacae5b7afd8224b26f3524756f2d7cad0e5915a1f63a703089ec2570ab3d"
+  }
+}

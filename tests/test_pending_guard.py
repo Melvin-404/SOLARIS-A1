@@ -73,3 +73,34 @@ def test_final_mode_passes_when_all_approved(fixture_synthetic_approved_decision
 
     assert is_approved is True
     assert len(missing) == 0
+
+
+def test_gate_g5_refuses_when_pending(fixture_synthetic_pending_decisions):
+    """Verify that check_gate_g5_approvals refuses when D-18 / D-19 are pending."""
+    from scripts.build_features import check_gate_g5_approvals
+    is_approved, missing = check_gate_g5_approvals(fixture_synthetic_pending_decisions)
+    assert is_approved is False
+    assert len(missing) > 0
+    assert any("D-18" in m for m in missing)
+
+
+def test_gate_g5_passes_when_approved(tmp_path: Path):
+    """Verify that check_gate_g5_approvals passes when G5 decisions are approved."""
+    from scripts.build_features import check_gate_g5_approvals
+    dec_file = tmp_path / "g5_approved.yaml"
+    data = {
+        "decisions": {
+            "D-05": {"status": "APPROVED", "approved_by": "Researcher"},
+            "D-06": {"status": "APPROVED", "approved_by": "Researcher"},
+            "D-18": {"status": "APPROVED", "approved_by": "Researcher"},
+            "D-19": {"status": "APPROVED", "approved_by": "Researcher"},
+            "D-20": {"status": "APPROVED", "approved_by": "Researcher"},
+        }
+    }
+    with open(dec_file, "w", encoding="utf-8") as f:
+        yaml.dump(data, f)
+
+    is_approved, missing = check_gate_g5_approvals(dec_file)
+    assert is_approved is True
+    assert len(missing) == 0
+

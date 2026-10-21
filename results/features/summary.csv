@@ -1,0 +1,2 @@
+stem,status,is_final,n_windows,n_low_coverage,low_coverage_percentage,leakage_guard_passed
+AL1_SOLEXS_20261018_SDD2_L1,SUCCESS,False,8116,0,0.0,True

@@ -8,9 +8,9 @@
 ---
 
 ## Current Status
-**Status:** `Stage 7 — Preprocessing and GTI-Aware Segmentation (PROVISIONAL Development Run)`
+**Status:** `Stage 8 — Sliding Windows and Feature Engineering (PROVISIONAL Development Run)`
 
-Non-destructive filtering, GTI boundary application, continuous segmentation, and auditable mathematical sample conservation are implemented (`src/solar_flare/preprocessing/`). The development run processed 86,400 raw samples on `2026-10-18`, retaining 81,379 valid samples (94.19%) across 4 continuous segments, with 5,021 excluded samples fully accounted for in audit logs. Source raw files are 100% hash-verified immutable. Final runs strictly refuse execution (`AWAITING_G4.md`) until human approval of Gates G1, G2, and Gate G4 (Decision D-14).
+Configurable intra-segment sliding windows ($W = 60\text{ s}$, $S = 10\text{ s}$ provisional), 18 pure causal features, causal pre-window baselines ($T_{\text{lookback}} = 600\text{ s}$), and a sample-level temporal leakage guard are implemented (`src/solar_flare/features/`). The development run generated 8,116 sliding windows across 4 segments from `2026-10-18`. All 8,116 windows passed the temporal leakage guard (provenance verified: zero future observations accessed). Windows strictly never cross segment boundaries or gaps. Raw data and segment files are 100% hash-verified immutable. Final mode strictly refuses execution until human approval of Gate G5 (Decisions D-05, D-06, D-18, D-19, D-20).
 
 ---
 
@@ -155,6 +155,8 @@ Detailed project documentation is available in the [`docs/`](docs/) directory:
 - [**08. Labelling Policy**](docs/08_labelling_policy.md) — Scientific labelling protocol draft with all Gate G3 decisions (D-01 to D-04, D-08, D-10, D-15) held PENDING.
 - [**09. Time Compatibility**](docs/09_time_compatibility.md) — Evaluation of reference epochs, time scales (UTC vs MET), leap seconds, and L1 propagation delay.
 - [**10. Preprocessing Methods**](docs/10_preprocessing_methods.md) — Non-destructive filtering, GTI boundary conventions, continuous segmentation, and auditable reconciliation.
+- [**11. Feature Dictionary**](docs/11_feature_dictionary.md) — Exact mathematical definitions, units, reasons, and critical warning on row-level splitting for all 18 causal features.
+- [**12. Windowing Methods**](docs/12_windowing_methods.md) — Sliding window geometry, reference time $t_0$, coverage fractions, and effective sample size considerations.
 - [**Setup & Troubleshooting (Windows)**](docs/setup_windows.md) — Step-by-step PowerShell environment setup, execution policies, and Windows troubleshooting.
 - [**Official Data Acquisition Protocol**](docs/data_acquisition.md) — ISRO ISSDC PRADAN portal retrieval instructions, pairing rules, and checksum logging.
 
@@ -232,7 +234,29 @@ python scripts/run_preprocessing.py --final
 
 ---
 
-## Next Steps (Stage 8 Windowing and Feature Extraction)
-- Review preprocessing audit reports in [`results/preprocessing/`](results/preprocessing/).
-- Review required decisions in [`results/preprocessing/AWAITING_G4.md`](results/preprocessing/AWAITING_G4.md) for final Gate G4 approval.
-- **Stage 8 (Windowing and Feature Extraction)** may proceed in PROVISIONAL mode for development. Final feature datasets require Decision D-14 approval.
+## Sliding Windows & Feature Engineering (Stage 8)
+Stage 8 generates configurable sliding windows strictly within continuous segments, computes 18 causal summary and morphological features, and enforces sample-level causal isolation:
+- **Intra-Segment Windows:** Windows strictly never cross segment or gap boundaries. Window length $W = 60\text{ s}$, stride $S = 10\text{ s}$ (D-05, D-06 provisional).
+- **Zero Future Peeking:** Every feature $f_j(w_i)$ is computed using strictly $t \le w_{\text{end}} = t_0$.
+- **Causal Local Baseline:** Evaluated over $[w_{\text{start}} - 600\text{ s}, w_{\text{start}})$ within the same segment. Never uses global or future samples.
+- **Auditable Leakage Guard:** Evaluates actual timestamps used (`max_time_used <= window_end`). Offending slices raise `LeakageError` immediately.
+- **Non-destructive & Zero Imputation:** Non-finite samples inside windows are excluded and accounted for; NaN is never imputed or filled.
+- **Leakage Warning:** Overlapping windows ($S < W$) share raw samples. Random row-level splitting causes catastrophic data leakage. Cross-validation MUST be grouped by contiguous segment or time block (Stage 10).
+- **Provisional Run on 2026-10-18:** Generated 8,116 windows across 4 segments (0 low coverage); 100% passed leakage guard.
+
+Run Feature Extraction CLI (PROVISIONAL development run):
+```powershell
+python scripts/build_features.py --stem all
+```
+
+Verify Final Run Refusal (Requires Gate G5 approval):
+```powershell
+python scripts/build_features.py --final
+```
+
+---
+
+## Next Steps (Stage 9 Detection Dataset Export)
+- Review feature logs and summary in [`results/features/`](results/features/).
+- Complete Human Approval Gate G3 (labelling policy) and Gate G5 (window parameters and feature selection).
+- Stage 9 detection export requires Gate G3 and Gate G5 approvals. Feature generation is complete in PROVISIONAL mode.

@@ -161,3 +161,30 @@ decisions:
     value: null
     approved_by: null
     notes: "Boundary inclusion rule for Good Time Intervals pending student approval at Gate G4. Provisional dev default: START_INCLUSIVE_STOP_EXCLUSIVE."
+
+  D-18:
+    title: "Causal baseline lookback window duration"
+    status: "PENDING"
+    owner: "Student"
+    stage_needed: "Stage 8 (Gate G5)"
+    value: null
+    approved_by: null
+    notes: "Temporal duration preceding window_start for estimating local background flux. Provisional dev default: 600.0 s."
+
+  D-19:
+    title: "Rolling trend duration parameter K within window"
+    status: "PENDING"
+    owner: "Student"
+    stage_needed: "Stage 8 (Gate G5)"
+    value: null
+    approved_by: null
+    notes: "Trailing duration K (s) at the end of each window for calculating immediate trend. Provisional dev default: 15.0 s."
+
+  D-20:
+    title: "Minimum window sample coverage fraction"
+    status: "PENDING"
+    owner: "Student"
+    stage_needed: "Stage 8 (Gate G5)"
+    value: null
+    approved_by: null
+    notes: "Threshold of observed-to-expected samples required for high-quality window inclusion. Provisional dev default: 0.80."

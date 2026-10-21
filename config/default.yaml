@@ -40,6 +40,24 @@ preprocessing:
   status_d14: "PENDING"
   status_d17: "PENDING"
 
+features:
+  # Stage 8 Sliding Windows and Feature Engineering parameters
+  # Status: PROVISIONAL in development mode; requires Gate G5 human approval for final runs.
+  window_seconds: 60.0                            # Window length W (Decision D-05)
+  stride_seconds: 10.0                            # Window stride S (Decision D-06)
+  min_coverage_fraction: 0.80                     # Minimum coverage fraction for inclusion (Decision D-20)
+  include_low_coverage: true                      # Whether to include low-coverage windows with flag
+  baseline_lookback_seconds: 600.0                # Causal baseline lookback duration (Decision D-18)
+  baseline_min_samples: 30                        # Minimum samples in lookback interval
+  baseline_epsilon: 1e-6                          # Minimum baseline flux floor to avoid div by zero
+  rolling_trend_seconds_k: 15.0                   # Trailing duration K within window for trend (Decision D-19)
+  percentiles: [5, 25, 75, 95]                    # Percentile levels to compute
+  status_d05: "PROVISIONAL"
+  status_d06: "PROVISIONAL"
+  status_d18: "PENDING"
+  status_d19: "PENDING"
+  status_d20: "PENDING"
+
 scientific_parameters:
   # All scientific parameters are deferred to student review and decision log
   window_length_s: "PENDING — see docs/01_decision_log.md (D-05)"

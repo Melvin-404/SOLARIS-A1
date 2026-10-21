@@ -44,6 +44,8 @@ results/*
 !results/labels/**
 !results/preprocessing/
 !results/preprocessing/**
+!results/features/
+!results/features/**
 
 # Logs
 logs/
