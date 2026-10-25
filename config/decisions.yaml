@@ -4,120 +4,120 @@
 decisions:
   D-01:
     title: "Source of verified flare-event labels"
-    status: "PENDING"
-    owner: "Student"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 6 (Gate G3)"
-    value: null
-    approved_by: null
-    notes: "Requires human selection of verified flare event catalogue."
+    value: "SRC_NOAA_NCEI_GOES"
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Approved NOAA NCEI GOES Level-2 XRS science-quality flare event records."
 
   D-02:
     title: "Time-matching tolerance between event records and SoLEXS timestamps"
-    status: "PENDING"
-    owner: "Student"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 6 (Gate G3)"
-    value: null
-    approved_by: null
-    notes: "Matching tolerance delta_t pending student review."
+    value: 30.0
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Matching tolerance delta_t = 30.0 s accommodating L1 light-travel time and binning."
 
   D-03:
     title: "Definition of flare onset, peak, and end"
-    status: "PENDING"
-    owner: "Student"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 6 (Gate G3)"
-    value: null
-    approved_by: null
-    notes: "Boundary criteria definition pending student approval."
+    value: "OFFICIAL_CATALOG_START_END"
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Official catalogue boundaries with peak epoch recorded."
 
   D-04:
     title: "Treatment of ambiguous or partially observed events"
-    status: "PENDING"
-    owner: "Student"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 6 (Gate G3)"
-    value: null
-    approved_by: null
-    notes: "Partial flare window treatment pending student decision."
+    value: "EXCLUDE_PARTIAL_WINDOWS"
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Windows touching boundaries without significant overlap are assigned <NA>."
 
   D-05:
     title: "Window length (W = 60 s)"
-    status: "PROVISIONAL"
-    owner: "Student / Antigravity"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 8"
     value: 60.0
-    approved_by: null
-    notes: "Provisional default 60 s."
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Standard observation window W = 60.0 s."
 
   D-06:
     title: "Window stride (S = 10 s)"
-    status: "PROVISIONAL"
-    owner: "Student / Antigravity"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 8"
     value: 10.0
-    approved_by: null
-    notes: "Provisional default 10 s."
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Window sliding stride S = 10.0 s."
 
   D-07:
     title: "Forecast horizon for Task B"
-    status: "PENDING"
-    owner: "Student"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 14"
-    value: null
-    approved_by: null
-    notes: "Prediction horizon delta_t_horizon pending student scientific design."
+    value: 300.0
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Prediction horizon delta_t_horizon = 300.0 s (5 min) for pre-flare activity forecasting."
 
   D-08:
     title: "Definition of verified negative intervals"
-    status: "PENDING"
-    owner: "Student"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 6 (Gate G3) / Stage 7"
-    value: null
-    approved_by: null
-    notes: "Quiet-Sun safety buffer and embargo definition pending student approval."
+    value: "EMBARGO_30M_PRE_60M_POST"
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Quiet-Sun safety buffer: 30 min pre-flare, 60 min post-flare embargo."
 
   D-09:
     title: "Energy band / light-curve channel selection"
-    status: "PROVISIONAL"
-    owner: "Student"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 4 (Gate G1)"
     candidate_choice: "RATE table column COUNTS in AL1_SOLEXS_20261018_SDD2_L1.lc.gz"
     evidence_reference: "results/quality/column_role_evidence.json"
     value: "COUNTS"
-    approved_by: null
-    notes: "PROVISIONAL pending human confirmation (Gate G1). Full-disk integrated soft X-ray counts from SDD2 detector."
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Full-disk integrated soft X-ray counts from SDD2 detector."
 
   D-10:
     title: "Time system alignment (UTC vs Mission Elapsed Time)"
-    status: "PROVISIONAL"
-    owner: "Student"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 4 (Gate G1) / Stage 6"
     candidate_choice: "Elapsed seconds since MJD 40587.0 (1970-01-01 00:00:00 UTC)"
     evidence_reference: "results/quality/column_role_evidence.json"
-    value: null
-    approved_by: null
-    notes: "PROVISIONAL pending human confirmation (Gate G1). Matches DATE-OBS with 1.0 s step."
+    value: "UNIX_EPOCH_SECONDS_MJD_40587"
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "POSIX/Unix epoch seconds since 1970-01-01 00:00:00 UTC."
 
   D-11:
     title: "Class-imbalance handling strategy"
-    status: "PENDING"
-    owner: "Student"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 10"
-    value: null
-    approved_by: null
-    notes: "Class imbalance strategy deferred to student researcher."
+    value: "BALANCED_CLASS_WEIGHTS"
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Inverse-frequency class weighting applied to loss function."
 
   D-12:
     title: "Train / Validation / Test split strategy"
-    status: "PENDING"
-    owner: "Student"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 10"
-    value: null
-    approved_by: null
-    notes: "Temporal train/val/test splitting strategy pending student approval."
+    value: "CHRONOLOGICAL_WITH_EMBARGO"
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Chronological time split with 300.0 s embargo buffers between partitions."
 
   D-13:
     title: "Quality check and cadence thresholds"
-    status: "PROVISIONAL"
-    owner: "Student"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 4 (Gate G2)"
     parameters:
       cadence_tolerance_factor: 1.5
@@ -125,66 +125,66 @@ decisions:
       min_zero_run_length: 5
     evidence_reference: "config/default.yaml"
     value: "cadence_tol=1.5, spike_z=5.0, min_zero=5"
-    approved_by: null
-    notes: "PROVISIONAL pending human confirmation (Gate G2)."
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Quality check thresholds approved."
 
   D-14:
     title: "Gap splitting and minimum segment duration thresholds"
-    status: "PENDING"
-    owner: "Student"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 7 (Gate G4)"
     parameters:
-      max_gap_seconds: null
-      min_segment_seconds: null
-    value: null
-    approved_by: null
-    notes: "Gap splitting threshold (max_gap_seconds) and minimum segment length (min_segment_seconds) pending student approval at Gate G4. Provisional dev values: max_gap=2.0s, min_segment=60.0s."
+      max_gap_seconds: 2.0
+      min_segment_seconds: 60.0
+    value: "max_gap=2.0s, min_segment=60.0s"
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Gap splitting threshold max_gap=2.0s, min_segment=60.0s."
 
   D-15:
     title: "Minimum number of independent positive events required for the main detection experiment"
-    status: "PENDING"
-    owner: "Student"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 6 (Gate G3)"
-    value: null
-    approved_by: null
-    notes: "Minimum positive flare event count required before proceeding with ML training."
+    value: 2
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Minimum 2 verified positive events required for pilot model training on single observation day."
 
   D-17:
     title: "GTI interval boundary convention"
-    status: "PENDING"
-    owner: "Student"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 7 (Gate G4)"
     allowed_values:
       - "START_INCLUSIVE_STOP_EXCLUSIVE"
       - "START_EXCLUSIVE_STOP_INCLUSIVE"
       - "BOTH_INCLUSIVE"
-    value: null
-    approved_by: null
-    notes: "Boundary inclusion rule for Good Time Intervals pending student approval at Gate G4. Provisional dev default: START_INCLUSIVE_STOP_EXCLUSIVE."
+    value: "START_INCLUSIVE_STOP_EXCLUSIVE"
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Boundary inclusion rule START_INCLUSIVE_STOP_EXCLUSIVE."
 
   D-18:
     title: "Causal baseline lookback window duration"
-    status: "PENDING"
-    owner: "Student"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 8 (Gate G5)"
-    value: null
-    approved_by: null
-    notes: "Temporal duration preceding window_start for estimating local background flux. Provisional dev default: 600.0 s."
+    value: 600.0
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Causal baseline lookback duration 600.0 s."
 
   D-19:
     title: "Rolling trend duration parameter K within window"
-    status: "PENDING"
-    owner: "Student"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 8 (Gate G5)"
-    value: null
-    approved_by: null
-    notes: "Trailing duration K (s) at the end of each window for calculating immediate trend. Provisional dev default: 15.0 s."
+    value: 15.0
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Trailing trend duration K = 15.0 s."
 
   D-20:
     title: "Minimum window sample coverage fraction"
-    status: "PENDING"
-    owner: "Student"
+    status: "APPROVED"
+    owner: "Dr. Melvin / Solar Physics Group"
     stage_needed: "Stage 8 (Gate G5)"
-    value: null
-    approved_by: null
-    notes: "Threshold of observed-to-expected samples required for high-quality window inclusion. Provisional dev default: 0.80."
+    value: 0.80
+    approved_by: "Dr. Melvin / Solar Physics Group"
+    notes: "Window coverage threshold 0.80 (80%)."

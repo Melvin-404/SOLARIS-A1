@@ -1,0 +1,116 @@
+# SOLARIS-A1 Machine Learning Training Protocol Specification (Stage 10)
+# Experiment: July 2024 Standalone Dataset (13 Observation Days, 117 Verified Flares)
+# STATUS: FROZEN — APPROVED (Gate G7 & Gate G8)
+
+protocol_id: "PROTO_STAGE10_EXPANDED_002"
+status: "FROZEN"  # Formally approved and frozen
+approved_by: "Dr. Melvin / Solar Physics Group"
+approved_date: "2026-10-23"
+g8_approved: true
+g8_approved_by: "Dr. Melvin / Solar Physics Group"
+g8_approved_date: "2026-10-23"
+g8_statement: "Formal authorization granted for single-shot test set evaluation after model selection"
+protocol_hash: null
+
+# Experiment Scope
+task: "detection"  # "detection" (Task A)
+dataset_export_id: "exp_det_july2024"
+dataset_status: "APPROVED-main"
+
+# Approved Ground-Truth Labeling Policy (Gate G3)
+label_policy:
+  policy_document: "docs/08_labelling_policy.md"
+  policy_version: "1.0"
+  event_catalog: "data/manifests/event_records_approved.csv"
+  tolerance_seconds: 30.0
+  embargo_seconds: 300.0
+  min_overlap_fraction: 0.50
+  min_coverage_fraction: 0.80
+
+# Approved Feature Matrix (Stage 8)
+features:
+  - "baseline_value"
+  - "p05"
+  - "p25"
+  - "p75"
+  - "p95"
+  - "coverage_fraction"
+  - "iqr"
+  - "max"
+  - "max_abs_first_difference"
+  - "mean"
+  - "mean_abs_first_difference"
+  - "median"
+  - "min"
+  - "n_observed_samples"
+  - "peak_to_baseline_ratio"
+  - "robust_variability"
+  - "rolling_trend"
+  - "std"
+  - "temporal_slope"
+
+# Temporal Split Strategy & Embargo Boundaries
+split_strategy: "chronological"
+split_parameters:
+  train_end: 1720655993.0  # End of 2024-07-10 23:59:53 UTC (9 days, 77 events, 65,619 usable windows)
+  val_end: 1720828792.0    # End of 2024-07-12 23:59:52 UTC (2 days, 12 events, 16,635 usable windows)
+  embargo_seconds: 300.0   # Buffer interval between train/val (304s) and val/test (308s)
+  fractions: [0.67, 0.16, 0.17]
+  random_state: 42
+
+# Inner Validation & Tuning
+inner_validation:
+  method: "TimeSeriesSplit"
+  n_splits: 3
+  respect_grouping: false
+
+# Preprocessing Pipeline (Fitted STRICTLY on Training partition)
+preprocessing:
+  scaler: "StandardScaler"  # "StandardScaler" | "RobustScaler" | "NONE"
+  imputer: "median"          # "median" | "mean" | "NONE"
+  feature_selection: "NONE" # "NONE" | "SelectKBest"
+
+# Class Imbalance Governance
+class_weight_options:
+  - "balanced"
+  - "none"
+
+# Candidate Estimator Search Spaces
+models:
+  logistic_regression:
+    enabled: true
+    param_grid:
+      C: [0.1, 1.0]
+      solver: ["lbfgs"]
+      max_iter: [1000]
+      class_weight: ["balanced", null]
+    deterministic_seed: 42
+
+  random_forest:
+    enabled: true
+    param_grid:
+      n_estimators: [50, 100]
+      max_depth: [5, 10]
+      min_samples_split: [5]
+      class_weight: ["balanced", null]
+    deterministic_seed: 42
+
+  xgboost:
+    enabled: true
+    param_grid:
+      n_estimators: [50, 100]
+      max_depth: [3, 5]
+      learning_rate: [0.05, 0.1]
+      scale_pos_weight: [1.0, 6.0]
+    deterministic_seed: 42
+
+# Model Selection Objective & Final Refitting Policy
+selection_metric: "PR_AUC"
+refit_final: "train_only"  # Strict requirement: Models trained strictly on training partition only
+selection:
+  metric: "pr_auc"  # Precision-Recall AUC (Decision D-14)
+  secondary_metrics:
+    - "roc_auc"
+    - "f1_score"
+    - "balanced_accuracy"
+    - "brier_score"

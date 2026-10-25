@@ -1,0 +1,42 @@
+{
+  "logistic_regression": {
+    "status": "TRAINED",
+    "selection_metric": "PR_AUC",
+    "best_validation_score": 1.0,
+    "best_parameters": {
+      "C": 0.01,
+      "solver": "lbfgs",
+      "max_iter": 1000,
+      "class_weight": null
+    },
+    "refit_mode": "train_only",
+    "artifact_path": "experiments\\exp_PROTO_STAGE10_PILOT_001_20261023_141429\\models\\logistic_regression.joblib"
+  },
+  "random_forest": {
+    "status": "TRAINED",
+    "selection_metric": "PR_AUC",
+    "best_validation_score": 1.0,
+    "best_parameters": {
+      "n_estimators": 50,
+      "max_depth": 5,
+      "min_samples_split": 2,
+      "class_weight": "balanced"
+    },
+    "refit_mode": "train_only",
+    "artifact_path": "experiments\\exp_PROTO_STAGE10_PILOT_001_20261023_141429\\models\\random_forest.joblib"
+  },
+  "xgboost": {
+    "status": "TRAINED",
+    "selection_metric": "PR_AUC",
+    "best_validation_score": 1.0,
+    "best_parameters": {
+      "n_estimators": 50,
+      "max_depth": 3,
+      "learning_rate": 0.05,
+      "tree_method": "hist",
+      "n_jobs": 1
+    },
+    "refit_mode": "train_only",
+    "artifact_path": "experiments\\exp_PROTO_STAGE10_PILOT_001_20261023_141429\\models\\xgboost.joblib"
+  }
+}

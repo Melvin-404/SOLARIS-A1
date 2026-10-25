@@ -62,6 +62,13 @@ def load_approved_events(
     if not p.is_file():
         raise FileNotFoundError(f"Approved event records file not found at: {p}")
 
+    if config is None:
+        try:
+            from solar_flare.config import load_config
+            config = load_config()
+        except Exception:
+            config = None
+
     df = pd.read_csv(p)
     # 1. Run schema and consistency validation
     validate_event_records(df, config=config, event_sources_path=event_sources_path)
@@ -143,24 +150,40 @@ def label_windows_detection(
 
     records: List[Dict[str, Any]] = []
 
-    for _, w_row in window_index.iterrows():
-        w_id = str(w_row["window_id"])
-        w_start = float(w_row["window_start"])
-        w_end = float(w_row["window_end"])
-        w_dur = float(w_end - w_start)
-        w_cov = float(w_row["coverage_fraction"])
-        q_flag = str(w_row["quality_flag"])
+    # Vectorized column access for performance on large multi-day datasets
+    w_ids = [str(x) for x in window_index["window_id"].tolist()]
+    w_starts = window_index["window_start"].to_numpy(dtype=float)
+    w_ends = window_index["window_end"].to_numpy(dtype=float)
+    w_covs = window_index["coverage_fraction"].to_numpy(dtype=float)
+    q_flags = [str(x) for x in window_index["quality_flag"].tolist()]
 
-        # Determine relationships with all events
+    e_ids = [str(x) for x in events["event_id"].tolist()]
+    e_onsets = events["onset_time"].to_numpy(dtype=float)
+    e_ends = events["end_time"].to_numpy(dtype=float)
+    e_durs = np.maximum(1e-3, e_ends - e_onsets)
+
+    n_windows = len(w_ids)
+    for i in range(n_windows):
+        w_id = w_ids[i]
+        w_start = w_starts[i]
+        w_end = w_ends[i]
+        w_dur = max(1e-3, float(w_end - w_start))
+        w_cov = w_covs[i]
+        q_flag = q_flags[i]
+
+        # Determine relationships with candidate events
         matched_events: List[Tuple[str, float, float]] = []  # (event_id, overlap_s, frac_event)
         partial_events: List[Tuple[str, float]] = []         # (event_id, overlap_s)
         in_embargo_of: List[str] = []
 
-        for _, e_row in events.iterrows():
-            e_id = str(e_row["event_id"])
-            e_onset = float(e_row["onset_time"])
-            e_end = float(e_row["end_time"])
-            e_dur = max(1e-3, float(e_end - e_onset))
+        cand_mask = (e_ends >= w_start - embargo_sec - tol_sec) & (e_onsets <= w_end + embargo_sec + tol_sec)
+        cand_indices = np.where(cand_mask)[0]
+
+        for idx in cand_indices:
+            e_id = e_ids[idx]
+            e_onset = e_onsets[idx]
+            e_end = e_ends[idx]
+            e_dur = e_durs[idx]
 
             overlap_s = interval_overlap_seconds(
                 w_start, w_end, e_onset, e_end, tolerance_seconds=tol_sec

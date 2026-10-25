@@ -59,9 +59,19 @@ features:
   status_d20: "PENDING"
 
 scientific_parameters:
-  # All scientific parameters are deferred to student review and decision log
-  window_length_s: "PENDING — see docs/01_decision_log.md (D-05)"
-  window_stride_s: "PENDING — see docs/01_decision_log.md (D-06)"
-  forecast_horizon_s: "PENDING — see docs/01_decision_log.md (D-07)"
-  time_tolerance_s: "PENDING — see docs/01_decision_log.md (D-02)"
-  energy_channels: "PENDING — see docs/01_decision_log.md (D-09)"
+  window_length_s: 60.0
+  window_stride_s: 10.0
+  forecast_horizon_s: 300.0
+  time_tolerance_s: 30.0
+  energy_channels: "COUNTS"
+  allowed_time_systems:
+    - "UTC"
+
+labels:
+  allowed_time_systems:
+    - "UTC"
+  matching_tolerance_seconds: 30.0
+  pre_flare_embargo_seconds: 1800.0
+  post_flare_embargo_seconds: 3600.0
+  min_overlap_fraction: 0.50
+  min_coverage_fraction: 0.80

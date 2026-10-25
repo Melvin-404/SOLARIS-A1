@@ -1,0 +1,44 @@
+{
+  "mean": {
+    "preflare_mean": 74.807,
+    "quiet_mean": 53.91,
+    "cohens_d": 0.075,
+    "ks_stat": 0.558,
+    "ks_pval": 0.0
+  },
+  "max": {
+    "preflare_mean": 92.04,
+    "quiet_mean": 66.25,
+    "cohens_d": 0.087,
+    "ks_stat": 0.531,
+    "ks_pval": 0.0
+  },
+  "std": {
+    "preflare_mean": 7.109,
+    "quiet_mean": 5.006,
+    "cohens_d": 0.223,
+    "ks_stat": 0.482,
+    "ks_pval": 0.0
+  },
+  "temporal_slope": {
+    "preflare_mean": -0.024,
+    "quiet_mean": -0.013,
+    "cohens_d": -0.028,
+    "ks_stat": 0.081,
+    "ks_pval": 1.2889151808319175e-14
+  },
+  "robust_variability": {
+    "preflare_mean": 7.096,
+    "quiet_mean": 4.971,
+    "cohens_d": 0.199,
+    "ks_stat": 0.428,
+    "ks_pval": 0.0
+  },
+  "peak_to_baseline_ratio": {
+    "preflare_mean": 1.582,
+    "quiet_mean": 1.979,
+    "cohens_d": -0.477,
+    "ks_stat": 0.275,
+    "ks_pval": 5.250040935928819e-167
+  }
+}

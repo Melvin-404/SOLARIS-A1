@@ -25,6 +25,7 @@ from pathlib import Path
 import sys
 from typing import Any, Dict, List, Optional
 import yaml
+import pandas as pd
 
 # Ensure src/ is on sys.path
 _REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -73,6 +74,17 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
         "--out-dir",
         default=None,
         help="Optional destination path for exported datasets (defaults to data/processed/datasets).",
+    )
+    parser.add_argument(
+        "--cohort",
+        default="all",
+        choices=["all", "pilot", "july2024"],
+        help="Observation cohort to export ('all', 'pilot', or 'july2024'). Defaults to 'all'.",
+    )
+    parser.add_argument(
+        "--export-id",
+        default=None,
+        help="Optional explicit dataset export identifier (e.g. 'exp_det_july2024').",
     )
     return parser.parse_args(argv)
 
@@ -231,6 +243,21 @@ def main(argv: Optional[List[str]] = None) -> int:
     if not feat_paths:
         raise RuntimeError("No window_features.csv files found to export.")
 
+    # Filter by cohort if requested
+    if args.cohort == "pilot":
+        feat_paths = [p for p in feat_paths if "20261018" in p.parent.name]
+        idx_paths = [p for p in idx_paths if "20261018" in p.parent.name]
+        events_df = events_df[events_df["event_id"].str.contains("20261018")].copy()
+    elif args.cohort == "july2024":
+        feat_paths = [p for p in feat_paths if "202407" in p.parent.name]
+        idx_paths = [p for p in idx_paths if "202407" in p.parent.name]
+        events_df = events_df[events_df["event_id"].str.contains("202407")].copy()
+
+    feat_paths = sorted(feat_paths)
+    idx_paths = sorted(idx_paths)
+
+    logger.info("Exporting cohort '%s' with %d feature stems (%d events).", args.cohort, len(feat_paths), len(events_df))
+
     all_feat_list = [pd.read_csv(p) for p in feat_paths]
     all_idx_list = [pd.read_csv(p) for p in idx_paths]
     features_df = pd.concat(all_feat_list, ignore_index=True)
@@ -242,8 +269,14 @@ def main(argv: Optional[List[str]] = None) -> int:
     event_count = len(events_df["event_id"].unique()) if "event_id" in events_df.columns else len(events_df)
 
     if task == "detection":
-        tol_sec = float(decs_yaml.get("decisions", {}).get("D-02", {}).get("value", 5.0))
-        emb_sec = float(decs_yaml.get("decisions", {}).get("D-08", {}).get("value", 60.0))
+        try:
+            tol_sec = float(decs_yaml.get("decisions", {}).get("D-02", {}).get("value", 30.0))
+        except (ValueError, TypeError):
+            tol_sec = 30.0
+        try:
+            emb_sec = float(decs_yaml.get("decisions", {}).get("D-08", {}).get("value", 300.0))
+        except (ValueError, TypeError):
+            emb_sec = 300.0
         params = {
             "tolerance_seconds": tol_sec,
             "embargo_seconds": emb_sec,
@@ -252,8 +285,14 @@ def main(argv: Optional[List[str]] = None) -> int:
         }
         labels_df = label_windows_detection(window_index=window_index_df, events=events_df, params=params)
     else:
-        h_sec = float(decs_yaml.get("decisions", {}).get("D-07", {}).get("value", 1800.0))
-        emb_sec = float(decs_yaml.get("decisions", {}).get("D-08", {}).get("value", 300.0))
+        try:
+            h_sec = float(decs_yaml.get("decisions", {}).get("D-07", {}).get("value", 300.0))
+        except (ValueError, TypeError):
+            h_sec = 300.0
+        try:
+            emb_sec = float(decs_yaml.get("decisions", {}).get("D-08", {}).get("value", 300.0))
+        except (ValueError, TypeError):
+            emb_sec = 300.0
         labels_df = prediction_target(
             window_index=window_index_df,
             onsets=events_df,
@@ -261,6 +300,7 @@ def main(argv: Optional[List[str]] = None) -> int:
             embargo_seconds=emb_sec,
         )
 
+    decs_yaml["cohort"] = args.cohort
     export_path = export_dataset(
         task=task,
         features_df=features_df,
@@ -271,6 +311,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         policy_text=policy_text,
         event_count=event_count,
         min_events_required=min_events_req,
+        export_id=args.export_id,
     )
 
     logger.info("Successfully exported %s dataset to: %s", task.upper(), export_path)

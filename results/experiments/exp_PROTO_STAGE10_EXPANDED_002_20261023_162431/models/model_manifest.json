@@ -1,0 +1,32 @@
+{
+  "logistic_regression": {
+    "artifact_file": "logistic_regression.joblib",
+    "model_class": "LogisticRegression",
+    "params": {
+      "C": 1.0,
+      "solver": "lbfgs",
+      "max_iter": 1000,
+      "class_weight": null
+    }
+  },
+  "random_forest": {
+    "artifact_file": "random_forest.joblib",
+    "model_class": "RandomForestClassifier",
+    "params": {
+      "n_estimators": 100,
+      "max_depth": 10,
+      "min_samples_split": 5,
+      "class_weight": null
+    }
+  },
+  "xgboost": {
+    "artifact_file": "xgboost.joblib",
+    "model_class": "XGBClassifier",
+    "params": {
+      "n_estimators": 100,
+      "max_depth": 3,
+      "learning_rate": 0.1,
+      "scale_pos_weight": 6.0
+    }
+  }
+}

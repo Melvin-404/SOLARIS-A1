@@ -4,7 +4,7 @@
 **Execution Date:** `2026-10-21`  
 **Python Runtime:** `Python 3.12.10`  
 **Operating System:** `Windows 11 (64-bit) / win32`  
-**Virtual Environment:** `C:\Users\melvi\Desktop\SOLARIS-A1\.venv`  
+**Virtual Environment:** `<project_root>\.venv`
 **Audit Output Path:** `results/checks/full_check_20261021_101513Z.md`  
 
 ---
@@ -30,7 +30,7 @@ This report documents the automated test suite execution, static safeguard scans
 ```text
 ============================= test session starts =============================
 platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.7.0
-rootdir: C:\Users\melvi\Desktop\SOLARIS-A1
+rootdir: <project_root>
 configfile: pyproject.toml
 collected 215 items
 

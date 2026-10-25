@@ -15,6 +15,7 @@ from typing import Any, Dict, List, Optional, Sequence, Union
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler, RobustScaler
+from sklearn.impute import SimpleImputer
 
 from solar_flare.modelling.guards import assert_no_test_in_fit, MissingFeatureError, TestLeakageError
 
@@ -32,6 +33,7 @@ class TrainingOnlyPreprocessor:
         self.imputer_name = imputer
         self.feature_selection_name = feature_selection
 
+        self.imputer = None
         self.scaler = None
         self.is_fitted = False
         self.feature_names_in_: List[str] = []
@@ -92,8 +94,15 @@ class TrainingOnlyPreprocessor:
 
         self.feature_names_in_ = list(X.columns)
 
-        # 2. Strict NaN check
-        if self.imputer_name.upper() == "NONE":
+        # 2. Imputation handling (fitted strictly on training)
+        imp_choice = self.imputer_name.upper()
+        if imp_choice in {"SIMPLEIMPUTER", "MEDIAN", "MEAN"}:
+            strategy = "mean" if imp_choice == "MEAN" else "median"
+            self.imputer = SimpleImputer(strategy=strategy)
+            arr_imputed = self.imputer.fit_transform(X_fit)
+            X_fit_clean = pd.DataFrame(arr_imputed, columns=self.feature_names_in_, index=X_fit.index)
+        elif imp_choice == "NONE":
+            self.imputer = None
             nan_counts = X_fit.isna().sum()
             bad_cols = nan_counts[nan_counts > 0].to_dict()
             if bad_cols:
@@ -101,15 +110,18 @@ class TrainingOnlyPreprocessor:
                     f"NaN values encountered in training features with imputer='NONE': {bad_cols}. "
                     "Silent imputation is prohibited."
                 )
+            X_fit_clean = X_fit
+        else:
+            raise ValueError(f"Unsupported imputer '{self.imputer_name}'. Must be 'NONE', 'SimpleImputer', 'median', or 'mean'.")
 
         # 3. Fit Scaler
         s_choice = self.scaler_name.upper()
         if s_choice == "STANDARDSCALER":
             self.scaler = StandardScaler()
-            self.scaler.fit(X_fit)
+            self.scaler.fit(X_fit_clean)
         elif s_choice == "ROBUSTSCALER":
             self.scaler = RobustScaler()
-            self.scaler.fit(X_fit)
+            self.scaler.fit(X_fit_clean)
         elif s_choice == "NONE":
             self.scaler = None
         else:
@@ -123,16 +135,21 @@ class TrainingOnlyPreprocessor:
         if not self.is_fitted:
             raise RuntimeError("TrainingOnlyPreprocessor must be fitted before transform.")
 
-        # Check for NaN in input under imputer=NONE
-        if self.imputer_name.upper() == "NONE":
-            nan_counts = X.isna().sum()
-            bad_cols = nan_counts[nan_counts > 0].to_dict()
-            if bad_cols:
-                raise MissingFeatureError(
-                    f"NaN values encountered during transform with imputer='NONE': {bad_cols}."
-                )
+        # Impute or check for NaN
+        if self.imputer is not None:
+            arr_imp = self.imputer.transform(X)
+            X_clean = pd.DataFrame(arr_imp, columns=self.feature_names_in_, index=X.index)
+        else:
+            if self.imputer_name.upper() == "NONE":
+                nan_counts = X.isna().sum()
+                bad_cols = nan_counts[nan_counts > 0].to_dict()
+                if bad_cols:
+                    raise MissingFeatureError(
+                        f"NaN values encountered during transform with imputer='NONE': {bad_cols}."
+                    )
+            X_clean = X
 
         if self.scaler is not None:
-            arr_scaled = self.scaler.transform(X)
+            arr_scaled = self.scaler.transform(X_clean)
             return pd.DataFrame(arr_scaled, columns=self.feature_names_in_, index=X.index)
-        return X.copy()
+        return X_clean.copy()

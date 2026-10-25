@@ -18,7 +18,7 @@ Execute the following commands from the root directory of `SOLARIS-A1`:
 
 ### Step 2.1: Open PowerShell and Navigate to Workspace
 ```powershell
-cd C:\Users\melvi\Desktop\SOLARIS-A1
+cd <path-to-SOLARIS-A1>
 ```
 
 ### Step 2.2: Create the Virtual Environment

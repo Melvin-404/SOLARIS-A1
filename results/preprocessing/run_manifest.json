@@ -1,8 +1,539 @@
 {
   "stage": "Stage 7 \u2014 Preprocessing and GTI-Aware Segmentation",
-  "timestamp": "2026-10-21T08:07:51.326713+00:00",
+  "timestamp": "2026-10-23T15:57:34.620514+00:00",
   "mode": "PROVISIONAL (DEVELOPMENT)",
   "summary": [
+    {
+      "file_stem": "AL1_SOLEXS_20240701_SDD2_L1",
+      "status": "SUCCESS",
+      "is_final": false,
+      "original_samples": 86400,
+      "retained_samples": 86260,
+      "retention_percentage": 99.838,
+      "excluded_by_reason": {
+        "NON_FINITE": 128,
+        "SEGMENT_TOO_SHORT": 8,
+        "OUTSIDE_GTI": 4
+      },
+      "n_segments": 2,
+      "segments": [
+        {
+          "segment_id": "AL1_SOLEXS_20240701_SDD2_L1_seg_001",
+          "start": 1719792131.0,
+          "end": 1719815130.0,
+          "n_samples": 23000,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 128.0,
+          "duration_seconds": 22999.0
+        },
+        {
+          "segment_id": "AL1_SOLEXS_20240701_SDD2_L1_seg_002",
+          "start": 1719815139.0,
+          "end": 1719878398.0,
+          "n_samples": 63260,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 3.0,
+          "duration_seconds": 63259.0
+        }
+      ],
+      "hash_before": "efd07637fff5d0f51998617bf416055ce6a30b30e80e02e869ee8234839a6d58",
+      "hash_after": "efd07637fff5d0f51998617bf416055ce6a30b30e80e02e869ee8234839a6d58",
+      "immutability_verified": true,
+      "audit_files": {
+        "csv": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240701_SDD2_L1.csv",
+        "json": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240701_SDD2_L1.json",
+        "md": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240701_SDD2_L1.md"
+      }
+    },
+    {
+      "file_stem": "AL1_SOLEXS_20240703_SDD2_L1",
+      "status": "SUCCESS",
+      "is_final": false,
+      "original_samples": 86400,
+      "retained_samples": 86391,
+      "retention_percentage": 99.9896,
+      "excluded_by_reason": {
+        "SEGMENT_TOO_SHORT": 4,
+        "OUTSIDE_GTI": 3,
+        "NON_FINITE": 2
+      },
+      "n_segments": 2,
+      "segments": [
+        {
+          "segment_id": "AL1_SOLEXS_20240703_SDD2_L1_seg_001",
+          "start": 1719964800.0,
+          "end": 1719982831.0,
+          "n_samples": 18032,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 0.0,
+          "duration_seconds": 18031.0
+        },
+        {
+          "segment_id": "AL1_SOLEXS_20240703_SDD2_L1_seg_002",
+          "start": 1719982840.0,
+          "end": 1720051198.0,
+          "n_samples": 68359,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 3.0,
+          "duration_seconds": 68358.0
+        }
+      ],
+      "hash_before": "4b664b1a848b6a1f49b3e0d55e9b535eeee8f66fff43a3d1e19c7008ef611c70",
+      "hash_after": "4b664b1a848b6a1f49b3e0d55e9b535eeee8f66fff43a3d1e19c7008ef611c70",
+      "immutability_verified": true,
+      "audit_files": {
+        "csv": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240703_SDD2_L1.csv",
+        "json": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240703_SDD2_L1.json",
+        "md": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240703_SDD2_L1.md"
+      }
+    },
+    {
+      "file_stem": "AL1_SOLEXS_20240704_SDD2_L1",
+      "status": "SUCCESS",
+      "is_final": false,
+      "original_samples": 86400,
+      "retained_samples": 86397,
+      "retention_percentage": 99.9965,
+      "excluded_by_reason": {
+        "OUTSIDE_GTI": 2,
+        "NON_FINITE": 1
+      },
+      "n_segments": 2,
+      "segments": [
+        {
+          "segment_id": "AL1_SOLEXS_20240704_SDD2_L1_seg_001",
+          "start": 1720051200.0,
+          "end": 1720094122.0,
+          "n_samples": 42923,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 0.0,
+          "duration_seconds": 42922.0
+        },
+        {
+          "segment_id": "AL1_SOLEXS_20240704_SDD2_L1_seg_002",
+          "start": 1720094125.0,
+          "end": 1720137598.0,
+          "n_samples": 43474,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 3.0,
+          "duration_seconds": 43473.0
+        }
+      ],
+      "hash_before": "bd1670d26ca72bd66813ccea29ab7ab0c6fbf887df4078a23e0c43416a3ff214",
+      "hash_after": "bd1670d26ca72bd66813ccea29ab7ab0c6fbf887df4078a23e0c43416a3ff214",
+      "immutability_verified": true,
+      "audit_files": {
+        "csv": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240704_SDD2_L1.csv",
+        "json": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240704_SDD2_L1.json",
+        "md": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240704_SDD2_L1.md"
+      }
+    },
+    {
+      "file_stem": "AL1_SOLEXS_20240705_SDD2_L1",
+      "status": "SUCCESS",
+      "is_final": false,
+      "original_samples": 86400,
+      "retained_samples": 86397,
+      "retention_percentage": 99.9965,
+      "excluded_by_reason": {
+        "OUTSIDE_GTI": 2,
+        "NON_FINITE": 1
+      },
+      "n_segments": 2,
+      "segments": [
+        {
+          "segment_id": "AL1_SOLEXS_20240705_SDD2_L1_seg_001",
+          "start": 1720137600.0,
+          "end": 1720150083.0,
+          "n_samples": 12484,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 0.0,
+          "duration_seconds": 12483.0
+        },
+        {
+          "segment_id": "AL1_SOLEXS_20240705_SDD2_L1_seg_002",
+          "start": 1720150086.0,
+          "end": 1720223998.0,
+          "n_samples": 73913,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 3.0,
+          "duration_seconds": 73912.0
+        }
+      ],
+      "hash_before": "4693c3f867048b054dd36a5ae740300007a90a4a1b814652d0b94a53b99961d9",
+      "hash_after": "4693c3f867048b054dd36a5ae740300007a90a4a1b814652d0b94a53b99961d9",
+      "immutability_verified": true,
+      "audit_files": {
+        "csv": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240705_SDD2_L1.csv",
+        "json": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240705_SDD2_L1.json",
+        "md": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240705_SDD2_L1.md"
+      }
+    },
+    {
+      "file_stem": "AL1_SOLEXS_20240706_SDD2_L1",
+      "status": "SUCCESS",
+      "is_final": false,
+      "original_samples": 86400,
+      "retained_samples": 86390,
+      "retention_percentage": 99.9884,
+      "excluded_by_reason": {
+        "SEGMENT_TOO_SHORT": 5,
+        "OUTSIDE_GTI": 3,
+        "NON_FINITE": 2
+      },
+      "n_segments": 2,
+      "segments": [
+        {
+          "segment_id": "AL1_SOLEXS_20240706_SDD2_L1_seg_001",
+          "start": 1720224007.0,
+          "end": 1720261314.0,
+          "n_samples": 37308,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 3.0,
+          "duration_seconds": 37307.0
+        },
+        {
+          "segment_id": "AL1_SOLEXS_20240706_SDD2_L1_seg_002",
+          "start": 1720261317.0,
+          "end": 1720310398.0,
+          "n_samples": 49082,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 3.0,
+          "duration_seconds": 49081.0
+        }
+      ],
+      "hash_before": "15b8f28c1197970f7c9667f99e88f29be5bd1f7c856c215c23566cbf12816c75",
+      "hash_after": "15b8f28c1197970f7c9667f99e88f29be5bd1f7c856c215c23566cbf12816c75",
+      "immutability_verified": true,
+      "audit_files": {
+        "csv": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240706_SDD2_L1.csv",
+        "json": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240706_SDD2_L1.json",
+        "md": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240706_SDD2_L1.md"
+      }
+    },
+    {
+      "file_stem": "AL1_SOLEXS_20240707_SDD2_L1",
+      "status": "SUCCESS",
+      "is_final": false,
+      "original_samples": 86400,
+      "retained_samples": 86394,
+      "retention_percentage": 99.9931,
+      "excluded_by_reason": {
+        "OUTSIDE_GTI": 3,
+        "NON_FINITE": 2,
+        "SEGMENT_TOO_SHORT": 1
+      },
+      "n_segments": 2,
+      "segments": [
+        {
+          "segment_id": "AL1_SOLEXS_20240707_SDD2_L1_seg_001",
+          "start": 1720310400.0,
+          "end": 1720316447.0,
+          "n_samples": 6048,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 0.0,
+          "duration_seconds": 6047.0
+        },
+        {
+          "segment_id": "AL1_SOLEXS_20240707_SDD2_L1_seg_002",
+          "start": 1720316453.0,
+          "end": 1720396798.0,
+          "n_samples": 80346,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 3.0,
+          "duration_seconds": 80345.0
+        }
+      ],
+      "hash_before": "5c83174e814022342aa5350792213a72c90783b65331935c38f478c0784a341e",
+      "hash_after": "5c83174e814022342aa5350792213a72c90783b65331935c38f478c0784a341e",
+      "immutability_verified": true,
+      "audit_files": {
+        "csv": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240707_SDD2_L1.csv",
+        "json": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240707_SDD2_L1.json",
+        "md": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240707_SDD2_L1.md"
+      }
+    },
+    {
+      "file_stem": "AL1_SOLEXS_20240708_SDD2_L1",
+      "status": "SUCCESS",
+      "is_final": false,
+      "original_samples": 86400,
+      "retained_samples": 33798,
+      "retention_percentage": 39.1181,
+      "excluded_by_reason": {
+        "NON_FINITE": 50212,
+        "OUTSIDE_GTI": 2390
+      },
+      "n_segments": 2,
+      "segments": [
+        {
+          "segment_id": "AL1_SOLEXS_20240708_SDD2_L1_seg_001",
+          "start": 1720396800.0,
+          "end": 1720427903.0,
+          "n_samples": 31104,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 0.0,
+          "duration_seconds": 31103.0
+        },
+        {
+          "segment_id": "AL1_SOLEXS_20240708_SDD2_L1_seg_002",
+          "start": 1720427906.0,
+          "end": 1720430599.0,
+          "n_samples": 2694,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 3.0,
+          "duration_seconds": 2693.0
+        }
+      ],
+      "hash_before": "02877cfa123e04a13d05f612983de8d98ff14f9f0240fb0cf3214fe977445cb7",
+      "hash_after": "02877cfa123e04a13d05f612983de8d98ff14f9f0240fb0cf3214fe977445cb7",
+      "immutability_verified": true,
+      "audit_files": {
+        "csv": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240708_SDD2_L1.csv",
+        "json": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240708_SDD2_L1.json",
+        "md": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240708_SDD2_L1.md"
+      }
+    },
+    {
+      "file_stem": "AL1_SOLEXS_20240709_SDD2_L1",
+      "status": "SUCCESS",
+      "is_final": false,
+      "original_samples": 86400,
+      "retained_samples": 56185,
+      "retention_percentage": 65.0289,
+      "excluded_by_reason": {
+        "NON_FINITE": 29247,
+        "OUTSIDE_GTI": 965,
+        "SEGMENT_TOO_SHORT": 3
+      },
+      "n_segments": 2,
+      "segments": [
+        {
+          "segment_id": "AL1_SOLEXS_20240709_SDD2_L1_seg_001",
+          "start": 1720513407.0,
+          "end": 1720537790.0,
+          "n_samples": 24384,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 0.0,
+          "duration_seconds": 24383.0
+        },
+        {
+          "segment_id": "AL1_SOLEXS_20240709_SDD2_L1_seg_002",
+          "start": 1720537798.0,
+          "end": 1720569598.0,
+          "n_samples": 31801,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 3.0,
+          "duration_seconds": 31800.0
+        }
+      ],
+      "hash_before": "12a81c4a8cc579360aff038c926838c6cbd456a9f88e5126f511772cb9b4e88e",
+      "hash_after": "12a81c4a8cc579360aff038c926838c6cbd456a9f88e5126f511772cb9b4e88e",
+      "immutability_verified": true,
+      "audit_files": {
+        "csv": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240709_SDD2_L1.csv",
+        "json": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240709_SDD2_L1.json",
+        "md": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240709_SDD2_L1.md"
+      }
+    },
+    {
+      "file_stem": "AL1_SOLEXS_20240710_SDD2_L1",
+      "status": "SUCCESS",
+      "is_final": false,
+      "original_samples": 86400,
+      "retained_samples": 86386,
+      "retention_percentage": 99.9838,
+      "excluded_by_reason": {
+        "SEGMENT_TOO_SHORT": 7,
+        "OUTSIDE_GTI": 4,
+        "NON_FINITE": 3
+      },
+      "n_segments": 2,
+      "segments": [
+        {
+          "segment_id": "AL1_SOLEXS_20240710_SDD2_L1_seg_001",
+          "start": 1720569606.0,
+          "end": 1720592495.0,
+          "n_samples": 22890,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 3.0,
+          "duration_seconds": 22889.0
+        },
+        {
+          "segment_id": "AL1_SOLEXS_20240710_SDD2_L1_seg_002",
+          "start": 1720592503.0,
+          "end": 1720655998.0,
+          "n_samples": 63496,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 3.0,
+          "duration_seconds": 63495.0
+        }
+      ],
+      "hash_before": "89a0fb07c63781d04a51a059cfbb9e4b871fe2d9520817b75b0af9f9b70e19e2",
+      "hash_after": "89a0fb07c63781d04a51a059cfbb9e4b871fe2d9520817b75b0af9f9b70e19e2",
+      "immutability_verified": true,
+      "audit_files": {
+        "csv": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240710_SDD2_L1.csv",
+        "json": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240710_SDD2_L1.json",
+        "md": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240710_SDD2_L1.md"
+      }
+    },
+    {
+      "file_stem": "AL1_SOLEXS_20240711_SDD2_L1",
+      "status": "SUCCESS",
+      "is_final": false,
+      "original_samples": 86400,
+      "retained_samples": 86392,
+      "retention_percentage": 99.9907,
+      "excluded_by_reason": {
+        "SEGMENT_TOO_SHORT": 5,
+        "OUTSIDE_GTI": 2,
+        "NON_FINITE": 1
+      },
+      "n_segments": 1,
+      "segments": [
+        {
+          "segment_id": "AL1_SOLEXS_20240711_SDD2_L1_seg_001",
+          "start": 1720656007.0,
+          "end": 1720742398.0,
+          "n_samples": 86392,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 3.0,
+          "duration_seconds": 86391.0
+        }
+      ],
+      "hash_before": "d1807b3e63d2813783906787b22a87eaca9ebaf75d83eb6af6fe8916b6d722a4",
+      "hash_after": "d1807b3e63d2813783906787b22a87eaca9ebaf75d83eb6af6fe8916b6d722a4",
+      "immutability_verified": true,
+      "audit_files": {
+        "csv": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240711_SDD2_L1.csv",
+        "json": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240711_SDD2_L1.json",
+        "md": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240711_SDD2_L1.md"
+      }
+    },
+    {
+      "file_stem": "AL1_SOLEXS_20240712_SDD2_L1",
+      "status": "SUCCESS",
+      "is_final": false,
+      "original_samples": 86400,
+      "retained_samples": 86397,
+      "retention_percentage": 99.9965,
+      "excluded_by_reason": {
+        "OUTSIDE_GTI": 2,
+        "NON_FINITE": 1
+      },
+      "n_segments": 2,
+      "segments": [
+        {
+          "segment_id": "AL1_SOLEXS_20240712_SDD2_L1_seg_001",
+          "start": 1720742400.0,
+          "end": 1720757159.0,
+          "n_samples": 14760,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 0.0,
+          "duration_seconds": 14759.0
+        },
+        {
+          "segment_id": "AL1_SOLEXS_20240712_SDD2_L1_seg_002",
+          "start": 1720757162.0,
+          "end": 1720828798.0,
+          "n_samples": 71637,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 3.0,
+          "duration_seconds": 71636.0
+        }
+      ],
+      "hash_before": "5e0e7e107057f0ccded53caecda6ac0f9213c1686ab2c2d36cbe1ad69bb573de",
+      "hash_after": "5e0e7e107057f0ccded53caecda6ac0f9213c1686ab2c2d36cbe1ad69bb573de",
+      "immutability_verified": true,
+      "audit_files": {
+        "csv": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240712_SDD2_L1.csv",
+        "json": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240712_SDD2_L1.json",
+        "md": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240712_SDD2_L1.md"
+      }
+    },
+    {
+      "file_stem": "AL1_SOLEXS_20240713_SDD2_L1",
+      "status": "SUCCESS",
+      "is_final": false,
+      "original_samples": 86400,
+      "retained_samples": 86397,
+      "retention_percentage": 99.9965,
+      "excluded_by_reason": {
+        "OUTSIDE_GTI": 2,
+        "NON_FINITE": 1
+      },
+      "n_segments": 2,
+      "segments": [
+        {
+          "segment_id": "AL1_SOLEXS_20240713_SDD2_L1_seg_001",
+          "start": 1720828800.0,
+          "end": 1720867728.0,
+          "n_samples": 38929,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 0.0,
+          "duration_seconds": 38928.0
+        },
+        {
+          "segment_id": "AL1_SOLEXS_20240713_SDD2_L1_seg_002",
+          "start": 1720867731.0,
+          "end": 1720915198.0,
+          "n_samples": 47468,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 3.0,
+          "duration_seconds": 47467.0
+        }
+      ],
+      "hash_before": "51009aec938708779a4b5ff5313016b9ad0428ee8aa3de44b3ed3d50a48745e8",
+      "hash_after": "51009aec938708779a4b5ff5313016b9ad0428ee8aa3de44b3ed3d50a48745e8",
+      "immutability_verified": true,
+      "audit_files": {
+        "csv": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240713_SDD2_L1.csv",
+        "json": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240713_SDD2_L1.json",
+        "md": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240713_SDD2_L1.md"
+      }
+    },
+    {
+      "file_stem": "AL1_SOLEXS_20240714_SDD2_L1",
+      "status": "SUCCESS",
+      "is_final": false,
+      "original_samples": 86400,
+      "retained_samples": 86397,
+      "retention_percentage": 99.9965,
+      "excluded_by_reason": {
+        "OUTSIDE_GTI": 2,
+        "NON_FINITE": 1
+      },
+      "n_segments": 2,
+      "segments": [
+        {
+          "segment_id": "AL1_SOLEXS_20240714_SDD2_L1_seg_001",
+          "start": 1720915200.0,
+          "end": 1720922733.0,
+          "n_samples": 7534,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 0.0,
+          "duration_seconds": 7533.0
+        },
+        {
+          "segment_id": "AL1_SOLEXS_20240714_SDD2_L1_seg_002",
+          "start": 1720922736.0,
+          "end": 1721001598.0,
+          "n_samples": 78863,
+          "cadence_median": 1.0,
+          "gap_before_seconds": 3.0,
+          "duration_seconds": 78862.0
+        }
+      ],
+      "hash_before": "f48cc69391fb7a3a525591a23d15df246a2b5044583e1d663e44dd4e9ff06621",
+      "hash_after": "f48cc69391fb7a3a525591a23d15df246a2b5044583e1d663e44dd4e9ff06621",
+      "immutability_verified": true,
+      "audit_files": {
+        "csv": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240714_SDD2_L1.csv",
+        "json": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240714_SDD2_L1.json",
+        "md": "C:/Users/melvi/Desktop/SOLARIS-A1/results/preprocessing/audit_AL1_SOLEXS_20240714_SDD2_L1.md"
+      }
+    },
     {
       "file_stem": "AL1_SOLEXS_20261018_SDD2_L1",
       "status": "SUCCESS",

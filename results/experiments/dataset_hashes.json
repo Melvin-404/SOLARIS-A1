@@ -1,7 +1,8 @@
 {
-  "dataset_count": 0,
-  "datasets_present": false,
-  "status": "BLOCKED_STAGE9",
-  "files": {},
-  "note": "No datasets exported in data/processed/datasets/ because Gate G3 (labelling policy) is unapproved. Stage 10 live training is blocked."
+  "dataset_count": 2,
+  "datasets_present": true,
+  "status": "DATASETS_EXPORTED",
+  "detection_export_id": "exp_det_7e151632ab",
+  "prediction_export_id": "exp_pred_82b606caa0",
+  "note": "Stage 9 datasets exported under approved labelling and forecasting policies."
 }

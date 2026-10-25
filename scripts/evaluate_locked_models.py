@@ -303,7 +303,16 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     protocol_id = proto_data.get("protocol_id", "UNKNOWN_PROTO")
     task = proto_data.get("task", "detection")
-    dataset_status = "PILOT"  # Single day dataset is PILOT under D-15
+    dataset_status = proto_data.get("dataset_status", "PILOT")
+    export_id = proto_data.get("dataset_export_id")
+    if export_id:
+        ds_cfg_file = root / "data" / "processed" / "datasets" / task / str(export_id) / "config_snapshot.yaml"
+        if ds_cfg_file.is_file():
+            try:
+                ds_cfg_data = yaml.safe_load(ds_cfg_file.read_text(encoding="utf-8")) or {}
+                dataset_status = ds_cfg_data.get("dataset_status", dataset_status)
+            except Exception:
+                pass
 
     # 6. Load Models and Model Manifest
     models_dir = exp_dir / "models"
@@ -313,7 +322,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     if model_manifest_file.is_file():
         model_manifest = json.loads(model_manifest_file.read_text(encoding="utf-8"))
         for m_name, meta in model_manifest.items():
-            art_file = exp_dir / meta.get("artifact_file", "")
+            rel_art = meta.get("artifact_file", "")
+            art_file = models_dir / rel_art if (models_dir / rel_art).is_file() else (exp_dir / rel_art)
             if art_file.is_file():
                 # Verify model hash
                 expected_hash = meta.get("model_hash")

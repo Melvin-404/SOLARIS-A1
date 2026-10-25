@@ -1,0 +1,630 @@
+{
+  "experiment_id": "exp_PROTO_STAGE16_EXPANDED_2024_2026",
+  "champion_model": "xgboost",
+  "champion_optimal_threshold": 0.65,
+  "validation_results": {
+    "logistic_regression": {
+      "n_samples": 398663,
+      "n_positives": 38697,
+      "n_negatives": 359966,
+      "prevalence": 0.09706694626790045,
+      "threshold": 0.5,
+      "precision": 0.4836,
+      "recall": 0.5321,
+      "f1": 0.5067,
+      "pr_auc": 0.5424,
+      "roc_auc": 0.8441,
+      "brier_score": 0.1242,
+      "false_alarms_per_hour": 21.9911,
+      "confusion_matrix": {
+        "tp": 20592,
+        "fp": 21989,
+        "tn": 337977,
+        "fn": 18105
+      }
+    },
+    "random_forest": {
+      "n_samples": 398663,
+      "n_positives": 38697,
+      "n_negatives": 359966,
+      "prevalence": 0.09706694626790045,
+      "threshold": 0.6,
+      "precision": 0.5421,
+      "recall": 0.59,
+      "f1": 0.565,
+      "pr_auc": 0.6351,
+      "roc_auc": 0.9029,
+      "brier_score": 0.0872,
+      "false_alarms_per_hour": 19.2828,
+      "confusion_matrix": {
+        "tp": 22830,
+        "fp": 19281,
+        "tn": 340685,
+        "fn": 15867
+      }
+    },
+    "xgboost": {
+      "n_samples": 398663,
+      "n_positives": 38697,
+      "n_negatives": 359966,
+      "prevalence": 0.09706694626790045,
+      "threshold": 0.65,
+      "precision": 0.5998,
+      "recall": 0.523,
+      "f1": 0.5588,
+      "pr_auc": 0.6326,
+      "roc_auc": 0.9001,
+      "brier_score": 0.0878,
+      "false_alarms_per_hour": 13.5033,
+      "confusion_matrix": {
+        "tp": 20239,
+        "fp": 13502,
+        "tn": 346464,
+        "fn": 18458
+      }
+    },
+    "baseline_threshold": {
+      "n_samples": 398663,
+      "n_positives": 38697,
+      "n_negatives": 359966,
+      "prevalence": 0.09706694626790045,
+      "threshold": 0.45000000000000007,
+      "precision": 0.1588,
+      "recall": 0.1962,
+      "f1": 0.1755,
+      "pr_auc": 0.1333,
+      "roc_auc": 0.4478,
+      "brier_score": 0.1431,
+      "false_alarms_per_hour": 40.2008,
+      "confusion_matrix": {
+        "tp": 7591,
+        "fp": 40197,
+        "tn": 319769,
+        "fn": 31106
+      }
+    },
+    "baseline_persistence": {
+      "n_samples": 398663,
+      "n_positives": 38697,
+      "n_negatives": 359966,
+      "prevalence": 0.09706694626790045,
+      "threshold": 0.1,
+      "precision": 0.9929,
+      "recall": 0.9929,
+      "f1": 0.9929,
+      "pr_auc": 0.9865,
+      "roc_auc": 0.9961,
+      "brier_score": 0.0014,
+      "false_alarms_per_hour": 0.276,
+      "confusion_matrix": {
+        "tp": 38421,
+        "fp": 276,
+        "tn": 359690,
+        "fn": 276
+      }
+    },
+    "baseline_climatological": {
+      "n_samples": 398663,
+      "n_positives": 38697,
+      "n_negatives": 359966,
+      "prevalence": 0.09706694626790045,
+      "threshold": 0.1,
+      "precision": 0.0971,
+      "recall": 1.0,
+      "f1": 0.177,
+      "pr_auc": 0.0971,
+      "roc_auc": 0.5,
+      "brier_score": 0.0884,
+      "false_alarms_per_hour": 360.0,
+      "confusion_matrix": {
+        "tp": 38697,
+        "fp": 359966,
+        "tn": 0,
+        "fn": 0
+      }
+    }
+  },
+  "test_results": {
+    "logistic_regression": {
+      "n_samples": 355263,
+      "n_positives": 18750,
+      "n_negatives": 336513,
+      "prevalence": 0.05277780123457833,
+      "threshold": 0.5,
+      "precision": 0.2435,
+      "recall": 0.3866,
+      "f1": 0.2988,
+      "pr_auc": 0.3247,
+      "roc_auc": 0.7392,
+      "brier_score": 0.1232,
+      "false_alarms_per_hour": 24.0875,
+      "confusion_matrix": {
+        "tp": 7248,
+        "fp": 22516,
+        "tn": 313997,
+        "fn": 11502
+      }
+    },
+    "random_forest": {
+      "n_samples": 355263,
+      "n_positives": 18750,
+      "n_negatives": 336513,
+      "prevalence": 0.05277780123457833,
+      "threshold": 0.6,
+      "precision": 0.584,
+      "recall": 0.4958,
+      "f1": 0.5363,
+      "pr_auc": 0.5633,
+      "roc_auc": 0.9172,
+      "brier_score": 0.0457,
+      "false_alarms_per_hour": 7.0853,
+      "confusion_matrix": {
+        "tp": 9296,
+        "fp": 6623,
+        "tn": 329890,
+        "fn": 9454
+      }
+    },
+    "xgboost": {
+      "n_samples": 355263,
+      "n_positives": 18750,
+      "n_negatives": 336513,
+      "prevalence": 0.05277780123457833,
+      "threshold": 0.65,
+      "precision": 0.5989,
+      "recall": 0.4778,
+      "f1": 0.5315,
+      "pr_auc": 0.5625,
+      "roc_auc": 0.9161,
+      "brier_score": 0.0471,
+      "false_alarms_per_hour": 6.4198,
+      "confusion_matrix": {
+        "tp": 8959,
+        "fp": 6001,
+        "tn": 330512,
+        "fn": 9791
+      }
+    },
+    "baseline_threshold": {
+      "n_samples": 355263,
+      "n_positives": 18750,
+      "n_negatives": 336513,
+      "prevalence": 0.05277780123457833,
+      "threshold": 0.45000000000000007,
+      "precision": 0.0575,
+      "recall": 0.3029,
+      "f1": 0.0966,
+      "pr_auc": 0.0639,
+      "roc_auc": 0.4481,
+      "brier_score": 0.2026,
+      "false_alarms_per_hour": 99.6857,
+      "confusion_matrix": {
+        "tp": 5680,
+        "fp": 93182,
+        "tn": 243331,
+        "fn": 13070
+      }
+    },
+    "baseline_persistence": {
+      "n_samples": 355263,
+      "n_positives": 18750,
+      "n_negatives": 336513,
+      "prevalence": 0.05277780123457833,
+      "threshold": 0.1,
+      "precision": 0.9922,
+      "recall": 0.9922,
+      "f1": 0.9922,
+      "pr_auc": 0.9849,
+      "roc_auc": 0.9959,
+      "brier_score": 0.0008,
+      "false_alarms_per_hour": 0.1562,
+      "confusion_matrix": {
+        "tp": 18604,
+        "fp": 146,
+        "tn": 336367,
+        "fn": 146
+      }
+    },
+    "baseline_climatological": {
+      "n_samples": 355263,
+      "n_positives": 18750,
+      "n_negatives": 336513,
+      "prevalence": 0.05277780123457833,
+      "threshold": 0.1,
+      "precision": 0.0528,
+      "recall": 1.0,
+      "f1": 0.1003,
+      "pr_auc": 0.0528,
+      "roc_auc": 0.5,
+      "brier_score": 0.0552,
+      "false_alarms_per_hour": 360.0,
+      "confusion_matrix": {
+        "tp": 18750,
+        "fp": 336513,
+        "tn": 0,
+        "fn": 0
+      }
+    }
+  },
+  "event_level_summary": {
+    "total_test_events": 162,
+    "detected_events": 159,
+    "missed_events": 3,
+    "event_detection_rate": 0.9815,
+    "missed_event_ids": [
+      "EVT_20261005_1327",
+      "EVT_20261006_1335",
+      "EVT_20261017_1405"
+    ]
+  },
+  "daily_breakdown": [
+    {
+      "stem": "AL1_SLX_L1_20260901_v1.0",
+      "total_windows": 8427,
+      "flare_windows": 378,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.4339,
+      "false_alarms_per_hour": 3.8464
+    },
+    {
+      "stem": "AL1_SLX_L1_20260902_v1.0",
+      "total_windows": 8295,
+      "flare_windows": 726,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.5372,
+      "false_alarms_per_hour": 5.6599
+    },
+    {
+      "stem": "AL1_SLX_L1_20260903_v1.0",
+      "total_windows": 8286,
+      "flare_windows": 504,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.5635,
+      "false_alarms_per_hour": 12.3978
+    },
+    {
+      "stem": "AL1_SLX_L1_20260904_v1.0",
+      "total_windows": 8227,
+      "flare_windows": 1512,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.3538,
+      "false_alarms_per_hour": 10.5614
+    },
+    {
+      "stem": "AL1_SLX_L1_20260905_v1.0",
+      "total_windows": 8365,
+      "flare_windows": 541,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.7153,
+      "false_alarms_per_hour": 1.4264
+    },
+    {
+      "stem": "AL1_SLX_L1_20260906_v1.0",
+      "total_windows": 8490,
+      "flare_windows": 320,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.425,
+      "false_alarms_per_hour": 1.1016
+    },
+    {
+      "stem": "AL1_SLX_L1_20260907_v1.0",
+      "total_windows": 8484,
+      "flare_windows": 90,
+      "activity_tier": "ACTIVE",
+      "recall": 0.3778,
+      "false_alarms_per_hour": 5.2323
+    },
+    {
+      "stem": "AL1_SLX_L1_20260908_v1.0",
+      "total_windows": 8124,
+      "flare_windows": 576,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.5503,
+      "false_alarms_per_hour": 0.1908
+    },
+    {
+      "stem": "AL1_SLX_L1_20260909_v1.0",
+      "total_windows": 8268,
+      "flare_windows": 277,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.4332,
+      "false_alarms_per_hour": 4.5952
+    },
+    {
+      "stem": "AL1_SLX_L1_20260910_v1.0",
+      "total_windows": 8371,
+      "flare_windows": 535,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.2579,
+      "false_alarms_per_hour": 1.9755
+    },
+    {
+      "stem": "AL1_SLX_L1_20260911_v1.0",
+      "total_windows": 8160,
+      "flare_windows": 0,
+      "activity_tier": "QUIET",
+      "recall": null,
+      "false_alarms_per_hour": 2.7794
+    },
+    {
+      "stem": "AL1_SLX_L1_20260912_v1.0",
+      "total_windows": 8306,
+      "flare_windows": 90,
+      "activity_tier": "ACTIVE",
+      "recall": 0.4889,
+      "false_alarms_per_hour": 5.7838
+    },
+    {
+      "stem": "AL1_SLX_L1_20260913_v1.0",
+      "total_windows": 8420,
+      "flare_windows": 402,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.1592,
+      "false_alarms_per_hour": 2.3347
+    },
+    {
+      "stem": "AL1_SLX_L1_20260914_v1.0",
+      "total_windows": 8243,
+      "flare_windows": 0,
+      "activity_tier": "QUIET",
+      "recall": null,
+      "false_alarms_per_hour": 1.0918
+    },
+    {
+      "stem": "AL1_SLX_L1_20260915_v1.0",
+      "total_windows": 7886,
+      "flare_windows": 0,
+      "activity_tier": "QUIET",
+      "recall": null,
+      "false_alarms_per_hour": 0.0913
+    },
+    {
+      "stem": "AL1_SLX_L1_20260917_v1.0",
+      "total_windows": 1274,
+      "flare_windows": 0,
+      "activity_tier": "QUIET",
+      "recall": null,
+      "false_alarms_per_hour": 0.0
+    },
+    {
+      "stem": "AL1_SLX_L1_20260918_v1.0",
+      "total_windows": 6967,
+      "flare_windows": 0,
+      "activity_tier": "QUIET",
+      "recall": null,
+      "false_alarms_per_hour": 0.0
+    },
+    {
+      "stem": "AL1_SLX_L1_20260919_v1.0",
+      "total_windows": 8502,
+      "flare_windows": 210,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.5095,
+      "false_alarms_per_hour": 8.1187
+    },
+    {
+      "stem": "AL1_SLX_L1_20260920_v1.0",
+      "total_windows": 8438,
+      "flare_windows": 390,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.3513,
+      "false_alarms_per_hour": 1.0736
+    },
+    {
+      "stem": "AL1_SLX_L1_20260921_v1.0",
+      "total_windows": 8365,
+      "flare_windows": 240,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.4042,
+      "false_alarms_per_hour": 1.152
+    },
+    {
+      "stem": "AL1_SLX_L1_20260924_v1.0",
+      "total_windows": 8623,
+      "flare_windows": 0,
+      "activity_tier": "QUIET",
+      "recall": null,
+      "false_alarms_per_hour": 2.5884
+    },
+    {
+      "stem": "AL1_SLX_L1_20260925_v1.0",
+      "total_windows": 8484,
+      "flare_windows": 282,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.3546,
+      "false_alarms_per_hour": 3.3358
+    },
+    {
+      "stem": "AL1_SLX_L1_20260926_v1.0",
+      "total_windows": 8425,
+      "flare_windows": 192,
+      "activity_tier": "ACTIVE",
+      "recall": 0.7188,
+      "false_alarms_per_hour": 4.4601
+    },
+    {
+      "stem": "AL1_SLX_L1_20260927_v1.0",
+      "total_windows": 8293,
+      "flare_windows": 348,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.5115,
+      "false_alarms_per_hour": 2.8546
+    },
+    {
+      "stem": "AL1_SLX_L1_20260929_v1.0",
+      "total_windows": 8126,
+      "flare_windows": 210,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.4238,
+      "false_alarms_per_hour": 2.9106
+    },
+    {
+      "stem": "AL1_SLX_L1_20260930_v1.0",
+      "total_windows": 7404,
+      "flare_windows": 205,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.5902,
+      "false_alarms_per_hour": 1.7502
+    },
+    {
+      "stem": "AL1_SLX_L1_20261001_v1.0",
+      "total_windows": 7494,
+      "flare_windows": 222,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.2523,
+      "false_alarms_per_hour": 2.0792
+    },
+    {
+      "stem": "AL1_SLX_L1_20261002_v1.0",
+      "total_windows": 5671,
+      "flare_windows": 0,
+      "activity_tier": "QUIET",
+      "recall": null,
+      "false_alarms_per_hour": 0.0
+    },
+    {
+      "stem": "AL1_SLX_L1_20261004_v1.0",
+      "total_windows": 3932,
+      "flare_windows": 0,
+      "activity_tier": "QUIET",
+      "recall": null,
+      "false_alarms_per_hour": 3.4791
+    },
+    {
+      "stem": "AL1_SLX_L1_20261005_v1.0",
+      "total_windows": 6553,
+      "flare_windows": 504,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.4306,
+      "false_alarms_per_hour": 6.4275
+    },
+    {
+      "stem": "AL1_SLX_L1_20261006_v1.0",
+      "total_windows": 7902,
+      "flare_windows": 1428,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.5462,
+      "false_alarms_per_hour": 13.4013
+    },
+    {
+      "stem": "AL1_SLX_L1_20261007_v1.0",
+      "total_windows": 8418,
+      "flare_windows": 714,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.4888,
+      "false_alarms_per_hour": 9.1589
+    },
+    {
+      "stem": "AL1_SLX_L1_20261008_v1.0",
+      "total_windows": 8293,
+      "flare_windows": 582,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.6082,
+      "false_alarms_per_hour": 15.5933
+    },
+    {
+      "stem": "AL1_SLX_L1_20261009_v1.0",
+      "total_windows": 7590,
+      "flare_windows": 1131,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.5155,
+      "false_alarms_per_hour": 16.7209
+    },
+    {
+      "stem": "AL1_SLX_L1_20261010_v1.0",
+      "total_windows": 8117,
+      "flare_windows": 1476,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.4783,
+      "false_alarms_per_hour": 27.1044
+    },
+    {
+      "stem": "AL1_SLX_L1_20261011_v1.0",
+      "total_windows": 8431,
+      "flare_windows": 378,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.3783,
+      "false_alarms_per_hour": 5.9903
+    },
+    {
+      "stem": "AL1_SLX_L1_20261012_v1.0",
+      "total_windows": 8383,
+      "flare_windows": 330,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.4333,
+      "false_alarms_per_hour": 5.588
+    },
+    {
+      "stem": "AL1_SLX_L1_20261013_v1.0",
+      "total_windows": 8486,
+      "flare_windows": 318,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.6478,
+      "false_alarms_per_hour": 11.7679
+    },
+    {
+      "stem": "AL1_SLX_L1_20261014_v1.0",
+      "total_windows": 8287,
+      "flare_windows": 672,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.558,
+      "false_alarms_per_hour": 10.4951
+    },
+    {
+      "stem": "AL1_SLX_L1_20261015_v1.0",
+      "total_windows": 8015,
+      "flare_windows": 803,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.5068,
+      "false_alarms_per_hour": 11.9301
+    },
+    {
+      "stem": "AL1_SLX_L1_20261017_v1.0",
+      "total_windows": 1398,
+      "flare_windows": 13,
+      "activity_tier": "QUIET",
+      "recall": 0.0,
+      "false_alarms_per_hour": 4.4188
+    },
+    {
+      "stem": "AL1_SLX_L1_20261019_v1.0",
+      "total_windows": 8076,
+      "flare_windows": 698,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.5186,
+      "false_alarms_per_hour": 8.3925
+    },
+    {
+      "stem": "AL1_SLX_L1_20261020_v1.0",
+      "total_windows": 8172,
+      "flare_windows": 750,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.4893,
+      "false_alarms_per_hour": 10.1374
+    },
+    {
+      "stem": "AL1_SLX_L1_20261021_v1.0",
+      "total_windows": 8431,
+      "flare_windows": 282,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.4468,
+      "false_alarms_per_hour": 14.1809
+    },
+    {
+      "stem": "AL1_SLX_L1_20261022_v1.0",
+      "total_windows": 8365,
+      "flare_windows": 376,
+      "activity_tier": "ERUPTIVE",
+      "recall": 0.4255,
+      "false_alarms_per_hour": 12.7976
+    },
+    {
+      "stem": "AL1_SOLEXS_20261018_SDD2_L1",
+      "total_windows": 7996,
+      "flare_windows": 45,
+      "activity_tier": "QUIET",
+      "recall": 1.0,
+      "false_alarms_per_hour": 15.4848
+    }
+  ]
+}

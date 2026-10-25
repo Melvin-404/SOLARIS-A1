@@ -1,7 +1,4 @@
-# Core runtime dependencies for SOLARIS-A1 (Stage 1)
-# Note: ML frameworks (scikit-learn, xgboost) and presentation tools (streamlit, plotly)
-# are deliberately omitted until subsequent stages per project roadmap.
-
+# Core runtime dependencies for SOLARIS-A1
 numpy>=1.26.0
 pandas>=2.2.0
 astropy>=6.0.0
@@ -14,3 +11,6 @@ xgboost>=2.0.0
 joblib>=1.3.0
 streamlit>=1.35.0
 plotly>=5.20.0
+fastapi>=0.110.0
+uvicorn>=0.28.0
+httpx>=0.27.0

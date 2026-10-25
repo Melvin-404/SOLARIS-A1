@@ -1,0 +1,122 @@
+{
+  "task": "Task B (Pre-Flare Activity Forecasting)",
+  "horizon_seconds": 1800.0,
+  "horizon_minutes": 30.0,
+  "champion_model": "Logistic Regression (Linear Benchmark)",
+  "champion_metrics": {
+    "model_name": "Logistic Regression",
+    "n_evaluated": 28980,
+    "prevalence": 0.1697377501725328,
+    "precision": 0.2145,
+    "recall": 0.5025,
+    "f1": 0.3007,
+    "pr_auc": 0.216,
+    "roc_auc": 0.597,
+    "brier_score": 0.2191,
+    "false_alarm_rate": 0.3763,
+    "miss_rate": 0.4975,
+    "true_positives": 2472,
+    "false_positives": 9053,
+    "true_negatives": 15008,
+    "false_negatives": 2447
+  },
+  "baselines": {
+    "climatological": {
+      "model_name": "Climatological Baseline",
+      "n_evaluated": 28980,
+      "prevalence": 0.1697377501725328,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "pr_auc": 0.1697,
+      "roc_auc": 0.5,
+      "brier_score": 0.1409,
+      "false_alarm_rate": 0.0,
+      "miss_rate": 1.0,
+      "true_positives": 0,
+      "false_positives": 0,
+      "true_negatives": 24061,
+      "false_negatives": 4919
+    },
+    "persistence": {
+      "model_name": "Persistence Baseline",
+      "n_evaluated": 28980,
+      "prevalence": 0.1697377501725328,
+      "precision": 0.1557,
+      "recall": 0.8292,
+      "f1": 0.2622,
+      "pr_auc": 0.1223,
+      "roc_auc": 0.3387,
+      "brier_score": 0.3939,
+      "false_alarm_rate": 0.9192,
+      "miss_rate": 0.1708,
+      "true_positives": 4079,
+      "false_positives": 22117,
+      "true_negatives": 1944,
+      "false_negatives": 840
+    }
+  },
+  "alternative_models": {
+    "random_forest": {
+      "model_name": "Random Forest",
+      "n_evaluated": 28980,
+      "prevalence": 0.1697377501725328,
+      "precision": 0.1326,
+      "recall": 0.3737,
+      "f1": 0.1957,
+      "pr_auc": 0.1334,
+      "roc_auc": 0.3941,
+      "brier_score": 0.2988,
+      "false_alarm_rate": 0.4997,
+      "miss_rate": 0.6263,
+      "true_positives": 1838,
+      "false_positives": 12023,
+      "true_negatives": 12038,
+      "false_negatives": 3081
+    },
+    "xgboost": {
+      "model_name": "XGBoost",
+      "n_evaluated": 28980,
+      "prevalence": 0.1697377501725328,
+      "precision": 0.1339,
+      "recall": 0.3828,
+      "f1": 0.1984,
+      "pr_auc": 0.1303,
+      "roc_auc": 0.3836,
+      "brier_score": 0.3744,
+      "false_alarm_rate": 0.5063,
+      "miss_rate": 0.6172,
+      "true_positives": 1883,
+      "false_positives": 12183,
+      "true_negatives": 11878,
+      "false_negatives": 3036
+    }
+  },
+  "calibration": {
+    "prob_true": [
+      0.0569,
+      0.116,
+      0.09,
+      0.1423,
+      0.1713,
+      0.2099,
+      0.2484,
+      0.1667,
+      0.1,
+      0.1739
+    ],
+    "prob_pred": [
+      0.0263,
+      0.1587,
+      0.2618,
+      0.3464,
+      0.462,
+      0.5412,
+      0.6306,
+      0.7336,
+      0.8553,
+      0.9595
+    ]
+  },
+  "scientific_conclusion": "Empirical results prove that full-disk integrated soft X-ray time-series features provide only weak discriminative signal 30 minutes prior to flare onset (ROC-AUC 0.597, PR-AUC 0.216). Non-linear decision trees suffer severe negative transfer across different active region background regimes (ROC-AUC 0.384-0.394). Single-instrument soft X-rays alone cannot support an operational warning system without spatial magnetic field topology (vector magnetograms) and multi-wavelength EUV coronal imaging."
+}

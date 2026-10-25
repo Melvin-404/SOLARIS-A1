@@ -41,12 +41,22 @@ def fixture_synthetic_approved_setup(tmp_path: Path):
     return policy_file, decisions_file
 
 
-def test_real_draft_policy_raises_guard_refusal():
-    """Verify that assert_labelling_approved on the real repository files raises LabellingNotApprovedError."""
+def test_real_draft_policy_raises_guard_refusal(tmp_path: Path):
+    """Verify that assert_labelling_approved on draft policy or pending decisions raises LabellingNotApprovedError."""
+    draft_policy = tmp_path / "08_labelling_policy.md"
+    draft_policy.write_text("# Labelling Policy\n\nStatus: DRAFT — REQUIRES HUMAN APPROVAL\n", encoding="utf-8")
+    draft_dec = tmp_path / "decisions.yaml"
+    draft_dec.write_text("decisions:\n  D-01:\n    status: PENDING\n    value: null\n", encoding="utf-8")
     with pytest.raises(LabellingNotApprovedError) as exc_info:
-        assert_labelling_approved()
+        assert_labelling_approved(policy_path=draft_policy, decisions_path=draft_dec)
     assert "Supervised labelling is strictly BLOCKED" in str(exc_info.value)
     assert "D-01" in str(exc_info.value)
+
+
+def test_repository_approved_policy_passes():
+    """Verify that assert_labelling_approved on the active repository files passes Gate G3."""
+    assert assert_labelling_approved() is True
+
 
 
 def test_synthetic_approved_setup_passes(fixture_synthetic_approved_setup):

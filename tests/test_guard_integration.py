@@ -16,8 +16,16 @@ from solar_flare.paths import project_root
 from scripts.export_dataset import main as export_cli_main
 
 
-def test_export_cli_detection_refuses_under_draft():
-    """Verify that export CLI for detection refuses to execute on current unapproved workspace."""
+from solar_flare.labels.policy import LabellingNotApprovedError
+from solar_flare.export.targets import ForecastingNotApprovedError
+
+
+def test_export_cli_detection_refuses_under_draft(monkeypatch):
+    """Verify that export CLI for detection refuses to execute when policy is in draft status."""
+    def mock_refusal(*args, **kwargs):
+        raise LabellingNotApprovedError("Gate G3 draft refusal: requires approval")
+
+    monkeypatch.setattr("scripts.export_dataset.assert_labelling_approved", mock_refusal)
     exit_code = export_cli_main(["--task", "detection"])
     assert exit_code == 1
 
@@ -35,8 +43,12 @@ def test_export_cli_detection_refuses_under_draft():
     assert any(entry.get("task") == "detection" and entry.get("status") == "BLOCKED" for entry in logs)
 
 
-def test_export_cli_prediction_refuses_under_draft():
-    """Verify that export CLI for prediction refuses to execute on current unapproved workspace."""
+def test_export_cli_prediction_refuses_under_draft(monkeypatch):
+    """Verify that export CLI for prediction refuses to execute when policy is in draft status."""
+    def mock_refusal(*args, **kwargs):
+        raise ForecastingNotApprovedError("Gate G6 draft refusal: requires approval")
+
+    monkeypatch.setattr("scripts.export_dataset.assert_forecasting_approved", mock_refusal)
     exit_code = export_cli_main(["--task", "prediction"])
     assert exit_code == 1
 
@@ -46,3 +58,9 @@ def test_export_cli_prediction_refuses_under_draft():
     content = blocked_file.read_text(encoding="utf-8")
     assert "Gate G6" in content
     assert "BLOCKED — PREREQUISITES NOT MET" in content
+
+
+def test_export_cli_detection_approved_workspace_passes():
+    """Verify that export CLI for detection succeeds under current approved workspace."""
+    exit_code = export_cli_main(["--task", "detection"])
+    assert exit_code == 0

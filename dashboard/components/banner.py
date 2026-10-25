@@ -18,23 +18,23 @@ def get_banner_text(status: str, message: str, context: Optional[str] = None) ->
     prefix = f"[{context}] " if context else ""
 
     if status_upper == "PROVISIONAL":
-        return f"{prefix}⚠️ **PROVISIONAL STATUS**: {message} (Pending human researcher approval at designated gate)."
+        return f"{prefix}**PROVISIONAL STATUS**: {message} (Pending human researcher approval at designated gate)."
     elif status_upper == "PILOT":
-        return f"{prefix}🔬 **PILOT EXPERIMENT**: {message} (Single-day dataset; does not establish general detector performance)."
+        return f"{prefix}**PILOT EXPERIMENT**: {message} (Single-day dataset; does not establish general detector performance)."
     elif status_upper == "UNVERIFIED":
-        return f"{prefix}🔍 **CANDIDATE — UNVERIFIED**: {message} (Heuristic statistical detections are NOT ground-truth labels)."
+        return f"{prefix}**CANDIDATE — UNVERIFIED**: {message} (Heuristic statistical detections are NOT ground-truth labels)."
     elif status_upper == "MISSING":
-        return f"{prefix}ℹ️ **ARTIFACT MISSING**: {message}"
+        return f"{prefix}**ARTIFACT MISSING**: {message}"
     elif status_upper == "STALE":
-        return f"{prefix}⏳ **STALE ARTIFACT**: {message} (Upstream pipeline changes detected)."
+        return f"{prefix}**STALE ARTIFACT**: {message} (Upstream pipeline changes detected)."
     elif status_upper == "ERROR":
-        return f"{prefix}❌ **ARTIFACT PARSING ERROR**: {message}"
+        return f"{prefix}**ARTIFACT PARSING ERROR**: {message}"
     elif status_upper == "EMPTY":
-        return f"{prefix}ℹ️ **EMPTY ARTIFACT**: {message}"
+        return f"{prefix}**EMPTY ARTIFACT**: {message}"
     elif status_upper == "OK":
-        return f"{prefix}✅ **CONFIRMED**: {message}"
+        return f"{prefix}**CONFIRMED**: {message}"
     else:
-        return f"{prefix}ℹ️ **{status_upper}**: {message}"
+        return f"{prefix}**{status_upper}**: {message}"
 
 
 def render_status_banner(status: str, message: str, context: Optional[str] = None) -> None:
@@ -56,5 +56,12 @@ def render_status_banner(status: str, message: str, context: Optional[str] = Non
 
 def render_sidebar_disclaimer() -> None:
     """Render persistent scientific governance disclaimer in Streamlit sidebar."""
-    st.sidebar.markdown("---")
-    st.sidebar.caption(PERSISTENT_SIDEBAR_DISCLAIMER)
+    st.sidebar.markdown(
+        f"""
+        <div class="sidebar-disclaimer">
+            <div class="sidebar-disclaimer-title">Scientific Governance</div>
+            <div class="sidebar-disclaimer-text">{PERSISTENT_SIDEBAR_DISCLAIMER}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )

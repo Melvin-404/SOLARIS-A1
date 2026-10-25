@@ -1,0 +1,95 @@
+# SOLARIS-A1 Machine Learning Training Protocol Specification (Stage 10)
+# STATUS: PILOT — APPROVED (Gate G7)
+
+protocol_id: "PROTO_STAGE10_PILOT_001"
+status: "PILOT"  # Allowed: DRAFT | FROZEN | PILOT
+approved_by: "Dr. Melvin / Solar Physics Group"
+approved_date: "2026-10-23"
+g8_approved: true
+g8_approved_by: "Dr. Melvin / Solar Physics Group"
+g8_approved_date: "2026-10-23"
+g8_statement: "Formal authorization granted for single-shot test set evaluation"
+protocol_hash: null  # SHA-256 computed over this file excluding this field
+
+# Experiment Scope
+task: "detection"  # "detection" (Task A) | "prediction" (Task B)
+dataset_export_id: "exp_det_7e151632ab"  # Export ID from Stage 9
+
+# Temporal & Segment Split Strategy
+split_strategy: "chronological"  # "chronological" | "event_grouped"
+split_parameters:
+  train_end: 1792324000.0  # End of segment 2 + embargo in seconds
+  val_end: 1792341600.0    # End of segment 3 in seconds
+  embargo_seconds: 300.0   # Buffer interval between train/val and val/test
+  group_column: "segment_id"
+  fractions: [0.50, 0.20, 0.30]
+  random_state: 42
+
+# Inner Validation & Tuning
+inner_validation:
+  method: "TimeSeriesSplit"
+  n_splits: 3
+  respect_grouping: true
+
+# Preprocessing Pipeline (Fitted STRICTLY on Training partition)
+preprocessing:
+  scaler: "StandardScaler"  # "StandardScaler" | "RobustScaler" | "NONE"
+  imputer: "median"          # "median" | "mean" | "NONE"
+  feature_selection: "NONE" # "NONE" | "SelectKBest"
+
+# Class Imbalance Governance
+class_weight_options:
+  - "balanced"
+  - "none"
+
+# Candidate Estimator Search Spaces
+models:
+  logistic_regression:
+    enabled: true
+    param_grid:
+      C: [0.01, 0.1, 1.0, 10.0]
+      solver: ["lbfgs"]
+      max_iter: [1000]
+      class_weight: ["balanced", null]
+    deterministic_seed: 42
+
+  random_forest:
+    enabled: true
+    param_grid:
+      n_estimators: [50, 100]
+      max_depth: [5, 10, null]
+      min_samples_split: [2, 5]
+      class_weight: ["balanced", "balanced_subsample", null]
+    deterministic_seed: 42
+
+  xgboost:
+    enabled: true
+    param_grid:
+      n_estimators: [50, 100]
+      max_depth: [3, 6]
+      learning_rate: [0.05, 0.1]
+      tree_method: ["hist"]
+      n_jobs: [1]
+    deterministic_seed: 42
+
+# Validation Selection Metric
+selection_metric: "PR_AUC"  # Precision-Recall Area Under Curve on validation
+refit_final: "train_only"    # "train_only" | "train_plus_validation"
+
+# Strict Test Set Lockdown
+test_lock: true  # Mandatory true: test partition must be sealed and never read during tuning
+
+# Random Seeds
+seeds:
+  global: 42
+  logistic_regression: 42
+  random_forest: 42
+  xgboost: 42
+
+# Governance & Event Floor (Decision D-15)
+minimum_counts:
+  min_positives_train: 1
+  min_events_train: 1
+  min_positives_val: 0
+  min_events_val: 0
+  d15_minimum_events: 2

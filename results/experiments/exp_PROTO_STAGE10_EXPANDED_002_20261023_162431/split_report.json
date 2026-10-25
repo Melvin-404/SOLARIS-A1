@@ -1,0 +1,25 @@
+{
+  "split_strategy": "chronological",
+  "n_total": 98185,
+  "n_train": 65619,
+  "n_val": 16635,
+  "n_test": 15872,
+  "n_dropped_embargo": 59,
+  "train_class_counts": {
+    "positives": 9324,
+    "negatives": 56295,
+    "excluded_na": 0
+  },
+  "val_class_counts": {
+    "positives": 1525,
+    "negatives": 15110,
+    "excluded_na": 0
+  },
+  "test_class_counts": {
+    "positives": 3178,
+    "negatives": 12694,
+    "excluded_na": 0
+  },
+  "embargo_seconds": 300.0,
+  "split_hash": "2aeebf6b3c6b304c"
+}

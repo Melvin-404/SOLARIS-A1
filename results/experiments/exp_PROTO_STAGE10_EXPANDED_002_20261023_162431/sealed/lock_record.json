@@ -1,0 +1,11 @@
+{
+  "status": "SEALED_LOCKED",
+  "file_name": "test_set.csv",
+  "sha256": "585638b8997d972196475439edc9dca50bbab30b0ab9999d40601a8214ab89cc",
+  "row_count": 15872,
+  "feature_count": 19,
+  "protocol_hash": "49d5d2320fb5d526",
+  "dataset_export_id": "exp_det_july2024",
+  "created_at_utc": "2026-10-23T16:24:32.177888+00:00",
+  "read_only_enforced": true
+}

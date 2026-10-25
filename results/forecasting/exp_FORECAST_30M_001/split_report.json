@@ -1,0 +1,50 @@
+{
+  "strategy": "chronological_with_embargo",
+  "embargo_seconds": 300.0,
+  "horizon_seconds": 1800.0,
+  "feature_count": 19,
+  "feature_names": [
+    "baseline_value",
+    "p05",
+    "p25",
+    "p75",
+    "p95",
+    "coverage_fraction",
+    "iqr",
+    "max",
+    "max_abs_first_difference",
+    "mean",
+    "mean_abs_first_difference",
+    "median",
+    "min",
+    "n_observed_samples",
+    "peak_to_baseline_ratio",
+    "robust_variability",
+    "rolling_trend",
+    "std",
+    "temporal_slope"
+  ],
+  "train": {
+    "dates": "2024-07-01 to 2024-07-09",
+    "samples": 51741,
+    "positive": 8904,
+    "prevalence": 0.1721,
+    "independent_events": 53
+  },
+  "validation": {
+    "dates": "2024-07-10 to 2024-07-11",
+    "samples": 14570,
+    "positive": 2616,
+    "prevalence": 0.1795,
+    "independent_events": 16
+  },
+  "test": {
+    "dates": "2024-07-12 to 2024-07-14 and 2026-10-18",
+    "samples": 28980,
+    "positive": 4919,
+    "prevalence": 0.1697,
+    "independent_events": 30
+  },
+  "total_valid_windows": 95291,
+  "total_independent_events": 99
+}

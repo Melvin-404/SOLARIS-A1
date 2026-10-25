@@ -2,11 +2,19 @@
 .venv/
 env/
 venv/
+ENV/
 
 # Byte-compiled / optimized files
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Packaging & metadata
+*.egg-info/
+src/*.egg-info/
+build/
+dist/
+.eggs/
 
 # Jupyter Notebook checkpoints
 .ipynb_checkpoints/
@@ -15,11 +23,31 @@ __pycache__/
 .env
 .env.*
 
-# Astronomical FITS data files
+# Local IDE and Streamlit configs
+.streamlit/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Scratch and temporary directories
+scratch/
+tmp/
+temp/
+*.bak
+*.tmp
+*.swp
+
+# Astronomical FITS and compressed telemetry data files
 *.fits
 *.fits.gz
 *.fit
 *.fit.gz
+*.pi
+*.pi.gz
+*.lc.gz
+*.gti.gz
+*.pha.gz
 
 # Data directories (preserve README placeholders)
 data/raw/*
@@ -31,7 +59,15 @@ data/processed/*
 data/interim/*
 !data/interim/README.md
 
-# Results (preserve README, inventory, and quality reports)
+# Large tabular matrices and external datasets
+data/processed/datasets/**
+!data/processed/datasets/README.md
+data/processed/features/**
+!data/processed/features/README.md
+data/processed/segments/**
+!data/processed/segments/README.md
+
+# Results
 results/*
 !results/README.md
 !results/inventory/
@@ -56,13 +92,32 @@ results/*
 !results/integration/**
 !results/checks/
 !results/checks/**
+!results/forecasting/
+!results/forecasting/**
+!results/FINAL_PRE_GITHUB_AUDIT.md
+
+# Results exclusions
+results/exact_window_labels_audit.csv
+results/proposed_event_records_july2024.csv
+results/experiments/**/random_forest.joblib
+results/experiments/**/test_set.csv
+results/experiments/**/test_predictions.csv
+results/experiments/**/test_timeline_error_analysis.png
+results/forecasting/**/test_predictions.csv
+results/forecasting/**/forecasting_rf_model.joblib
+
+# Superseded intermediate experiment prototypes (preserve locked pilot 141429 and expanded 162431)
+results/experiments/exp_PROTO_STAGE10_PILOT_001_20261023_140731/
+results/experiments/exp_PROTO_STAGE10_PILOT_001_20261023_140852/
+
+# Granular daily preprocessing, quality, and feature audit logs (retained locally in research archive)
+results/preprocessing/audit_AL1_SOLEXS_2024*
+results/quality/AL1_SOLEXS_2024*
+results/features/AL1_SOLEXS_2024*
+
+# Duplicate dashboard static directory (active assets reside in dashboard/assets/)
+dashboard/static/
 
 # Logs
 logs/
 *.log
-
-# IDE & OS specific files
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db

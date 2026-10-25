@@ -174,5 +174,1079 @@
       "Approved event records file does not exist at 'data\\manifests\\event_records_approved.csv'. Gate G6 requires human-verified flare event onsets."
     ],
     "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T13:55:49.147371+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Supervised labelling is strictly BLOCKED pending Gate G3 human approval.\nThe following approval items must be confirmed by the human researcher:\n  - Policy status line in '08_labelling_policy.md' is 'DRAFT \u2014 REQUIRES HUMAN APPROVAL'. Requires exact format 'Status: APPROVED by <name>, date <YYYY-MM-DD>'.\n  - Decision 'D-01' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-02' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-03' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-04' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-08' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-10' status is 'PROVISIONAL' (required: 'APPROVED')\n  - Decision 'D-15' status is 'PENDING' (required: 'APPROVED')",
+      "Approved event records file does not exist at 'data\\manifests\\event_records_approved.csv'. Gate G3 requires human verification and placement of approved independent flare event records."
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T13:55:49.181453+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Task B forecasting export is strictly BLOCKED pending Gate G6 human approval.\nThe following items must be confirmed by the human researcher:\n  - Forecasting policy document not found: C:\\Users\\melvi\\Desktop\\SOLARIS-A1\\docs\\22_forecasting_policy.md\n  - Decision 'D-07' status is 'PENDING' (required: 'APPROVED')\n  - Decision 'D-08' status is 'PENDING' (required: 'APPROVED')",
+      "Approved event records file does not exist at 'data\\manifests\\event_records_approved.csv'. Gate G6 requires human-verified flare event onsets."
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T14:05:18.202021+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_7e151632ab",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_7e151632ab",
+    "n_samples": 8116,
+    "n_positive": 45,
+    "n_verified_negative": 7951,
+    "n_excluded_na": 120,
+    "event_count": 2
+  },
+  {
+    "timestamp_utc": "2026-10-23T14:05:42.232478+00:00",
+    "task": "prediction",
+    "status": "SUCCESS",
+    "export_id": "exp_pred_82b606caa0",
+    "export_path": "data\\processed\\datasets\\prediction\\exp_pred_82b606caa0",
+    "n_samples": 8116,
+    "n_positive": 60,
+    "n_verified_negative": 7996,
+    "n_excluded_na": 60,
+    "event_count": 2
+  },
+  {
+    "timestamp_utc": "2026-10-23T14:25:57.042166+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_7e151632ab",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_7e151632ab",
+    "n_samples": 8116,
+    "n_positive": 45,
+    "n_verified_negative": 7951,
+    "n_excluded_na": 120,
+    "event_count": 2
+  },
+  {
+    "timestamp_utc": "2026-10-23T14:25:58.577083+00:00",
+    "task": "prediction",
+    "status": "SUCCESS",
+    "export_id": "exp_pred_82b606caa0",
+    "export_path": "data\\processed\\datasets\\prediction\\exp_pred_82b606caa0",
+    "n_samples": 8116,
+    "n_positive": 60,
+    "n_verified_negative": 7996,
+    "n_excluded_na": 60,
+    "event_count": 2
+  },
+  {
+    "timestamp_utc": "2026-10-23T14:26:50.133423+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T14:26:50.157718+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T14:26:50.170261+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_7e151632ab",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_7e151632ab",
+    "n_samples": 8116,
+    "n_positive": 45,
+    "n_verified_negative": 7951,
+    "n_excluded_na": 120,
+    "event_count": 2
+  },
+  {
+    "timestamp_utc": "2026-10-23T14:27:05.777423+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T14:27:05.846210+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T14:27:05.864377+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_7e151632ab",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_7e151632ab",
+    "n_samples": 8116,
+    "n_positive": 45,
+    "n_verified_negative": 7951,
+    "n_excluded_na": 120,
+    "event_count": 2
+  },
+  {
+    "timestamp_utc": "2026-10-23T15:12:12.680951+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T15:12:12.712661+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T15:12:12.728337+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_7e151632ab",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_7e151632ab",
+    "n_samples": 8116,
+    "n_positive": 45,
+    "n_verified_negative": 7951,
+    "n_excluded_na": 120,
+    "event_count": 2
+  },
+  {
+    "timestamp_utc": "2026-10-23T15:20:33.451719+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T15:20:33.477627+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T15:20:33.493612+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_7e151632ab",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_7e151632ab",
+    "n_samples": 8116,
+    "n_positive": 45,
+    "n_verified_negative": 7951,
+    "n_excluded_na": 120,
+    "event_count": 2
+  },
+  {
+    "timestamp_utc": "2026-10-23T15:52:20.312166+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T15:52:20.343207+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T15:52:20.363074+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_7e151632ab",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_7e151632ab",
+    "n_samples": 8116,
+    "n_positive": 45,
+    "n_verified_negative": 7951,
+    "n_excluded_na": 120,
+    "event_count": 2
+  },
+  {
+    "timestamp_utc": "2026-10-23T16:12:37.052996+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T16:12:37.083028+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T16:12:37.101625+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_7e151632ab",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_7e151632ab",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-23T16:14:25.017228+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_july2024",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_july2024",
+    "n_samples": 103879,
+    "n_positive": 14027,
+    "n_verified_negative": 84158,
+    "n_excluded_na": 5694,
+    "event_count": 117
+  },
+  {
+    "timestamp_utc": "2026-10-23T17:25:02.816425+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T17:25:02.853729+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T17:25:02.869787+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-23T17:35:49.546511+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T17:35:49.574122+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-23T17:35:49.592242+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T06:06:19.514859+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T06:06:19.557369+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T06:06:19.576950+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T06:08:52.836104+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T06:08:52.869366+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T06:08:52.889404+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T06:49:07.135960+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T06:49:07.167616+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T06:49:07.188562+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T06:50:33.102334+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T06:50:33.129037+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T06:50:33.146255+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T07:22:45.878374+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T07:22:45.902467+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T07:22:45.921481+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T07:29:48.382850+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T07:29:48.413251+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T07:29:48.430740+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T07:31:28.291871+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T07:31:28.332543+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T07:31:28.353608+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T07:39:36.158004+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T07:39:36.180011+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T07:39:36.195819+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T08:10:44.373987+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T08:10:44.404110+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T08:10:44.426069+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T08:39:39.615474+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T08:39:39.645602+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T08:39:39.661925+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T09:17:25.554676+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T09:17:25.585147+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T09:17:25.601040+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T09:47:21.059685+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T09:47:21.088851+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T09:47:21.107559+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T10:00:47.837383+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T10:00:47.866971+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T10:00:47.885559+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T10:19:07.425570+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T10:19:07.456636+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T10:19:07.474230+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T10:23:41.640550+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T10:23:41.670710+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T10:23:41.689757+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T11:12:31.843628+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T11:12:31.877766+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T11:12:31.900527+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T15:24:59.258162+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T15:24:59.287546+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T15:24:59.306841+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-24T15:43:31.360857+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T15:43:31.389284+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-24T15:43:31.405640+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-25T05:58:10.037917+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-25T05:58:10.071663+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-25T05:58:10.089830+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-25T06:50:00.679307+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-25T06:50:00.713440+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-25T06:50:00.733969+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-25T07:07:30.813463+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-25T07:07:30.830727+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-25T07:07:30.847469+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-25T07:17:19.433182+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-25T07:17:19.460348+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-25T07:17:19.476919+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-25T07:29:34.128869+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-25T07:29:34.159032+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-25T07:29:34.175317+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
   }
 ]

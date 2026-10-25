@@ -1,7 +1,7 @@
 {
   "file_stem": "AL1_SOLEXS_20261018_SDD2_L1",
   "mode": "PROVISIONAL (DEVELOPMENT)",
-  "timestamp_utc": "2026-10-21T08:29:23.242744+00:00",
+  "timestamp_utc": "2026-10-23T15:58:29.413647+00:00",
   "parameters": {
     "window_seconds": 60.0,
     "stride_seconds": 10.0,

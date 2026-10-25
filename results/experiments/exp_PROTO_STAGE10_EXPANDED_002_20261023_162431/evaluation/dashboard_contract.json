@@ -1,0 +1,53 @@
+{
+  "contract_version": "1.0",
+  "stage": "STAGE_11_SCIENTIFIC_EVALUATION",
+  "description": "Standardized schema contract for Stage 12 (interactive analysis) and Stage 13 (dashboard).",
+  "files": {
+    "metrics_csv": {
+      "relative_path": "evaluation/metrics.csv",
+      "format": "csv",
+      "required_columns": [
+        "model_name",
+        "model_type",
+        "n_evaluated",
+        "prevalence",
+        "precision",
+        "recall",
+        "f1",
+        "pr_auc",
+        "roc_auc",
+        "true_positives",
+        "false_positives",
+        "true_negatives",
+        "false_negatives"
+      ]
+    },
+    "test_predictions": {
+      "relative_path": "evaluation/test_predictions.csv",
+      "format": "csv",
+      "required_columns": [
+        "window_id",
+        "model_name",
+        "label",
+        "score",
+        "pred"
+      ]
+    },
+    "evaluation_report_json": {
+      "relative_path": "evaluation/evaluation_report.json",
+      "format": "json",
+      "required_sections": [
+        "metadata",
+        "window_metrics",
+        "event_metrics",
+        "false_alarms",
+        "calibration",
+        "uncertainty"
+      ]
+    },
+    "evaluation_report_md": {
+      "relative_path": "evaluation/evaluation_report.md",
+      "format": "markdown"
+    }
+  }
+}

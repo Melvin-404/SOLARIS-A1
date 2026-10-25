@@ -1,0 +1,56 @@
+{
+  "experiment_id": "exp_PROTO_STAGE10_EXPANDED_002_20261023_162431",
+  "protocol_id": "PROTO_STAGE10_EXPANDED_002",
+  "status": "EVALUATED_ONCE",
+  "timestamp_utc": "2026-10-23T16:26:25.291955+00:00",
+  "dataset_export_id": "exp_det_july2024",
+  "test_lock_status": "SEALED",
+  "selected_models": {
+    "logistic_regression": {
+      "status": "TRAINED",
+      "selection_metric": "PR_AUC",
+      "best_validation_score": 0.531531242956299,
+      "best_parameters": {
+        "C": 1.0,
+        "solver": "lbfgs",
+        "max_iter": 1000,
+        "class_weight": null
+      },
+      "refit_mode": "train_only",
+      "artifact_path": "experiments\\exp_PROTO_STAGE10_EXPANDED_002_20261023_162431\\models\\logistic_regression.joblib"
+    },
+    "random_forest": {
+      "status": "TRAINED",
+      "selection_metric": "PR_AUC",
+      "best_validation_score": 0.5742991339574992,
+      "best_parameters": {
+        "n_estimators": 100,
+        "max_depth": 10,
+        "min_samples_split": 5,
+        "class_weight": null
+      },
+      "refit_mode": "train_only",
+      "artifact_path": "experiments\\exp_PROTO_STAGE10_EXPANDED_002_20261023_162431\\models\\random_forest.joblib"
+    },
+    "xgboost": {
+      "status": "TRAINED",
+      "selection_metric": "PR_AUC",
+      "best_validation_score": 0.5956407480946964,
+      "best_parameters": {
+        "n_estimators": 100,
+        "max_depth": 3,
+        "learning_rate": 0.1,
+        "scale_pos_weight": 6.0
+      },
+      "refit_mode": "train_only",
+      "artifact_path": "experiments\\exp_PROTO_STAGE10_EXPANDED_002_20261023_162431\\models\\xgboost.joblib"
+    }
+  },
+  "evaluated_at_utc": "2026-10-23T16:27:18.062454+00:00",
+  "g8_record": {
+    "g8_status": "APPROVED",
+    "approved_by": "Dr. Melvin / Solar Physics Group",
+    "approved_date": "2026-10-23",
+    "statement": "Formal authorization granted for single-shot test set evaluation after model selection on July 2024 standalone experiment."
+  }
+}

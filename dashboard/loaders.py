@@ -13,9 +13,10 @@ CRITICAL ARCHITECTURAL CONSTRAINTS:
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import datetime, timezone
 import json
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, List, Optional, Tuple, Union
 import numpy as np
 import pandas as pd
 import yaml
@@ -191,11 +192,26 @@ def load_policy_status_pure(root: Optional[Union[Path, str]] = None) -> LoadResu
 
 
 def load_eda_candidates_pure(stem: Optional[str] = None, root: Optional[Union[Path, str]] = None) -> LoadResult:
-    """Load candidate burst intervals from results/eda/candidate_bursts.csv."""
+    """Load candidate burst intervals from results/eda/candidate_bursts.csv or subdirectories."""
     r = _resolve_root(root)
-    burst_csv = r / "results" / "eda" / "candidate_bursts.csv"
-    if not burst_csv.is_file():
-        return LoadResult(data=None, status="MISSING", message="Candidate bursts table not found.", source_path=str(burst_csv))
+    burst_csv = None
+
+    if stem:
+        c = r / "results" / "eda" / stem / "candidate_bursts.csv"
+        if c.is_file():
+            burst_csv = c
+
+    if not burst_csv:
+        primary = r / "results" / "eda" / "candidate_bursts.csv"
+        if primary.is_file():
+            burst_csv = primary
+        else:
+            candidates = list((r / "results" / "eda").glob("*/candidate_bursts.csv"))
+            if candidates:
+                burst_csv = candidates[0]
+
+    if not burst_csv or not burst_csv.is_file():
+        return LoadResult(data=None, status="MISSING", message="Candidate bursts table not found.", source_path=str(burst_csv or (r / "results" / "eda")))
     try:
         df = pd.read_csv(burst_csv)
         if df.empty:
@@ -489,6 +505,143 @@ def load_light_curve_pure(stem: str = "AL1_SOLEXS_20261018_SDD2_L1", root: Optio
         return LoadResult(data=None, status="ERROR", message=f"Error reading FITS light curve: {exc}", source_path=str(target_fits))
 
 
+def format_approved_event_record(row: Union[pd.Series, Dict[str, Any]]) -> Dict[str, Any]:
+    """Format an approved event record row for clean scientific display without inferring missing values."""
+    if isinstance(row, pd.Series):
+        r = row.to_dict()
+    else:
+        r = dict(row)
+
+    eid = str(r.get("event_id", "Unavailable"))
+
+    # Classification (Flare Class)
+    raw_class = r.get("classification")
+    if raw_class is None or pd.isna(raw_class) or str(raw_class).strip() in ("", "nan", "None"):
+        raw_class = r.get("flare_class") or r.get("class")
+
+    classification = str(raw_class).strip() if (raw_class is not None and not pd.isna(raw_class) and str(raw_class).strip() not in ("", "nan", "None")) else "Unavailable"
+
+    # Flare class group
+    if classification != "Unavailable" and len(classification) > 0:
+        c_letter = classification[0].upper()
+        if c_letter in {"X", "M", "C", "B", "A"}:
+            flare_group = f"{c_letter}-Class"
+        else:
+            flare_group = "Other"
+    else:
+        flare_group = "Unavailable"
+
+    def _fmt_epoch(val: Any) -> Tuple[Optional[float], str]:
+        if val is None or pd.isna(val) or str(val).strip() in ("", "nan", "None"):
+            return None, "Unavailable"
+        try:
+            f = float(val)
+            dt = datetime.fromtimestamp(f, tz=timezone.utc)
+            return f, dt.strftime("%Y-%m-%d %H:%M:%S UTC")
+        except (ValueError, OSError, OverflowError):
+            return None, str(val)
+
+    peak_epoch, peak_utc = _fmt_epoch(r.get("peak_time"))
+    onset_epoch, onset_utc = _fmt_epoch(r.get("onset_time"))
+    end_epoch, end_utc = _fmt_epoch(r.get("end_time"))
+
+    # Duration
+    if onset_epoch is not None and end_epoch is not None:
+        dur = end_epoch - onset_epoch
+        duration_str = f"{dur:.0f} s ({dur / 60.0:.1f} min)"
+    else:
+        duration_str = "Unavailable"
+
+    # Observation Date (from peak, onset, or event_id)
+    obs_date = "Unavailable"
+    if peak_utc != "Unavailable":
+        obs_date = peak_utc.split(" ")[0]
+    elif onset_utc != "Unavailable":
+        obs_date = onset_utc.split(" ")[0]
+    elif "_" in eid:
+        parts = eid.split("_")
+        if len(parts) >= 2 and len(parts[1]) == 8 and parts[1].isdigit():
+            obs_date = f"{parts[1][:4]}-{parts[1][4:6]}-{parts[1][6:8]}"
+
+    # Cohort
+    if "20261018" in eid:
+        cohort = "October 2026 Pilot"
+    elif "202407" in eid:
+        cohort = "July 2024 Benchmark"
+    else:
+        cohort = "Archival Ground Truth"
+
+    source_id = str(r.get("source_id", "Unavailable"))
+    method = str(r.get("classification_method", "Unavailable"))
+
+    unc_val = r.get("uncertainty_seconds")
+    if unc_val is not None and not pd.isna(unc_val) and str(unc_val).strip() not in ("", "nan", "None"):
+        try:
+            unc_str = f"±{float(unc_val):.1f} s"
+        except (ValueError, TypeError):
+            unc_str = str(unc_val)
+    else:
+        unc_str = "Unavailable"
+
+    notes = str(r.get("notes", ""))
+    if pd.isna(notes) or notes.strip() in ("nan", "None"):
+        notes = ""
+
+    return {
+        "event_id": eid,
+        "classification": classification,
+        "flare_group": flare_group,
+        "peak_time_epoch": peak_epoch,
+        "peak_time_utc": peak_utc,
+        "onset_time_epoch": onset_epoch,
+        "onset_time_utc": onset_utc,
+        "end_time_epoch": end_epoch,
+        "end_time_utc": end_utc,
+        "duration": duration_str,
+        "observation_date": obs_date,
+        "cohort": cohort,
+        "source_id": source_id,
+        "classification_method": method,
+        "uncertainty_seconds": unc_str,
+        "notes": notes,
+    }
+
+
+def load_approved_events_pure(root: Optional[Union[Path, str]] = None) -> LoadResult:
+    """Load approved NOAA-verified ground-truth events from data/manifests/event_records_approved.csv."""
+    r = _resolve_root(root)
+    csv_path = r / "data" / "manifests" / "event_records_approved.csv"
+    if not csv_path.is_file():
+        return LoadResult(
+            data=None,
+            status="MISSING",
+            message=f"Approved events catalog not found at {csv_path}",
+            source_path=str(csv_path),
+        )
+    try:
+        df = pd.read_csv(csv_path)
+        if df.empty:
+            return LoadResult(
+                data=df,
+                status="EMPTY",
+                message="Approved events catalog is empty",
+                source_path=str(csv_path),
+            )
+        return LoadResult(
+            data=df,
+            status="OK",
+            message=f"Loaded {len(df)} approved ground-truth events",
+            source_path=str(csv_path),
+        )
+    except Exception as exc:
+        return LoadResult(
+            data=None,
+            status="ERROR",
+            message=f"Failed to load approved events: {exc}",
+            source_path=str(csv_path),
+        )
+
+
 # ---------------------------------------------------------------------------
 # Streamlit Caching Wrappers (Instantiated when Streamlit is available)
 # ---------------------------------------------------------------------------
@@ -560,6 +713,10 @@ try:
     def load_light_curve(stem: str = "AL1_SOLEXS_20261018_SDD2_L1") -> LoadResult:
         return load_light_curve_pure(stem)
 
+    @st.cache_data(show_spinner=False)
+    def load_approved_events() -> LoadResult:
+        return load_approved_events_pure()
+
 except ImportError:
     # Fallback to direct pure functions if Streamlit is not installed or outside app context
     load_inventory = load_inventory_pure
@@ -578,3 +735,4 @@ except ImportError:
     load_evaluation_report = load_evaluation_report_pure
     load_metrics = load_metrics_pure
     load_light_curve = load_light_curve_pure
+    load_approved_events = load_approved_events_pure

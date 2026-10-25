@@ -1,6 +1,6 @@
 # DATASET EXPORT BLOCKED: PREDICTION (Gate G6 (Pre-Flare Forecasting Policy))
 
-**Execution Timestamp:** `2026-10-21T09:15:19.699000+00:00`  
+**Execution Timestamp:** `2026-10-25T07:29:34.159032+00:00`  
 **Task:** `prediction`  
 **Status:** `BLOCKED — PREREQUISITES NOT MET`  
 
@@ -8,12 +8,7 @@
 
 ## Missing Scientific Prerequisites:
 
-- Task B forecasting export is strictly BLOCKED pending Gate G6 human approval.
-The following items must be confirmed by the human researcher:
-  - Forecasting policy document not found: C:\Users\melvi\Desktop\SOLARIS-A1\docs\22_forecasting_policy.md
-  - Decision 'D-07' status is 'PENDING' (required: 'APPROVED')
-  - Decision 'D-08' status is 'PENDING' (required: 'APPROVED')
-- Approved event records file does not exist at 'data\manifests\event_records_approved.csv'. Gate G6 requires human-verified flare event onsets.
+- Gate G6 draft refusal: requires approval
 
 --- 
 

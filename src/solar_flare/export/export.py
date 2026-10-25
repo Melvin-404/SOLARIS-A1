@@ -91,6 +91,7 @@ def export_dataset(
     event_count: int = 0,
     min_events_required: int = 10,
     policy_version: str = "1.0",
+    export_id: Optional[str] = None,
 ) -> Path:
     """Export segregated dataset tables, metadata, and documentation.
     
@@ -116,6 +117,8 @@ def export_dataset(
         Minimum events required by Decision D-15 for main experiment.
     policy_version : str
         Policy version string.
+    export_id : Optional[str]
+        Explicit export identifier. If None, deterministic compute_export_id() is used.
         
     Returns
     -------
@@ -132,7 +135,8 @@ def export_dataset(
         raise DatasetExportError(f"Invalid task '{task}'. Must be 'detection' or 'prediction'.")
 
     # 1. Compute deterministic export_id and isolate directory
-    export_id = compute_export_id(task=task_clean, config_snapshot=config_snapshot, policy_text=policy_text)
+    if export_id is None:
+        export_id = compute_export_id(task=task_clean, config_snapshot=config_snapshot, policy_text=policy_text)
     out_dir = Path(out_root) / task_clean / export_id
 
     # Complete separation assertion

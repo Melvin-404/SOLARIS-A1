@@ -1,0 +1,82 @@
+{
+  "baseline_climatological": {
+    "n_samples": 341470,
+    "n_positives": 25570,
+    "n_negatives": 315900,
+    "prevalence": 0.0749,
+    "threshold": 0.5,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "pr_auc": 0.0749,
+    "roc_auc": 0.5,
+    "brier_score": 0.0779,
+    "false_alarm_rate": 0.0,
+    "confusion_matrix": {
+      "tp": 0,
+      "fp": 0,
+      "tn": 315900,
+      "fn": 25570
+    }
+  },
+  "logistic_regression": {
+    "n_samples": 341470,
+    "n_positives": 25570,
+    "n_negatives": 315900,
+    "prevalence": 0.0749,
+    "threshold": 0.5,
+    "precision": 0.1249,
+    "recall": 0.1437,
+    "f1": 0.1337,
+    "pr_auc": 0.1149,
+    "roc_auc": 0.6506,
+    "brier_score": 0.1504,
+    "false_alarm_rate": 0.0815,
+    "confusion_matrix": {
+      "tp": 3674,
+      "fp": 25735,
+      "tn": 290165,
+      "fn": 21896
+    }
+  },
+  "random_forest": {
+    "n_samples": 341470,
+    "n_positives": 25570,
+    "n_negatives": 315900,
+    "prevalence": 0.0749,
+    "threshold": 0.5,
+    "precision": 0.1367,
+    "recall": 0.3888,
+    "f1": 0.2023,
+    "pr_auc": 0.1204,
+    "roc_auc": 0.66,
+    "brier_score": 0.1337,
+    "false_alarm_rate": 0.1988,
+    "confusion_matrix": {
+      "tp": 9941,
+      "fp": 62788,
+      "tn": 253112,
+      "fn": 15629
+    }
+  },
+  "xgboost": {
+    "n_samples": 341470,
+    "n_positives": 25570,
+    "n_negatives": 315900,
+    "prevalence": 0.0749,
+    "threshold": 0.5,
+    "precision": 0.0382,
+    "recall": 0.0005,
+    "f1": 0.0009,
+    "pr_auc": 0.1192,
+    "roc_auc": 0.6519,
+    "brier_score": 0.0692,
+    "false_alarm_rate": 0.001,
+    "confusion_matrix": {
+      "tp": 12,
+      "fp": 302,
+      "tn": 315598,
+      "fn": 25558
+    }
+  }
+}
