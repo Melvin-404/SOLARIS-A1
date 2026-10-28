@@ -44,6 +44,8 @@ class EventMetricsReport:
     median_lead_time_sec: Optional[float]
     n_unwarned_onsets: int
     merge_gap_seconds: float
+    tolerance_seconds: float = 0.0
+    median_detection_delay_sec: Optional[float] = None
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert report to dictionary representation."""
@@ -132,13 +134,15 @@ def compute_event_metrics(
     task: str = "detection",
     lead_horizon_sec: float = 1800.0,
     merge_gap_seconds: float = 60.0,
+    tolerance_seconds: float = 0.0,
 ) -> EventMetricsReport:
     """Compute event-level detection, false alarm, and timing metrics.
 
     Parameters
     ----------
     reference_events : pd.DataFrame
-        Table of reference events with columns ['start_sec', 'end_sec'] (or ['onset_sec', 'end_sec']).
+        Table of reference events with columns ['start_sec', 'end_sec'] (or ['onset_sec', 'end_sec']
+        or ['onset_time', 'end_time']).
     predicted_intervals : sequence of PredictedInterval
         Merged candidate predicted intervals.
     task : str, default="detection"
@@ -147,6 +151,8 @@ def compute_event_metrics(
         Prediction warning horizon (for Task B prediction).
     merge_gap_seconds : float, default=60.0
         Merge gap parameter used to produce predicted intervals.
+    tolerance_seconds : float, default=0.0
+        Event-boundary matching tolerance window in seconds (Decision D-02).
 
     Returns
     -------
@@ -171,11 +177,22 @@ def compute_event_metrics(
             median_lead_time_sec=None,
             n_unwarned_onsets=0,
             merge_gap_seconds=merge_gap_seconds,
+            tolerance_seconds=tolerance_seconds,
+            median_detection_delay_sec=None,
         )
 
     # Resolve column names for reference events
-    start_col = "start_sec" if "start_sec" in reference_events.columns else "onset_sec"
-    end_col = "end_sec" if "end_sec" in reference_events.columns else "peak_sec"
+    start_col = "start_sec"
+    for cand in ["start_sec", "onset_sec", "onset_time", "start_time"]:
+        if cand in reference_events.columns:
+            start_col = cand
+            break
+
+    end_col = "end_sec"
+    for cand in ["end_sec", "peak_sec", "end_time", "peak_time"]:
+        if cand in reference_events.columns:
+            end_col = cand
+            break
 
     detected_event_flags = [False] * n_ref
     timing_errors: List[float] = []
@@ -190,14 +207,14 @@ def compute_event_metrics(
         matching_preds: List[Tuple[int, PredictedInterval]] = []
         for p_idx, pred in enumerate(predicted_intervals):
             if task == "detection":
-                # Detection: interval overlap condition
-                if pred.start_sec <= ref_end and pred.end_sec >= ref_start:
+                # Detection: interval overlap condition with tolerance
+                if pred.start_sec <= (ref_end + tolerance_seconds) and pred.end_sec >= (ref_start - tolerance_seconds):
                     matching_preds.append((p_idx, pred))
                     predicted_matched[p_idx] = True
             else:
                 # Prediction: forecast episode occurs within horizon before onset:
-                # [ref_start - lead_horizon_sec, ref_start]
-                if pred.end_sec >= (ref_start - lead_horizon_sec) and pred.start_sec <= ref_start:
+                # [ref_start - lead_horizon_sec - tolerance_seconds, ref_start + tolerance_seconds]
+                if pred.end_sec >= (ref_start - lead_horizon_sec - tolerance_seconds) and pred.start_sec <= (ref_start + tolerance_seconds):
                     matching_preds.append((p_idx, pred))
                     predicted_matched[p_idx] = True
 
@@ -247,4 +264,6 @@ def compute_event_metrics(
         median_lead_time_sec=med_lead,
         n_unwarned_onsets=n_unwarned,
         merge_gap_seconds=merge_gap_seconds,
+        tolerance_seconds=tolerance_seconds,
+        median_detection_delay_sec=med_timing,
     )

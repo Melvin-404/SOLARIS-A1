@@ -39,7 +39,17 @@ from solar_flare.evaluation.calibration import (
 from solar_flare.evaluation.uncertainty import (
     BootstrapUncertaintyReport,
     MetricCI,
+    PairedComparisonReport,
+    PairedDifferenceCI,
     compute_block_bootstrap_ci,
+    compute_paired_bootstrap_comparison,
+    create_temporal_clusters,
+)
+from solar_flare.evaluation.explainability import (
+    check_shap_available,
+    compute_permutation_feature_importance,
+    compute_tree_feature_importance,
+    generate_explainability_artifacts,
 )
 from solar_flare.evaluation.reporting import (
     MANDATORY_DISCLAIMER,
@@ -68,6 +78,14 @@ __all__ = [
     "MetricCI",
     "BootstrapUncertaintyReport",
     "compute_block_bootstrap_ci",
+    "PairedDifferenceCI",
+    "PairedComparisonReport",
+    "compute_paired_bootstrap_comparison",
+    "create_temporal_clusters",
+    "check_shap_available",
+    "compute_permutation_feature_importance",
+    "compute_tree_feature_importance",
+    "generate_explainability_artifacts",
     "MANDATORY_DISCLAIMER",
     "PREDICTION_SKILL_DISCLAIMER",
     "build_evaluation_report",

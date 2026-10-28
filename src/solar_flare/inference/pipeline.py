@@ -114,6 +114,23 @@ EXPERIMENT_PROFILES: Dict[str, ExperimentProfile] = {
             "logistic_regression": {"window_fp_per_hour": 43.74, "episodes_fp_per_hour": 0.96, "exposure_hours": 44.77},
         },
     ),
+    "expanded_2024_2026": ExperimentProfile(
+        profile_id="expanded_2024_2026",
+        experiment_id="exp_PROTO_STAGE16_EXPANDED_2024_2026",
+        display_name="Multi-Year Expanded Cohort (2024–2026)",
+        dataset_cohort="multi_year_2024_2026",
+        protocol_id="training_protocol_stage16.yaml",
+        task="window_flare_detection",
+        governance_status="EXPERIMENTAL_MULTI_YEAR",
+        is_default=False,
+        production_ready=False,
+        evaluation_window="2024–2026 Multi-Year Archive",
+        description="Expanded multi-year experiment integrating 2024 observations and October 2026 pilot.",
+        limitations="Experimental research cohort; evaluation under active investigation.",
+        false_alarm_rate_summary={
+            "xgboost": {"window_fp_per_hour": 0.0, "episodes_fp_per_hour": 0.0, "exposure_hours": 0.0},
+        },
+    ),
 }
 
 PROFILE_ALIASES: Dict[str, str] = {
@@ -127,6 +144,10 @@ PROFILE_ALIASES: Dict[str, str] = {
     "expanded": "expanded_july2024",
     "benchmark": "expanded_july2024",
     "exp_PROTO_STAGE10_EXPANDED_002_20261023_162431": "expanded_july2024",
+    "multi_year": "expanded_2024_2026",
+    "expanded_2024_2026": "expanded_2024_2026",
+    "stage16": "expanded_2024_2026",
+    "exp_PROTO_STAGE16_EXPANDED_2024_2026": "expanded_2024_2026",
 }
 
 DEFAULT_PROFILE_ID = "pilot_20261018"
@@ -176,7 +197,10 @@ class InferencePipeline:
         if not preproc_path.is_file():
             raise FileNotFoundError(f"Preprocessor artifact not found at {preproc_path}")
         self.preprocessor = joblib.load(preproc_path)
-        self.expected_features: List[str] = list(self.preprocessor.feature_names_in_)
+        if isinstance(self.preprocessor, dict):
+            self.expected_features: List[str] = list(self.preprocessor.get("feature_names", []))
+        else:
+            self.expected_features: List[str] = list(getattr(self.preprocessor, "feature_names_in_", []))
 
         # Load model artifact
         models_dir = exp_dir / "models"
@@ -224,8 +248,16 @@ class InferencePipeline:
             "model_version": f"{self.model_name}@{self.exp_id}",
             "features_count": len(self.expected_features),
             "expected_features": self.expected_features,
-            "scaler": getattr(self.preprocessor, "scaler_name", "StandardScaler"),
-            "imputer": getattr(self.preprocessor, "imputer_name", "median"),
+            "scaler": (
+                self.preprocessor.get("scaler").__class__.__name__
+                if isinstance(self.preprocessor, dict) and self.preprocessor.get("scaler")
+                else getattr(self.preprocessor, "scaler_name", "StandardScaler")
+            ),
+            "imputer": (
+                self.preprocessor.get("imputer").__class__.__name__
+                if isinstance(self.preprocessor, dict) and self.preprocessor.get("imputer")
+                else getattr(self.preprocessor, "imputer_name", "median")
+            ),
             "evaluated": self.metrics_df is not None,
             "task": "window_flare_detection",
             "window_duration_seconds": 60.0,
@@ -265,7 +297,13 @@ class InferencePipeline:
     def predict_proba(self, X: Union[pd.DataFrame, Dict[str, Any], List[Dict[str, Any]]]) -> np.ndarray:
         """Compute flaring probability for input features."""
         df_aligned = self._prepare_dataframe(X)
-        df_trans = self.preprocessor.transform(df_aligned)
+        if isinstance(self.preprocessor, dict):
+            imputer = self.preprocessor.get("imputer")
+            scaler = self.preprocessor.get("scaler")
+            arr = imputer.transform(df_aligned.values) if imputer is not None else df_aligned.values
+            df_trans = scaler.transform(arr) if scaler is not None else arr
+        else:
+            df_trans = self.preprocessor.transform(df_aligned)
 
         if hasattr(self.model, "predict_proba"):
             probs = self.model.predict_proba(df_trans)[:, 1]
@@ -388,10 +426,12 @@ def get_pipeline(
     profile_or_id: Optional[str] = None,
     model_name: str = "xgboost",
     experiments_root: Optional[Union[Path, str]] = None,
+    *,
+    profile_id: Optional[str] = None,
 ) -> InferencePipeline:
     """Retrieve or initialize a cached pipeline for an explicit experiment profile and model."""
     global _PIPELINE_CACHE
-    prof_key = profile_or_id or DEFAULT_PROFILE_ID
+    prof_key = profile_id or profile_or_id or DEFAULT_PROFILE_ID
     cache_key = f"{prof_key}:{model_name}:{experiments_root or ''}"
     if cache_key not in _PIPELINE_CACHE:
         _PIPELINE_CACHE[cache_key] = InferencePipeline(

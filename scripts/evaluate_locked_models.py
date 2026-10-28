@@ -425,8 +425,11 @@ def main(argv: Optional[List[str]] = None) -> int:
     false_alarm_report = None
 
     # Check for window times
-    if "window_start_sec" in test_df.columns and "window_end_sec" in test_df.columns:
-        w_times = list(zip(test_df["window_start_sec"].values, test_df["window_end_sec"].values))
+    w_start_col = "window_start_sec" if "window_start_sec" in test_df.columns else ("window_start" if "window_start" in test_df.columns else None)
+    w_end_col = "window_end_sec" if "window_end_sec" in test_df.columns else ("window_end" if "window_end" in test_df.columns else None)
+
+    if w_start_col and w_end_col:
+        w_times = list(zip(test_df[w_start_col].values, test_df[w_end_col].values))
         # Use best performing model or first model's predictions
         primary_model = list(trained_models.keys())[0] if trained_models else None
         if primary_model:
@@ -439,6 +442,9 @@ def main(argv: Optional[List[str]] = None) -> int:
 
             # Look for reference events
             ref_events_file = root / "data" / "processed" / "labels" / "reference_events.csv"
+            if not ref_events_file.is_file():
+                ref_events_file = root / "data" / "manifests" / "event_records_approved.csv"
+
             ref_events = pd.read_csv(ref_events_file) if ref_events_file.is_file() else pd.DataFrame(columns=["start_sec", "end_sec"])
 
             event_report = compute_event_metrics(
@@ -446,10 +452,11 @@ def main(argv: Optional[List[str]] = None) -> int:
                 predicted_intervals=merged_intervals,
                 task=task,
                 merge_gap_seconds=60.0,
+                tolerance_seconds=30.0,
             )
 
             # Covered observation hours
-            covered_sec = float(test_df["window_end_sec"].max() - test_df["window_start_sec"].min()) if len(test_df) > 0 else 3600.0
+            covered_sec = float(test_df[w_end_col].max() - test_df[w_start_col].min()) if len(test_df) > 0 else 3600.0
             if covered_sec <= 0:
                 covered_sec = 3600.0
 
@@ -458,6 +465,7 @@ def main(argv: Optional[List[str]] = None) -> int:
                 reference_events=ref_events,
                 covered_duration_seconds=covered_sec,
                 task=task,
+                tolerance_seconds=30.0,
             )
 
     # 10. Statistical Uncertainty

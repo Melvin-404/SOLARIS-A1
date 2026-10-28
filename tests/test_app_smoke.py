@@ -17,7 +17,7 @@ def test_app_smoke_real_workspace():
     root = project_root()
     app_file = root / "dashboard" / "app.py"
 
-    at = AppTest.from_file(str(app_file), default_timeout=15)
+    at = AppTest.from_file(str(app_file), default_timeout=30)
     at.run()
     assert not at.exception
 

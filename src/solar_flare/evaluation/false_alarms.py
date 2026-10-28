@@ -51,6 +51,8 @@ class FalseAlarmReport:
     false_alarm_rate_per_hour: float
     false_alarm_intervals: List[FalseAlarmRecord]
     missed_events: List[MissedEventRecord]
+    false_alarm_episodes_per_day: float = 0.0
+    tolerance_seconds: float = 0.0
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -58,6 +60,8 @@ class FalseAlarmReport:
             "covered_observation_hours": self.covered_observation_hours,
             "n_false_alarms": self.n_false_alarms,
             "false_alarm_rate_per_hour": self.false_alarm_rate_per_hour,
+            "false_alarm_episodes_per_day": self.false_alarm_episodes_per_day,
+            "tolerance_seconds": self.tolerance_seconds,
             "false_alarm_intervals": [r.to_dict() for r in self.false_alarm_intervals],
             "missed_events": [r.to_dict() for r in self.missed_events],
         }
@@ -69,6 +73,7 @@ def compute_false_alarm_analysis(
     covered_duration_seconds: float,
     task: str = "detection",
     lead_horizon_sec: float = 1800.0,
+    tolerance_seconds: float = 0.0,
 ) -> FalseAlarmReport:
     """Compute false alarms per covered observation hour and missed event breakdown.
 
@@ -84,6 +89,8 @@ def compute_false_alarm_analysis(
         Evaluation task: "detection" or "prediction".
     lead_horizon_sec : float, default=1800.0
         Forecast horizon for prediction task.
+    tolerance_seconds : float, default=0.0
+        Event-boundary matching tolerance window in seconds (Decision D-02).
 
     Returns
     -------
@@ -97,9 +104,23 @@ def compute_false_alarm_analysis(
 
     covered_hours = covered_duration_seconds / 3600.0
 
-    start_col = "start_sec" if "start_sec" in reference_events.columns else "onset_sec"
-    end_col = "end_sec" if "end_sec" in reference_events.columns else "peak_sec"
-    id_col = "event_id" if "event_id" in reference_events.columns else None
+    start_col = "start_sec"
+    for cand in ["start_sec", "onset_sec", "onset_time", "start_time"]:
+        if cand in reference_events.columns:
+            start_col = cand
+            break
+
+    end_col = "end_sec"
+    for cand in ["end_sec", "peak_sec", "end_time", "peak_time"]:
+        if cand in reference_events.columns:
+            end_col = cand
+            break
+
+    id_col = None
+    for cand in ["event_id", "source_id", "id"]:
+        if cand in reference_events.columns:
+            id_col = cand
+            break
 
     # 1. Identify False Alarm Intervals
     fa_records: List[FalseAlarmRecord] = []
@@ -110,11 +131,11 @@ def compute_false_alarm_analysis(
             ref_end = float(ref[end_col])
 
             if task == "detection":
-                if pred.start_sec <= ref_end and pred.end_sec >= ref_start:
+                if pred.start_sec <= (ref_end + tolerance_seconds) and pred.end_sec >= (ref_start - tolerance_seconds):
                     is_matched = True
                     break
             else:
-                if pred.end_sec >= (ref_start - lead_horizon_sec) and pred.start_sec <= ref_start:
+                if pred.end_sec >= (ref_start - lead_horizon_sec - tolerance_seconds) and pred.start_sec <= (ref_start + tolerance_seconds):
                     is_matched = True
                     break
 
@@ -139,11 +160,11 @@ def compute_false_alarm_analysis(
         is_detected = False
         for pred in predicted_intervals:
             if task == "detection":
-                if pred.start_sec <= ref_end and pred.end_sec >= ref_start:
+                if pred.start_sec <= (ref_end + tolerance_seconds) and pred.end_sec >= (ref_start - tolerance_seconds):
                     is_detected = True
                     break
             else:
-                if pred.end_sec >= (ref_start - lead_horizon_sec) and pred.start_sec <= ref_start:
+                if pred.end_sec >= (ref_start - lead_horizon_sec - tolerance_seconds) and pred.start_sec <= (ref_start + tolerance_seconds):
                     is_detected = True
                     break
 
@@ -158,6 +179,7 @@ def compute_false_alarm_analysis(
             )
 
     fa_rate = len(fa_records) / covered_hours if covered_hours > 0 else 0.0
+    fa_episodes_day = fa_rate * 24.0
 
     return FalseAlarmReport(
         covered_duration_sec=covered_duration_seconds,
@@ -166,4 +188,6 @@ def compute_false_alarm_analysis(
         false_alarm_rate_per_hour=fa_rate,
         false_alarm_intervals=fa_records,
         missed_events=missed_records,
+        false_alarm_episodes_per_day=fa_episodes_day,
+        tolerance_seconds=tolerance_seconds,
     )

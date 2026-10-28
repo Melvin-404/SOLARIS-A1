@@ -1248,5 +1248,197 @@
     "n_verified_negative": 92109,
     "n_excluded_na": 5814,
     "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-28T15:40:47.057344+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-28T15:40:47.092745+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-28T15:40:47.112049+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-28T16:20:02.595593+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-28T16:20:02.620821+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-28T16:20:02.637240+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-28T16:22:44.913693+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-28T16:22:44.937876+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-28T16:22:44.953642+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-28T17:20:28.912897+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-28T17:20:28.942054+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-28T17:20:28.958247+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-28T17:23:08.394138+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-28T17:23:08.421936+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-28T17:23:08.436414+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
+  },
+  {
+    "timestamp_utc": "2026-10-28T17:40:09.883407+00:00",
+    "task": "detection",
+    "status": "BLOCKED",
+    "gate": "Gate G3 (Ground-Truth Labelling Policy)",
+    "refusal_reasons": [
+      "Gate G3 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_DETECTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-28T17:40:09.908627+00:00",
+    "task": "prediction",
+    "status": "BLOCKED",
+    "gate": "Gate G6 (Pre-Flare Forecasting Policy)",
+    "refusal_reasons": [
+      "Gate G6 draft refusal: requires approval"
+    ],
+    "blocked_report_path": "results\\exports\\BLOCKED_PREDICTION.md"
+  },
+  {
+    "timestamp_utc": "2026-10-28T17:40:09.924543+00:00",
+    "task": "detection",
+    "status": "SUCCESS",
+    "export_id": "exp_det_588ad0dcb5",
+    "export_path": "data\\processed\\datasets\\detection\\exp_det_588ad0dcb5",
+    "n_samples": 111995,
+    "n_positive": 14072,
+    "n_verified_negative": 92109,
+    "n_excluded_na": 5814,
+    "event_count": 119
   }
 ]
